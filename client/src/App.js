@@ -24,7 +24,7 @@ class App extends Component {
           Welcome!
         </Header>
         <Content>
-          Mern boilerplate with react-emotion
+          placeholder while I work on api calls
         </Content>
       </div>
     );
