@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import styled from 'react-emotion'
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import YardSaleListings from "./pages/Yard-Sale-Listings/YardSaleListings"
 
 const Header = styled('div')({
   width: '100%',
@@ -24,7 +26,9 @@ class App extends Component {
           Welcome!
         </Header>
         <Content>
-          placeholder while I work on api calls
+
+          Mern boilerplate with react-emotion
+          <YardSaleListings />
         </Content>
       </div>
     );
