@@ -3,6 +3,7 @@ const path = require("path");
 const bodyParser = require("body-parser");
 const PORT = process.env.PORT || 3001;
 const app = express();
+var mongoose = require("mongoose");
 
 // Define middleware here
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -11,9 +12,13 @@ app.use(bodyParser.json());
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
 }
+var db = require("./models");
+const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoPaiMai";
 
 // Define API routes here
-
+require("./routes/listingRoutes")(app);
+require("./routes/userRoutes")(app);
+require("./routes/yardSaleRoutes")(app);
 // Send every other request to the React app
 // Define any API routes before this runs
 app.get("*", (req, res) => {
