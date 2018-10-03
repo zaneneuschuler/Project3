@@ -17,8 +17,6 @@ var YardSaleSchema = new Schema({
    },
    zipCode: {
        type: Number,
-        min: [5, "Please enter a valid zip code."],
-        max: [5, "Please enter a valid zip code."],
         required: true
    },
    listings: [{
