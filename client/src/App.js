@@ -26,6 +26,7 @@ class App extends Component {
           Welcome!
         </Header>
         <Content>
+
           Mern boilerplate with react-emotion
           <YardSaleListings />
         </Content>
