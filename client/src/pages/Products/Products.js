@@ -10,11 +10,13 @@ class Products extends Component {
 
     state = {
         products = [],
+        category: "",
         title: "",
         seller: "",
         price: "",
         imgURL: "",
-        description: ""
+        description: "",
+        intCounter: ""
     };
     
 
@@ -34,6 +36,7 @@ class Products extends Component {
             <Col size="md-6 sm-12">
               <Jumbotron>
                 <h1>Products on Sale in my Yard</h1>
+                <h3>Day | Time | Address</h3>
               </Jumbotron>
               {this.state.products.length ? (
                 <List>
@@ -41,13 +44,14 @@ class Products extends Component {
                     <ProductCard>
                     <ListItem key={product._id}>
                       <Link to={"/products/" + product._id}>
+                        {product.imgURL}
                         <strong>
-                          {product.title} sold by {product.seller}
+                          {product.category} : {product.title} sold by {product.seller}
                         </strong>
                       </Link>
                       {product.price}
-                      {product.imgURL}
                       {product.description}
+                      {product.intCounter} People Interested
                     </ListItem>
                     </ProductCard>
                   ))}
