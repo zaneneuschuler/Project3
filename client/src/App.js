@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import styled from 'react-emotion'
+import YardSaleProducts from "../src/pages/Yard-Sale-Products"
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import YardSaleListings from "./pages/Yard-Sale-Listings/YardSaleListings"
 
@@ -28,7 +29,7 @@ class App extends Component {
         <Content>
 
           Mern boilerplate with react-emotion
-          <YardSaleListings />
+          <YardSaleProducts />
         </Content>
       </div>
     );
