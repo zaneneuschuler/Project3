@@ -7,28 +7,21 @@ import collage from '../../images/collage.jpg'
 
 const BodyWrapper = styled('bodymain')({
   width: '100%',
-  height: 400,
+  height: 550,
   backgroundColor: 'rgba(0,0,0,.3);',
   textAlign: "center",
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'space-around',
   padding: '24 12px',
-  backgroundImage: `url${collage}`
+  backgroundSize: 'cover',
+  background: `url("${collage}")`,
+  opacity: '0.8'
 });
-
-const FormWrapper = styled('form')({
-  className: "login-form",
-  flexWrap: 'wrap'
-})
-
 
 const BodyMain = () => (
   <BodyWrapper>
-    {/* <h1>Main body</h1> */}
-    <img src={collage} />
-      
-    
+    <h1></h1>
   </BodyWrapper>
 )
 
