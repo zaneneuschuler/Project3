@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import styled from 'react-emotion';
-import { List, ListItem } from "../../components/Yard-Sale-List/index";
+import { List, ListItem } from "../../components/List/index";
 
 const YardSaleListingsWrapper = styled('div')({
     display: "flex",
