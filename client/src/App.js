@@ -35,6 +35,7 @@ class App extends Component {
 
 {/*           
         <Content>
+
           Mern boilerplate with react-emotion
           <YardSaleListings />
         </Content> */}
