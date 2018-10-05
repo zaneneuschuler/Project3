@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import styled from 'react-emotion'
-import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
 
+import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
 
 import YardSaleListings from "./pages/Yard-Sale-Listings/YardSaleListings"
 import Header from './components/Header'
@@ -19,6 +19,7 @@ const Content = styled('div')({
 class App extends Component {
   render() {
     return (
+
       <Router>
         <div>
           <Header />
@@ -36,6 +37,7 @@ class App extends Component {
           </Content>
         </div>
       </Router>     
+
     );
   }
 }
