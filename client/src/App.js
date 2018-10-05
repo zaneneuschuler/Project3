@@ -10,6 +10,7 @@ import Contact from './pages/Contact/Contact'
 import About from "./pages/About/About"
 import Login from './pages/Login/Login'
 import BodyMain from "./components/Body-main/BodyMain";
+// import Modal from "./components/ModalForm/ModalForm";
 
 
 const Content = styled('div')({
@@ -33,7 +34,10 @@ class App extends Component {
               <Route path="/YardSaleListings" component={YardSaleListings} />
               
             </Switch>
-          <BodyMain />
+          <BodyMain >
+            {/* <Modal /> */}
+          </BodyMain>
+          
           </Content>
         </div>
       </Router>     
