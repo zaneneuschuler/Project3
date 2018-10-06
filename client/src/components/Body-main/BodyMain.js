@@ -3,7 +3,8 @@ import { Link } from 'react-router-dom';
 import styled from 'react-emotion';
 import "./BodyMain.css";
 import collage from '../../images/collage.jpg'
-import Modal from '../ModalForm/ModalForm'
+// import Modal from '../ModalForm/ModalForm'
+import UserRegistration from '../../pages/User-Registration/User-Registration';
 
 
 const BodyWrapper = styled('bodymain')({
@@ -13,12 +14,12 @@ const BodyWrapper = styled('bodymain')({
   alignItems: 'center',
   backgroundSize: 'cover',
   background: `url("${collage}")`,
-  opacity: '0.9'
+  // opacity: '0.9'
 });
 
 const BodyMain = () => (
   <BodyWrapper>
-    <Modal />
+    <UserRegistration />
   </BodyWrapper>
 )
 

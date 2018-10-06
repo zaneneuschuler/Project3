@@ -68,5 +68,6 @@ module.exports = [
         name: "Danielle Wu",
         email:"danielleWu@yahoo.com",
         yardSales: []
-    },
+    }
 ]
+
