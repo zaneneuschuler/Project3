@@ -21,7 +21,7 @@ module.exports = [
     date: Date.now
   },
   {
-    name: "Victory St. Block Sale",
+    name: "Diamond St. Block Sale",
     address: "454 Diamond St.  San Diego, CA",
     zipCode: 92109,
     listings: [],
