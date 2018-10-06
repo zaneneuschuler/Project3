@@ -6,19 +6,27 @@ const app = express();
 var mongoose = require("mongoose");
 var db = require("./models");
 const routes = require("./routes");
+const passport = require("./passport");
+const session = require("express-session");
 
 // Define middleware here
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+
+app.use(passport.initialize());
+app.use(passport.session()); // will call the deserializeUser
+
 // Serve up static assets (usually on heroku)
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
 }
-var db = require("./models");
+
 const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoPaiMai";
 
 // Define API routes here
+app.use("/auth", require("./auth"));
 app.use(routes);
+
 // Send every other request to the React app
 // Define any API routes before this runs
 app.get("*", (req, res) => {
