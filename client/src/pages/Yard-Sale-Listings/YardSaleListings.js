@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import styled from 'react-emotion';
-import { List, ListItem } from "../../components/List/index";
+import { List, ListItem } from "../../Components/Yard-Sale-List/index";
+import API from "../../utils/API";
 
 const YardSaleListingsWrapper = styled('div')({
     display: "flex",
@@ -20,6 +21,21 @@ const IndividualListingsWrapper = styled('div')({
 
 class YardSaleListings extends Component {
 
+    state = {
+        yardSales: []
+    }
+
+    componentDidMount(){
+        this.loadYardSaleListings();
+    }
+
+    loadYardSaleListings = () => {
+        API.getAllYardSales()
+        .then(
+            res => this.setState({ yardSales: res.data })
+        )
+        .catch(err => console.log(err))
+    }
 
     render() {
         return (
@@ -29,9 +45,23 @@ class YardSaleListings extends Component {
                 </YardSaleListingsWrapper>
                 <ListingsWrapper>
                     <IndividualListingsWrapper>
-                        <List>
-                            
-                        </List>
+                        {this.state.yardSales.length ? (
+                            <List>
+                                {this.state.yardSales.map(yardSale => {
+                                return (
+                                    <ListItem key={yardSale._id}>
+                                        <a href={"/books/" + yardSale._id}>
+                                            <strong>
+                                            {/* {yardSale.title} by {yardSale.author} */}
+                                            </strong>
+                                        </a>
+                                    </ListItem>
+                                );
+                                })}
+                            </List>
+                            ) : (
+                            <h3>No Results to Display</h3>
+                            )}
                     </IndividualListingsWrapper>
                 </ListingsWrapper>
             </div>
