@@ -3,7 +3,7 @@ const router = require("express").Router();
 //   key: process.env.GMAPS_KEY}); //old
 
 router.post("/", (req, res) => {
- let gMapsClient = require("@google/maps").createClient({
+  let gMapsClient = require("@google/maps").createClient({
     key: process.env.GMAPS_KEY,
     Promise: Promise
   }); //new

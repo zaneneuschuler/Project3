@@ -27,5 +27,5 @@ module.exports = [
     listings: [],
     date: Date.now
   },
-]
+];
 
