@@ -38,7 +38,7 @@ module.exports = {
   createNewListing: function (req, res) {
     db.Listing.create(req.body)
       .then(function (dbNote) {
-        return db.User.findOneAndUpdate({
+        return db.YardSale.findOneAndUpdate({
           _id: req.params.id
         }, {
           $push: {
