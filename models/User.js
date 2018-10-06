@@ -42,6 +42,7 @@ UserSchema.methods = {
 };
 
 UserSchema.pre("save", function (next) {
+  debugger;
   if (!this.local.password) {
     console.log("=======NO PASSWORD PROVIDED=======");
     next();
