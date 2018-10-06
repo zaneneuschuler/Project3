@@ -67,18 +67,18 @@ router.post("/signup", (req, res) => {
         error: `Sorry, already a user with the username: ${username}`
       });
     } else{ 
-  const newUser = new User({
-      "local.username": username,
-      "local.password": password,
-      "email": email
-    });
-    console.log(newUser);
-    newUser.save((err, savedUser) => {
-      if (err) {
-        return res.json(err);
-      }
-      return res.json(savedUser);
-    });
+      const newUser = new User({
+        "local.username": username,
+        "local.password": password,
+        "email": email
+      });
+      console.log(newUser);
+      newUser.save((err, savedUser) => {
+        if (err) {
+          return res.json(err);
+        }
+        return res.json(savedUser);
+      });
     }
   
   });
