@@ -2,14 +2,16 @@ import React, { Component } from "react";
 import Jumbotron from "../../components/Jumbotron";
 import API from "../../utils/API";
 import { Link } from "react-router-dom";
-import { Col, Row, Container } from "../../components/Grid";
+import Container from "../../components/Grid/Container";
+import Row from "../../components/Grid/Row";
+import Col from "../../components/Grid/Col";
 import { List, ListItem } from "../../components/List";
-
+import ProductCard from "../../components/ProductCard";
 
 class Products extends Component {
 
     state = {
-        products = [],
+        products: [],
         category: "",
         title: "",
         seller: "",
