@@ -9,22 +9,18 @@ delete mongoose.connection.models["User"];
 // This is similar to a Sequelize model
 var UserSchema = new Schema({
   local: {
+    username: {
+      type: String,
+      unique: false,
+      required: false
+    },
     password: {
       type: String,
       unique: false,
       required: false
     }
   },
-  firstname: {
-    type: String,
-    unique: false,
-    required: false
-  },
-  lastname: {
-    type: String,
-    unique: false,
-    required: false
-  },
+  name: String,
   email: {
     type: String,
     unique: true,

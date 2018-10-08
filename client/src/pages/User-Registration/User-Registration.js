@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import styled from 'react-emotion';
 import ModalFormItem from '../../components/ModalFormItem/ModalFormItem'
+import API from "../../utils/API";
 
 const UserRegistrationWrapper = styled('div')({
     
@@ -21,7 +22,7 @@ const SubmitButton = styled('button')({
 class UserRegistration extends Component {
 
     state = {
-        fistName: '',
+        firstName: '',
         lastName: '',
         email: '',
         password: ''
@@ -34,19 +35,32 @@ class UserRegistration extends Component {
         })
     }
 
-    handleSubmit = () => {
-        // post my state to the api to save the contact form,
-        // then set the state to some kind of success message
-        // and show the user some feedback
-        alert(JSON.stringify(this.state))
+  handleFormSubmit = event => {
+    event.preventDefault();
+    if (this.state.firstName && this.state.lastName  && this.state.email  && this.state.password) {
+      API.createNewUser({
+        firstName: this.state.firstName,
+        lastName: this.state.lastName,
+        email: this.state.email,
+        password: this.state.password
+      })
+        .then(this.setState({
+            firstName: '',
+            lastName: '',
+            email: '',
+            password: ''
+        }))
+        .catch(err => console.log(err));
     }
+  };
 
     render() {
         return (
             <UserRegistrationWrapper>
                 <h3>Sell anything here for free</h3>
                 <h4>Let's started.  It's free!</h4>
-
+            <form>
+            
                 <ModalFormItem
                     name="firstName"
                     label="First name"
@@ -74,10 +88,11 @@ class UserRegistration extends Component {
                     onChangeFn={this.handleChange}
                     value={this.state.password}
                 />
-                <SubmitButton onClick={this.handleSubmit}>
+                <SubmitButton onClick={this.handleFormSubmit}>
                   Join Now
                 </SubmitButton>
-                
+                    
+            </form>
             </UserRegistrationWrapper>
         );
     }
