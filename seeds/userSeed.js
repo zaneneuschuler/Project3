@@ -1,51 +1,73 @@
 module.exports = [
     {
-        userName: "KyleStyle",
+        local: {
+            username: "KyleStyle",
+            password: "pass123"
+        },
+
         name: "Smile Hubbard",
         email:"kyleh@gmail.com",
-        password: "pass123",
         yardSales: []
     },
     {
-        userName: "CareyBeary",
+        local: {
+            username: "CareyBeary",
+            password: "pass123"
+        },
+
         name: "Carey White",
         email:"careybeary@yahoo.com",
-        password: "pass123",
         yardSales: []
     },
     {
-        userName: "story762",
+        local: {
+            username: "story762",
+            password: "pass123"
+        },
+
         name: "Nathan Story",
         email:"nathanS@gmail.com",
-        password: "pass123",
         yardSales: []
     },
     {
-        userName: "LeStone",
+        local: {
+            username: "LeStone",
+            password: "pass123"
+        },
+
         name: "Leslie Stone",
         email:"ldawg@hotmail.com",
-        password: "pass123",
         yardSales: []
     },
     {
-        userName: "Chargers69",
+        local: {
+            username: "Chargers69",
+            password: "pass123"
+        },
+
         name: "Luis Guitierez",
         email:"kingluis@gmail.com",
-        password: "pass123",
         yardSales: []
     },
     {
-        userName: "Rene998",
+        local: {
+            username: "Rene998",
+            password: "pass123"
+        },
+
         name: "Rene Doucet",
         email:"renedoucet@gmail.com",
-        password: "pass123",
         yardSales: []
     },
     {
-        userName: "D-Train632",
+        local: {
+            username: "D-Train632",
+            password: "pass123"
+        },
+
         name: "Danielle Wu",
         email:"danielleWu@yahoo.com",
-        password: "pass123",
         yardSales: []
-    },
+    }
 ]
+
