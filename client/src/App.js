@@ -34,7 +34,7 @@ class App extends Component {
               <Route path="/contact" component={Contact} />
               <Route path="/register" component={Registration} />
               <Route exact path="/yardsalelistings" component={YardSaleListings} />
-              <Route path="/products" component={Products} />
+              <Route path="/products/*" component={Products} />
             </Switch>
           {/* <BodyMain > */}
             {/* <Modal /> */}

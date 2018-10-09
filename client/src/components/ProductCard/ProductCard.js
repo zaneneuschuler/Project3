@@ -1,15 +1,26 @@
 import React from "react";
 import Container from "../Grid/Container"
+import styled from "react-emotion"
 
-const ProductCard = ({ children }) => (
+const Wrapper = styled('div')({
+  margin: 25
+})
+
+const ProductCard = ({ imageUrl, price, category, productName, quantity, description, interest }) => (
   
   <Container>
-  <div
-    style={{ height: 286, width: 180, textAlign: "center" }}
-    className="card"
-  >
-    {children}
-  </div>
+  <Wrapper>  
+    <div>
+
+      <img src={imageUrl} alt={productName} style={{ height: 150, width: 150, textAlign: "center" }}></img>
+      <p>Product: {productName}</p>
+      <p>Price: {price}</p>
+      <p>Quantity: {quantity}</p>
+      <p>Category: {category}</p>
+      <p>Description: {description}</p>
+      <p>Interest: {interest}</p>
+    </div>
+  </Wrapper>
   </Container>
 );
 

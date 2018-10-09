@@ -11,6 +11,8 @@ import ProductCard from "../../components/ProductCard";
 class Products extends Component {
 
     state = {
+        yardsaleID: this.props.location.pathname.split('/')[2],
+        yardsale: [],
         products: [],
         category: "",
         title: "",
@@ -18,12 +20,25 @@ class Products extends Component {
         price: "",
         imgURL: "",
         description: "",
-        intCounter: ""
+        intCounter: 0
     };
     
 
     componentDidMount() {
       this.loadProducts();
+      this.loadYardSaleInfo();
+    }
+
+    loadProducts = () => {
+      API.getYardSale(this.state.yardsaleID)
+        .then(res => this.setState({products: this.state.products.concat(res.data.listings)}))
+        .catch(err => console.log(err))
+    }
+
+    loadYardSaleInfo = () => {
+      API.getYardSale(this.state.yardsaleID)
+      .then(res => this.setState({yardsale: res.data}))
+      .catch(err => console.log(err))
     }
 
     render() {
@@ -38,24 +53,23 @@ class Products extends Component {
             <Col size="md-6 sm-12">
               <Jumbotron>
                 <h1>Products on Sale in my Yard</h1>
-                <h3>Day | Time | Address</h3>
+                <h2>{this.state.yardsale.name}</h2>
+                <h3>{this.state.yardsale.date} | {this.state.yardsale.address} | {this.state.yardsale.zipCode}</h3>
               </Jumbotron>
               {this.state.products.length ? (
                 <List>
                   {this.state.products.map(product => (
-                    <ProductCard>
-                    <ListItem key={product._id}>
-                      <Link to={"/products/" + product._id}>
-                        {product.imgURL}
-                        <strong>
-                          {product.category} : {product.title} sold by {product.seller}
-                        </strong>
-                      </Link>
-                      {product.price}
-                      {product.description}
-                      {product.intCounter} People Interested
+                    <ListItem>
+                      <ProductCard key={product._id} 
+                        imageUrl ={product.imageUrl} 
+                        product = {product.productName}
+                        price = {product.price}
+                        quantity = {product.quantity}
+                        category = {product.category}
+                        description = {product.description}
+                        interest = {this.state.intCounter}
+                      />
                     </ListItem>
-                    </ProductCard>
                   ))}
                 </List>
               ) : (
