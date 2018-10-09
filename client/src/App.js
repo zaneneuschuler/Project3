@@ -28,17 +28,17 @@ class App extends Component {
           <Header />
           <Content>
             <Switch>
-              <Route exact path="/" component={Welcome} />
-              <Route path="/about" component={About} />
+              <Route exact path="/" component={BodyMain} />
+              <Route exact path="/about" component={About} />
               <Route path="/login" component={Login} />
               <Route path="/contact" component={Contact} />
               <Route path="/register" component={Registration} />
-              <Route path="/yardsalelistings" component={YardSaleListings} />
+              <Route exact path="/yardsalelistings" component={YardSaleListings} />
               <Route path="/products" component={Products} />
             </Switch>
-          <BodyMain >
+          {/* <BodyMain > */}
             {/* <Modal /> */}
-          </BodyMain>
+          {/* </BodyMain> */}
           
           </Content>
         </div>
