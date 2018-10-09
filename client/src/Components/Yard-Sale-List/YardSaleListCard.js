@@ -10,7 +10,7 @@ const Wrapper = styled('div')({
 export const YardSaleListCard = ({ address, zipCode, date, name, link }) => {
     return (
         <Wrapper>
-            <a href={"/products/" + link}>Click Here to View Products</a>
+            <a href={"/yardsale/" + link}>Click Here to View Products</a>
             <p>{address}</p>
             <p>{zipCode}</p>
             <p>{date}</p>
