@@ -1,30 +1,29 @@
 Arguments: 
-  C:\Program Files\nodejs\node.exe C:\Users\legsl\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js
+  /usr/local/bin/node /home/tranti/.yarn/bin/yarn.js
 
 PATH: 
-  C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\bin;C:\Users\legsl\bin;C:\ProgramData\Oracle\Java\javapath;C:\Program Files (x86)\Razer Chroma SDK\bin;C:\Program Files\Razer Chroma SDK\bin;C:\Program Files (x86)\Intel\iCLS Client;C:\Program Files\Intel\iCLS Client;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files\Intel\Intel(R) Management Engine Components\IPT;C:\Users\Administrator\AppData\Local\Microsoft\WindowsApps;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0;C:\Program Files\PuTTY;C:\Perl64\bin;C:\ProgramData\chocolatey\bin;C:\Program Files (x86)\Streamlink\bin;C:\Program Files\Git\cmd;C:\WINDOWS\System32\OpenSSH;C:\Program Files\nodejs;C:\Program Files\Microsoft VS Code\bin;C:\ProgramData\chocolatey\lib\mpv.install\tools;C:\Users\legsl\AppData\Local\Microsoft\WindowsApps;C:\Program Files\Heroku\bin;C:\Users\legsl\AppData\Local\hyper\app-2.0.0\resources\bin;C:\Users\legsl\AppData\Roaming\npm;C:\Program Files\Microsoft VS Code\bin;C:\Program Files\MongoDB\Server\4.0\bin
+  /home/tranti/.yarn/bin:/home/tranti/.config/yarn/global/node_modules/.bin:/home/tranti/.yarn/bin:/home/tranti/.config/yarn/global/node_modules/.bin:/home/tranti/.yarn/bin:/home/tranti/.config/yarn/global/node_modules/.bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin:/opt/puppetlabs/bin:/home/tranti/.local/bin:/home/tranti/bin:/home/tranti/.local/bin:/home/tranti/bin
 
 Yarn version: 
-  1.10.0
+  1.10.1
 
 Node version: 
-  8.11.1
+  10.10.0
 
 Platform: 
-  win32 x64
+  linux x64
 
 Trace: 
-  SyntaxError: Invalid value type 1258:12 in C:\Users\legsl\dev\Project3\yarn.lock
-      at Parser.unexpected (C:\Users\legsl\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:58238:11)
-      at Parser.parse (C:\Users\legsl\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:58366:16)
-      at Parser.parse (C:\Users\legsl\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:58323:26)
-      at parse (C:\Users\legsl\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:58440:17)
-      at module.exports.exports.default (C:\Users\legsl\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:58004:96)
-      at Function.<anonymous> (C:\Users\legsl\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:3790:63)
+  SyntaxError: Invalid value type 1258:12 in /home/tranti/dev/homeworks/Project3/yarn.lock
+      at Parser.unexpected (/home/tranti/.yarn/lib/cli.js:58238:11)
+      at Parser.parse (/home/tranti/.yarn/lib/cli.js:58366:16)
+      at Parser.parse (/home/tranti/.yarn/lib/cli.js:58323:26)
+      at parse (/home/tranti/.yarn/lib/cli.js:58440:17)
+      at module.exports.exports.default (/home/tranti/.yarn/lib/cli.js:58004:96)
+      at Function.<anonymous> (/home/tranti/.yarn/lib/cli.js:3790:63)
       at Generator.next (<anonymous>)
-      at step (C:\Users\legsl\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:98:30)
-      at C:\Users\legsl\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:109:13
-      at <anonymous>
+      at step (/home/tranti/.yarn/lib/cli.js:98:30)
+      at /home/tranti/.yarn/lib/cli.js:109:13
 
 npm manifest: 
   {
