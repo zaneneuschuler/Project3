@@ -13,8 +13,7 @@ const HeaderWrapper = styled('header')({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'space-around',
-  padding: '0 6px',
-  color: 'aliceblue'
+  padding: '0 6px'
 });
 
 const FormWrapper = styled('form')({
