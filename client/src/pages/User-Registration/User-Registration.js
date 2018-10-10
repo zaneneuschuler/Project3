@@ -20,7 +20,6 @@ const SubmitButton = styled('button')({
 })
 
 
-
 class UserRegistration extends Component {
 
   constructor() {

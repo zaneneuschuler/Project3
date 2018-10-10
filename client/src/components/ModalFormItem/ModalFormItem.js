@@ -1,6 +1,6 @@
-import React, { Component } from "react";
-import ReactDOM from "react-dom";
-import { Link } from 'react-router-dom';
+import React from "react";
+// import ReactDOM from "react-dom";
+// import { Link } from 'react-router-dom';
 import styled from 'react-emotion';
 import "./ModalFormItem.css";
 
