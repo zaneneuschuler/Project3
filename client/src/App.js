@@ -10,6 +10,8 @@ import Contact from './pages/Contact/Contact'
 import About from "./pages/About/About"
 import Login from './pages/Login/Login'
 import BodyMain from "./components/Body-main/BodyMain";
+import Products from "./pages/Products"
+import Registration from "./pages/User-Registration/User-Registration"
 // import Modal from "./components/ModalForm/ModalForm";
 
 
@@ -26,17 +28,17 @@ class App extends Component {
           <Header />
           <Content>
             <Switch>
-              <Route exact path="/" component={Welcome} />
-              <Route path="/about" component={About} />
+              <Route exact path="/" component={BodyMain} />
+              <Route exact path="/about" component={About} />
               <Route path="/login" component={Login} />
               <Route path="/contact" component={Contact} />
-              {/* <Route path="/registration" component={Registration} /> */}
-              <Route path="/YardSaleListings" component={YardSaleListings} />
-              
+              <Route path="/register" component={Registration} />
+              <Route exact path="/yardsalelistings" component={YardSaleListings} />
+              <Route path="/products/*" component={Products} />
             </Switch>
-          <BodyMain >
+          {/* <BodyMain > */}
             {/* <Modal /> */}
-          </BodyMain>
+          {/* </BodyMain> */}
           
           </Content>
         </div>

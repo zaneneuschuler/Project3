@@ -8,12 +8,36 @@ delete mongoose.connection.models.User;
 // Using the Schema constructor, create a new UserSchema object
 // This is similar to a Sequelize model
 var UserSchema = new Schema({
-  local: {
-    password: {
+  local: 
+  {
+    username: {
       type: String,
       unique: false,
       required: false
-    }
+    },
+    password: {
+    type: String,
+    unique: false,
+    required: false
+  } 
+  },
+
+  First: {
+    type: String,
+    unique: false,
+    required: false
+  },
+
+  Last: {
+    type: String,
+    unique: false,
+    required: false
+  },
+  
+  password: {
+    type: String,
+    unique: false,
+    required: false
   },
   firstname: {
     type: String,
@@ -25,6 +49,7 @@ var UserSchema = new Schema({
     unique: false,
     required: false
   },
+  // name: String,
   email: {
     type: String,
     unique: true,
