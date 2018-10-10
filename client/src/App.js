@@ -5,7 +5,7 @@ import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
 
 import YardSaleListings from "./pages/Yard-Sale-Listings/YardSaleListings"
 import Header from './components/Header'
-import Welcome from './pages/Welcome/Welcome'
+// import Welcome from './pages/Welcome/Welcome'
 import Contact from './pages/Contact/Contact'
 import About from "./pages/About/About"
 import Login from './pages/Login/Login'

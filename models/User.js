@@ -10,9 +10,9 @@ delete mongoose.connection.models.User;
 var UserSchema = new Schema({
   local: 
   {
-    username: {
+    email: {
       type: String,
-      unique: false,
+      unique: true,
       required: false
     },
     password: {
@@ -50,12 +50,7 @@ var UserSchema = new Schema({
     required: false
   },
   // name: String,
-  email: {
-    type: String,
-    unique: true,
-    match: [/.+@.+\..+/, "Please enter a valid e-mail address"],
-    required: false
-  },
+
   yardSales: [{
     type: Schema.Types.ObjectId,
     ref: "YardSale"

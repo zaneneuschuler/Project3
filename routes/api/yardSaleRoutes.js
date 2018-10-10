@@ -4,7 +4,6 @@ const yardSaleController = require("../../controllers/yardSaleController");
 // Matches with "/api/yardSale"
 router.route("/")
   .get(yardSaleController.findAll)
-  .post(yardSaleController.create);
 
 // Matches with "/api/yardSale/:id"
 router

@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import styled from 'react-emotion';
 import "./BodyMain.css";
 import collage from '../../images/collage.jpg'
@@ -7,7 +7,7 @@ import collage from '../../images/collage.jpg'
 import UserRegistration from '../../pages/User-Registration/User-Registration';
 
 
-const BodyWrapper = styled('bodymain')({
+const BodyWrapper = styled('div')({
   width: '100%',
   minHeight: '80vh',
   display: 'flex',
