@@ -13,9 +13,12 @@ export default {
         return axios.get(`/api/yardSales/${id}`)
     },
 
+    createYardSale: function(yardsale){
+        return axios.post('api/yardSales', yardsale)
+    },
+
     login: function(loginData) {
       console.log ('login() is called...' + JSON.stringify(loginData))
         return axios.post("/auth/login", loginData)
     }
-
 };
