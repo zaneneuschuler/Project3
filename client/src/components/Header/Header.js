@@ -33,8 +33,12 @@ const Header = () => (
       <input type="text" className="login-password" autoCapitalize="off" autoFocus="autofocus" aria-required="true" tabindex="1" placeholder="Password"></input>
       <input type="submit" className="login submit-button" tabindex="1" id="login-submit" value="Sign in"></input>
       </FormWrapper>
-    <Link to="/register">Join Now</Link>
-    
+      <Link to="/">Home</Link>
+      <Link to="/register">Join Now</Link>
+      <Link to="/about">About</Link>
+      <Link to="/login">Login</Link>
+      <Link to="/contact">Contact</Link>
+      <Link to="/yardsalelistings">Yard Sales</Link>
   </HeaderWrapper>
 )
 
