@@ -4,12 +4,12 @@ import styled from 'react-emotion'
 import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
 
 import YardSaleListings from "./pages/Yard-Sale-Listings/YardSaleListings"
-import Header from './components/Header'
+import Header from './Components/Header'
 import Welcome from './pages/Welcome/Welcome'
 import Contact from './pages/Contact/Contact'
 import About from "./pages/About/About"
 import Login from './pages/Login/Login'
-import BodyMain from "./components/Body-main/BodyMain";
+import BodyMain from "./Components/BodyMain";
 // import Modal from "./components/ModalForm/ModalForm";
 
 
