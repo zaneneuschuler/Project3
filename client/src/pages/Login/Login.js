@@ -21,15 +21,16 @@ class Login extends Component {
             signedIn: false,
             showSignInFields: true
       };
-    
-  handleInputChange = (e) => {
+    }
+
+handleInputChange = (e) => {
     const { name, value } = e.target
     this.setState({
     [name]: value
     })
 }
 
-handleLogin = event => {
+handleLogin = (event) => {
   event.preventDefault();
   if (this.state.email && this.state.password) {
     API.login({
@@ -49,7 +50,6 @@ handleLogin = event => {
 
 
 
-      }
     render() {
         return (
             <div>
