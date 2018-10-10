@@ -39,6 +39,7 @@ const Header = () => (
       <Link to="/login">Login</Link>
       <Link to="/contact">Contact</Link>
       <Link to="/yardsalelistings">Yard Sales</Link>
+      <Link to="/yardsalecreation">Create A Yard Sale</Link>
   </HeaderWrapper>
 )
 

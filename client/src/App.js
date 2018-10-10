@@ -40,11 +40,11 @@ class App extends Component {
               <Route path="/register" component={Registration} />
               <Route exact path="/yardsalelistings" component={YardSaleListings} />
               <Route path="/products/*" component={Products} />
+              <Route path="/yardsalecreation" component={YardSaleCreation} />
             </Switch>
           {/* <BodyMain > */}
             {/* <Modal /> */}
           {/* </BodyMain> */}
-            <YardSaleCreation userID={this.state.id}/>
           </Content>
         </div>
       </Router>     
