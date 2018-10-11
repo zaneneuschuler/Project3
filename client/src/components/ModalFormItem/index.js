@@ -1,1 +1,1 @@
-export { default } from "./ModalForm";
+export { default } from "./ModalFormItem";

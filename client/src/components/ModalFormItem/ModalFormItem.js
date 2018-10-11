@@ -1,6 +1,6 @@
-import React, { Component } from "react";
-import ReactDOM from "react-dom";
-import { Link } from 'react-router-dom';
+import React from "react";
+// import ReactDOM from "react-dom";
+// import { Link } from 'react-router-dom';
 import styled from 'react-emotion';
 import "./ModalFormItem.css";
 
@@ -21,7 +21,7 @@ const Label = styled('div')({
   height: 20
 })
 
-const ModalFormItem = ({ label, name, value, onChangeFn }) => {
+const ModalFormItem = ({ label, name, value, onChangeFn, type }) => {
   return (
     <div>
       <Label>{label}</Label>
@@ -29,6 +29,7 @@ const ModalFormItem = ({ label, name, value, onChangeFn }) => {
         name={name}
         value={value}
         onChange={onChangeFn}
+        type={type}
       />
     </div>
   )
