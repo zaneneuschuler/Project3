@@ -12,6 +12,7 @@ import Login from './pages/Login/Login'
 import BodyMain from "./components/Body-main/BodyMain";
 import Products from "./pages/Products"
 import Registration from "./pages/User-Registration/User-Registration"
+import YardSaleCreation from "./pages/Yard-Sale-Creation/YardSaleCreation"
 // import Modal from "./components/ModalForm/ModalForm";
 
 
@@ -25,7 +26,7 @@ class App extends Component {
     id: ""
   }
 
-  
+
   render() {
     return (
 
@@ -41,11 +42,11 @@ class App extends Component {
               <Route path="/register" component={Registration} />
               <Route exact path="/yardsalelistings" component={YardSaleListings} />
               <Route path="/products/*" component={Products} />
+              <Route path="/yardsalecreation" component={YardSaleCreation} />
             </Switch>
           {/* <BodyMain > */}
             {/* <Modal /> */}
           {/* </BodyMain> */}
-          
           </Content>
         </div>
       </Router>     

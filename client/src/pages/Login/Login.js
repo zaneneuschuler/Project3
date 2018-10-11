@@ -21,39 +21,37 @@ class Login extends Component {
             signedIn: false,
             showSignInFields: true
       };
-    
 
-}
+    }
+
 handleInputChange = (e) => {
-    const {
-        name,
-        value
-    } = e.target
+    const { name, value } = e.target
     this.setState({
         [name]: value
     })
 }
 
-handleLogin = event => {
-        event.preventDefault();
-        if (this.state.email && this.state.password) {
-            API.login({
-                    "email": this.state.email,
-                    "password": this.state.password,
-                })
-                .then(console.log('logged in info:  ', JSON.stringify(this.state)))
-                .then(this.setState({
-                    email: '',
-                    password: '',
-                    signedIn: true,
-                    showSignInFields: false
-                }))
-                .catch(err => console.log(err));
-        }
+handleLogin = (event) => {
+  event.preventDefault();
+  if (this.state.email && this.state.password) {
+    API.login({
+      "email": this.state.email,
+      "password": this.state.password,
+    })
+      .then(console.log('logged in info:  ', JSON.stringify(this.state)))
+      .then(this.setState({
+          email: '',
+          password: '',
+          signedIn: true,
+          showSignInFields: false
+      }))
+      .catch(err => console.log(err));
+  }
+}
 
 
 
-      }
+
     render() {
         return (
             <div>

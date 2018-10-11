@@ -13,8 +13,7 @@ const HeaderWrapper = styled('header')({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'space-around',
-  padding: '0 6px',
-  color: 'aliceblue'
+  padding: '0 6px'
 });
 
 const FormWrapper = styled('form')({
@@ -39,6 +38,7 @@ const Header = () => (
       <Link to="/login">Login</Link>
       <Link to="/contact">Contact</Link>
       <Link to="/yardsalelistings">Yard Sales</Link>
+      <Link to="/yardsalecreation">Create A Yard Sale</Link>
   </HeaderWrapper>
 )
 
