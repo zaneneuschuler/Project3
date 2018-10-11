@@ -53,7 +53,6 @@ router.post("/logout", (req, res) => {
 });
 
 router.post("/signup", (req, res) => {
-  console.log(req.body)
   const {
     password, 
     First,

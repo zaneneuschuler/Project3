@@ -1,3 +1,4 @@
+require("dotenv").config();
 const express = require("express");
 const path = require("path");
 const bodyParser = require("body-parser");
@@ -8,7 +9,7 @@ var db = require("./models");
 const routes = require("./routes");
 const passport = require("./passport");
 const session = require("express-session");
-require("dotenv").config();
+
 // Define middleware here
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
