@@ -74,6 +74,7 @@ class UserRegistration extends Component {
               <ModalFormItem
                   name="First"
                   label="First name"
+                  type="text"
                   onChangeFn={this.handleInputChange}
                   value={this.state.firstName}
               />
@@ -81,6 +82,7 @@ class UserRegistration extends Component {
               <ModalFormItem
                   name="Last"
                   label="Last name"
+                  type="text"
                   onChangeFn={this.handleInputChange}
                   value={this.state.lastName}
               />
@@ -88,6 +90,7 @@ class UserRegistration extends Component {
               <ModalFormItem
                   name="email"
                   label="Email"
+                  type="string"
                   onChangeFn={this.handleInputChange}
                   value={this.state.email}
               />
@@ -95,6 +98,7 @@ class UserRegistration extends Component {
               <ModalFormItem
                   name="password"
                   label="Password"
+                  type="password"
                   onChangeFn={this.handleInputChange}
                   value={this.state.password}
               />

@@ -21,13 +21,14 @@ const Label = styled('div')({
   height: 20
 })
 
-const ModalFormItem = ({ label, name, value, onChangeFn }) => {
+const ModalFormItem = ({ label, name, value, type, onChangeFn }) => {
   return (
     <div>
       <Label>{label}</Label>
       <CustomInput
         name={name}
         value={value}
+        type={type}
         onChange={onChangeFn}
       />
     </div>
