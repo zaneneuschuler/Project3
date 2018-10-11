@@ -21,11 +21,7 @@ const Label = styled('div')({
   height: 20
 })
 
-<<<<<<< HEAD
 const ModalFormItem = ({ label, name, value, type, onChangeFn }) => {
-=======
-const ModalFormItem = ({ label, name, value, onChangeFn, type }) => {
->>>>>>> master
   return (
     <div>
       <Label>{label}</Label>

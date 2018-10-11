@@ -11,11 +11,8 @@ import Login from './pages/Login/Login'
 import BodyMain from "./components/Body-main/BodyMain";
 import Products from "./pages/Products"
 import Registration from "./pages/User-Registration/User-Registration"
-<<<<<<< HEAD
-=======
 import YardSaleCreation from "./pages/Yard-Sale-Creation/YardSaleCreation"
 // import Modal from "./components/ModalForm/ModalForm";
->>>>>>> master
 
 
 const Content = styled('div')({
@@ -46,13 +43,7 @@ class App extends Component {
               <Route path="/products/*" component={Products} />
               <Route path="/yardsalecreation" component={YardSaleCreation} />
             </Switch>
-<<<<<<< HEAD
           
-=======
-          {/* <BodyMain > */}
-            {/* <Modal /> */}
-          {/* </BodyMain> */}
->>>>>>> master
           </Content>
         </div>
       </Router>     

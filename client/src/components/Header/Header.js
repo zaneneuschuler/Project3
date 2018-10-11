@@ -104,27 +104,3 @@ class Header extends Component {
 }
 export default Header;
 
-<<<<<<< HEAD
-=======
-const Header = () => (
-  <HeaderWrapper>
-    <h1>YarddY</h1>
-      <FormWrapper>
-      <label for="login-email"></label>
-      <input type="text" className="login-email" autoCapitalize="off" autoFocus="autofocus" tabindex="1" placeholder="Email"></input>
-      <label for="login-password"></label>
-      <input type="text" className="login-password" autoCapitalize="off" autoFocus="autofocus" aria-required="true" tabindex="1" placeholder="Password"></input>
-      <input type="submit" className="login submit-button" tabindex="1" id="login-submit" value="Sign in"></input>
-      </FormWrapper>
-      <Link to="/">Home</Link>
-      <Link to="/register">Join Now</Link>
-      <Link to="/about">About</Link>
-      <Link to="/login">Login</Link>
-      <Link to="/contact">Contact</Link>
-      <Link to="/yardsalelistings">Yard Sales</Link>
-      <Link to="/yardsalecreation">Create A Yard Sale</Link>
-  </HeaderWrapper>
-)
-
-export default Header;
->>>>>>> master
