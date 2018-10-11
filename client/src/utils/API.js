@@ -7,7 +7,9 @@ export default {
     // Saves a new user to the database
     createNewUser: function(userData){
         console.log ('createNewUser() is called...' + JSON.stringify(userData))
-        return axios.post("/auth/signup", userData)
+        axios.post("/auth/signup", userData).then(function (response){
+            return response.data;
+        })
     },
     getYardSale: function(id){
         return axios.get(`/api/yardSales/${id}`)

@@ -21,12 +21,13 @@ class Login extends Component {
             signedIn: false,
             showSignInFields: true
       };
+
     }
 
 handleInputChange = (e) => {
     const { name, value } = e.target
     this.setState({
-    [name]: value
+        [name]: value
     })
 }
 
@@ -47,6 +48,7 @@ handleLogin = (event) => {
       .catch(err => console.log(err));
   }
 }
+
 
 
 

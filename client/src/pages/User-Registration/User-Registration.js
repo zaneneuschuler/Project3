@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import styled from 'react-emotion';
 import ModalFormItem from '../../components/ModalFormItem/ModalFormItem'
 import API from "../../utils/API";
+import axios from "axios";
+
 
 const UserRegistrationWrapper = styled('div')({
     
@@ -29,7 +31,8 @@ class UserRegistration extends Component {
         Last: '',
         email: '',
         password: '',
-        showSubmitForm: true
+        showSubmitForm: true,
+        id: ""
   };
 
   }
@@ -44,20 +47,22 @@ class UserRegistration extends Component {
   handleFormSubmit = event => {
       event.preventDefault();
       if (this.state.First && this.state.Last && this.state.email && this.state.password) {
-        API.createNewUser({
+        let newUser = {
          'First': this.state.First,
           "Last": this.state.Last,
           "email": this.state.email,
           "password": this.state.password,
+        };
+        axios.post("/auth/signup", newUser).then(function (response) {
+            alert(JSON.stringify(response.data));
         })
-          .then(console.log('new user:  ', JSON.stringify(this.state)))
-          .then(this.setState({
-              First: '',
-              Last: '',
-              email: '',
-              password: '',
-              showSubmitForm: false
-          }))
+        //   .then(this.setState({
+        //       First: '',
+        //       Last: '',
+        //       email: '',
+        //       password: '',
+        //       showSubmitForm: false
+        //   }))
           .catch(err => console.log(err));
       }
     };
@@ -97,6 +102,7 @@ class UserRegistration extends Component {
                   label="Password"
                   onChangeFn={this.handleInputChange}
                   value={this.state.password}
+                  type="password"
               />
               
               <SubmitButton onClick={this.handleFormSubmit}>

@@ -22,9 +22,11 @@ const Content = styled('div')({
 
 class App extends Component {
   state = {
-    id: "",
-    loggedIn: false
+    loggedIn: false,
+    id: ""
   }
+
+
   render() {
     return (
 
