@@ -15,7 +15,8 @@ const HeaderWrapper = styled('header')({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'space-around',
-  padding: '0 6px'
+  padding: '0 6px',
+  color: 'white'
 });
 
 const FormWrapper = styled('form')({
@@ -34,8 +35,9 @@ class Header extends Component {
   constructor() {
     super();
     this.state = {
-      Email: '',
+      email: '',
       password: '',
+      type: '',
       showLoginForm: true
     };
   }
@@ -65,7 +67,12 @@ class Header extends Component {
   render() {
     return (
       <HeaderWrapper>
-        <h1>YarddY</h1>
+        <h1>YarddY</h1>        
+          <Link to="/">Home</Link>
+          <Link to="/about">About</Link>
+          <Link to="/contact">Contact</Link>
+          <Link to="/yardsalelistings">Yard Sales</Link>
+
             {
               this.state.showLoginForm ?
               <div>
@@ -92,15 +99,9 @@ class Header extends Component {
               </div>
               : null
           }
-          <Link to="/">Home</Link>
-          <Link to="/about">About</Link>
-          <Link to="/contact">Contact</Link>
-          <Link to="/yardsalelistings">Yard Sales</Link>
       </HeaderWrapper>
     )
   }
-
-
 }
 export default Header;
 

@@ -11,7 +11,8 @@ const UserRegistrationWrapper = styled('div')({
     display: 'flex',
     flexDirection: 'column',
     padding: 20,
-    background: 'lightgray'
+    boxShadow: '0 0 15px 5px rgba(0,0,0,0.5)',
+    background: 'lightgrey'
 });
 const SubmitButton = styled('button')({
     padding: 8,
@@ -56,23 +57,23 @@ class UserRegistration extends Component {
         axios.post("/auth/signup", newUser).then(function (response) {
             alert(JSON.stringify(response.data));
         })
-        //   .then(this.setState({
-        //       First: '',
-        //       Last: '',
-        //       email: '',
-        //       password: '',
-        //       showSubmitForm: false
-        //   }))
+          .then(this.setState({
+              First: '',
+              Last: '',
+              email: '',
+              password: '',
+              showSubmitForm: false
+          }))
           .catch(err => console.log(err));
       }
     };
   
   render() {
       return (
-          <UserRegistrationWrapper>
-            {
-              this.state.showSubmitForm ? 
-            <div>
+        <UserRegistrationWrapper>
+          {
+            this.state.showSubmitForm ? 
+          <div>
               <h3>Sell anything here for free</h3>
               <h4>Let's started.  It's free!</h4>
 
@@ -106,17 +107,16 @@ class UserRegistration extends Component {
                   type="password"
                   onChangeFn={this.handleInputChange}
                   value={this.state.password}
-                  type="password"
               />
               
               <SubmitButton onClick={this.handleFormSubmit}>
                 Join Now
               </SubmitButton>
+              
               </div>
               : null
             }
-              
-          </UserRegistrationWrapper>
+              </UserRegistrationWrapper>
       );
   }
 }

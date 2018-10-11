@@ -30,7 +30,6 @@ const ModalFormItem = ({ label, name, value, type, onChangeFn }) => {
         value={value}
         type={type}
         onChange={onChangeFn}
-        type={type}
       />
     </div>
   )
