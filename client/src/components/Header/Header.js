@@ -42,6 +42,18 @@ class Header extends Component {
     };
   }
 
+  componentDidMount = () => {
+
+    setTimeout(() => {
+          if (this.props.loggedIn) {
+            this.setState({
+              showLoginForm: false
+            })
+          }
+    }, 1000);
+
+  }
+
   handleInputChange = (e) => {
       const { name, value } = e.target
       this.setState({

@@ -38,7 +38,8 @@
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
     "react-cookie": "^3.0.4",
-    "react-emotion": "^9.2.10"
+    "react-emotion": "^9.2.10",
+    "react-gmaps": "^1.9.0"
   },
   "repository": {
     "type": "git",

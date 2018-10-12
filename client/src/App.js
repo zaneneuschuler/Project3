@@ -53,7 +53,7 @@ class App extends Component {
 
       <Router>
         <div>
-          <Header />
+          <Header loggedIn={this.state.loggedIn}/>
           <Content>
             <Switch>
               <Route exact path="/" component={BodyMain} />
