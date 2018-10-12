@@ -9,14 +9,42 @@ const YardSaleCreationElement = styled('div')({
     margin: 15
 })
 
+function getCookie(cname) {
+    var name = cname + "=";
+    var decodedCookie = decodeURIComponent(document.cookie);
+    var ca = decodedCookie.split(';');
+    for (var i = 0; i < ca.length; i++) {
+      var c = ca[i];
+      while (c.charAt(0) == ' ') {
+        c = c.substring(1);
+      }
+      if (c.indexOf(name) == 0) {
+        return c.substring(name.length, c.length);
+      }
+    }
+    return "";
+  }
+
 class YardSaleCreation extends Component {
     state = {
         displayProducts: false,
-        address: "Street Address City, State",
-        zipCode: 12345,
-        name: "Your Yard Sale's Name",
-        date: "2018-12-3101:00"
+
+        address: "Street Address City, State", 
+        zipCode: 12345, 
+        name: "Your Yard Sale's Name", 
+        date: "2018-12-3101:00",
+        userID: ""
     }
+    
+    componentDidMount = () => {
+        if(getCookie("id") !== ""){
+          this.setState({
+            userID: getCookie("id"),
+          })
+        }
+        console.log(this.state.userID)
+      }
+
 
     handleInput = (event) => {
         const { name, value } = event.target;
