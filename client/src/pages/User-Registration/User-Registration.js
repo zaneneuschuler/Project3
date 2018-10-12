@@ -71,6 +71,7 @@ class UserRegistration extends Component {
         };
         axios.post("/auth/signup", newUser).then(function (response) {
             document.cookie = `id=${response.data._id}`
+            window.location.reload();
             
         })
           .then(this.setState({
