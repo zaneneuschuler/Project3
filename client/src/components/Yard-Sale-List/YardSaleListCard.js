@@ -7,10 +7,14 @@ const Wrapper = styled('div')({
     padding: 10
 })
 
+const ATag = styled('a')({
+    color: "blue"
+})
+
 export const YardSaleListCard = ({ address, zipCode, date, name, link }) => {
     return (
         <Wrapper>
-            <a href={"/products/" + link}>Click Here to View Products</a>
+            <ATag href={"/products/" + link}>Click Here to View Products</ATag>
             <p>{address}</p>
             <p>{zipCode}</p>
             <p>{date}</p>
