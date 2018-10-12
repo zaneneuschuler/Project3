@@ -37,6 +37,7 @@
     "mongoose-bcrypt": "^1.6.0",
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
+    "react-cookie": "^3.0.4",
     "react-emotion": "^9.2.10"
   },
   "repository": {
