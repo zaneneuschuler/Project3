@@ -30,6 +30,7 @@ function getCookie(cname) {
   }
   return "";
 }
+
 const Content = styled('div')({
   textAlign: 'center'
 })
