@@ -72,7 +72,7 @@ class Header extends Component {
           <Link to="/about">About</Link>
           <Link to="/contact">Contact</Link>
           <Link to="/yardsalelistings">Yard Sales</Link>
-
+          <Link to="/yardsalecreation">Create A Yard Sale</Link>
             {
               this.state.showLoginForm ?
               <div>
