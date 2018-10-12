@@ -12,14 +12,14 @@ const UserRegistrationWrapper = styled('div')({
     flexDirection: 'column',
     padding: 20,
     boxShadow: '0 0 15px 5px rgba(0,0,0,0.5)',
-    background: 'lightgrey'
+    background: '#f6f8fa'
 });
 const SubmitButton = styled('button')({
     padding: 8,
-    borderRadius: 5,
     background: "rgb(0,115,177)",
     color: 'white',
-    float: 'left'
+    float: 'left',
+    width: 260
 })
 
 
