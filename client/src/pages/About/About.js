@@ -15,8 +15,6 @@ class About extends Component {
         return (
             <div>
                 <AboutWrapper>
-                    <Header />
-
                     {/* <Jumbotron />
 
                     <List /> */}

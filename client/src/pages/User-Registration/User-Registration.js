@@ -3,7 +3,7 @@ import styled from 'react-emotion';
 import ModalFormItem from '../../components/ModalFormItem/ModalFormItem'
 import API from "../../utils/API";
 import axios from "axios";
-
+import { withCookies, Cookies } from 'react-cookie';
 
 const UserRegistrationWrapper = styled('div')({
     
@@ -21,6 +21,21 @@ const SubmitButton = styled('button')({
     color: 'white',
     float: 'left'
 })
+function getCookie(cname) {
+    var name = cname + "=";
+    var decodedCookie = decodeURIComponent(document.cookie);
+    var ca = decodedCookie.split(';');
+    for (var i = 0; i < ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+        }
+    }
+    return "";
+}
 
 
 class UserRegistration extends Component {
@@ -33,7 +48,7 @@ class UserRegistration extends Component {
         email: '',
         password: '',
         showSubmitForm: true,
-        id: ""
+        id: ''
   };
 
   }
@@ -55,14 +70,16 @@ class UserRegistration extends Component {
           "password": this.state.password,
         };
         axios.post("/auth/signup", newUser).then(function (response) {
-            alert(JSON.stringify(response.data));
+            document.cookie = `id=${response.data._id}`
+            
         })
           .then(this.setState({
               First: '',
               Last: '',
               email: '',
               password: '',
-              showSubmitForm: false
+              showSubmitForm: false,
+              id: getCookie("id")
           }))
           .catch(err => console.log(err));
       }

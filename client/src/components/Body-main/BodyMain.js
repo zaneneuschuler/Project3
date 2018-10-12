@@ -19,7 +19,7 @@ const BodyWrapper = styled('div')({
 
 const BodyMain = () => (
   <BodyWrapper>
-    <UserRegistration lol="lol"/>
+    <UserRegistration/>
   </BodyWrapper>
 )
 
