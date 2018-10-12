@@ -1,6 +1,13 @@
 import React, { Component } from "react";
 import styled from 'react-emotion';
 import API from "../../utils/API";
+import DeleteBtn from "../../components/DeleteBtn";
+import Row from "../../components/Grid/Row";
+import Col from "../../components/Grid/Col";
+import Container from "../../components/Grid/Container";
+import { List, ListItem } from "../../components/List";
+import { Input, TextArea, FormBtn } from "../../components/Form";
+import Jumbotron from "../../components/Jumbotron";
 
 const YardSaleCreationWrapper = styled('div')({
     margin: 20
@@ -28,12 +35,19 @@ function getCookie(cname) {
 class YardSaleCreation extends Component {
     state = {
         displayProducts: false,
-
         address: "Street Address City, State", 
         zipCode: 12345, 
         name: "Your Yard Sale's Name", 
         date: "2018-12-3101:00",
-        userID: ""
+        userID: "",
+        _id: "",
+        imageUrl: "",
+        productName: "",
+        price: "",
+        quantity: "",
+        category: "",
+        description: "",
+        intCounter: 0
     }
     
     componentDidMount = () => {
@@ -68,100 +82,64 @@ class YardSaleCreation extends Component {
 
     render() {
         return (
-            <YardSaleCreationWrapper>
-                <h3>Enter Your Sale's Info Here</h3>
-                {/* Address */}
-                <YardSaleCreationElement>Address: <input type="text" name="address" value={this.state.address} onChange={this.handleInput}></input></YardSaleCreationElement>
-                {/* Zip Code */}
-                <YardSaleCreationElement>Zip Code: <input type="text" name="zipCode" value={this.state.zipCode} onChange={this.handleInput}></input></YardSaleCreationElement>
-                {/* Date of Sale */}
-                <YardSaleCreationElement>Date of Sale: <input type="datetime-local" name="date" value={this.state.date} onChange={this.handleInput}></input></YardSaleCreationElement>
-                {/* Name of Sale */}
-                <YardSaleCreationElement>Name of Your Sale: <input type="text" name="name" value={this.state.name} onChange={this.handleInput}></input></YardSaleCreationElement>
+            <div>
+                <YardSaleCreationWrapper>
+                    <h3>Enter Your Sale's Info Here</h3>
+                    {/* Address */}
+                    <YardSaleCreationElement>Address: <input type="text" name="address" value={this.state.address} onChange={this.handleInput}></input></YardSaleCreationElement>
+                    {/* Zip Code */}
+                    <YardSaleCreationElement>Zip Code: <input type="text" name="zipCode" value={this.state.zipCode} onChange={this.handleInput}></input></YardSaleCreationElement>
+                    {/* Date of Sale */}
+                    <YardSaleCreationElement>Date of Sale: <input type="datetime-local" name="date" value={this.state.date} onChange={this.handleInput}></input></YardSaleCreationElement>
+                    {/* Name of Sale */}
+                    <YardSaleCreationElement>Name of Your Sale: <input type="text" name="name" value={this.state.name} onChange={this.handleInput}></input></YardSaleCreationElement>
 
-                <button onClick={this.submitYardSale}>Submit</button>
-            </YardSaleCreationWrapper>
-
-            <Container fluid>
-                <Row>
-                    <Col size="md-6">
-                        <Jumbotron>
-                            <h1>Add an Item to Sell</h1>
-                        </Jumbotron>
-                        <form>
-                        <Input type="text" name="key" value={this.state.product._id} onChange={this.handleInput}></Input>/>
-                        <Input type="text" name="imageUrl" value={this.state.product.imageUrl} onChange={this.handleInput}></Input>/>
-                        <Input type="text" name="productName" value={this.state.product.productName} onChange={this.handleInput}></Input>/>
-                        <Input type="text" name="productPrice" value={this.state.product.price} onChange={this.handleInput}></Input>/>
-                        <Input type="text" name="quantity" value={this.state.product.quantity} onChange={this.handleInput}></Input>/>
-                        <Input type="text" name="category" value={this.state.product.category} onChange={this.handleInput}></Input>/>   
-                        <Input type="text" name="description" value={this.state.product.description} onChange={this.handleInput}></Input>/>
-                        <Input type="text" name="interest" value={this.state.intCounter} onChange={this.handleInput}></Input>/>
-                        <FormBtn>Submit Item</FormBtn>
-                        </form>
-                    </Col>
-                    <Col size="md-6 sm-12">
-                        <Jumbotron>
-                            <h1>Items for Sale</h1>
-                        </Jumbotron>
-                        {this.state.products.length ? (
-                            <List>
-                                {this.state.products.map(product => (
-                                    <ListItem key={product._id}>
-                                        <a href={"/products/" + product._id}>
-                                            <strong>
-                                                Product: {product.productName}
-                                                imageUrl: {product.imageUrl}
-                                                Price: {product.price}
-                                                Quantity: {product.quantity}
-                                                Category: {product.category}
-                                                Description: {product.description}
-                                                Interest: {product.interest}
-                                            </strong>
-                                        </a>
-                                        <DeleteBtn />
-                                    </ListItem>
-                                ))}
-                            </List>
-                        ) : (
-                                <h3>No Results to Display</h3>
-                            )}
-                    </Col>
-                </Row>
-            </Container>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+                    <button onClick={this.submitYardSale}>Submit</button>
+                </YardSaleCreationWrapper>
+                <Container fluid>
+                    <Row>
+                        <Col size="md-6">
+                            <Jumbotron>
+                                <h1>Add an Item to Sell</h1>
+                            </Jumbotron>
+                            <YardSaleCreationElement> <input type="text" name="_id" value={this.state._id} onChange={this.handleInput}></input></YardSaleCreationElement>
+                            <YardSaleCreationElement> <input type="text" name="imageUrl" value={this.state.imageUrl} onChange={this.handleInput}></input></YardSaleCreationElement>
+                            <YardSaleCreationElement> <input type="text" name="productName" value={this.state.productName} onChange={this.handleInput}></input></YardSaleCreationElement>
+                            <YardSaleCreationElement> <input type="text" name="productPrice" value={this.state.price} onChange={this.handleInput}></input></YardSaleCreationElement>
+                            <YardSaleCreationElement> <input type="text" name="quantity" value={this.state.quantity} onChange={this.handleInput}></input></YardSaleCreationElement>
+                            <YardSaleCreationElement> <input type="text" name="category" value={this.state.category} onChange={this.handleInput}></input></YardSaleCreationElement>   
+                            <YardSaleCreationElement> <input type="text" name="description" value={this.state.description} onChange={this.handleInput}></input></YardSaleCreationElement>
+                            <YardSaleCreationElement> <input type="text" name="interest" value={this.state.intCounter} onChange={this.handleInput}></input></YardSaleCreationElement>
+                            <FormBtn>Submit Item</FormBtn>
+                        </Col>
+                        <Col size="md-6 sm-12">
+                            <Jumbotron>
+                                <h1>Items for Sale</h1>
+                            </Jumbotron>
+                            {this.state.length ? (
+                                <List>
+                                    {this.state.map(product => (
+                                        <ListItem key={product._id}>
+                                                <strong>
+                                                    Product: {product.productName}
+                                                    imageUrl: {product.imageUrl}
+                                                    Price: {product.price}
+                                                    Quantity: {product.quantity}
+                                                    Category: {product.category}
+                                                    Description: {product.description}
+                                                    Interest: {product.interest}
+                                                </strong>
+                                            <DeleteBtn />
+                                        </ListItem>
+                                    ))}
+                                </List>
+                            ) : (
+                                    <h3>No Results to Display</h3>
+                                )}
+                        </Col>
+                    </Row>
+                </Container>
+            </div>
         );
     }
 }
