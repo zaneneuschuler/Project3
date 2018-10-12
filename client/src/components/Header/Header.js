@@ -26,7 +26,7 @@ const FormWrapper = styled('form')({
 })
 
 const LoginButton = styled('button')({
-  background: "rgb(0,115,177)",
+  background: "#283e4a",
   color: 'white',
   height: 26
 })
@@ -93,7 +93,7 @@ class Header extends Component {
                     onChangeFn={this.handleInputChange}
                   />
                   <div>
-                    <LoginButton onClick={this.handleFormLogin}>Log In</LoginButton>
+                    <LoginButton onClick={this.handleFormLogin}>Sign In</LoginButton>
                   </div>
                 </FormWrapper>
               </div>
