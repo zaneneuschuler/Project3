@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import styled from 'react-emotion';
 import API from "../../utils/API";
+import axios from "axios";
 import DeleteBtn from "../../components/DeleteBtn";
 import Row from "../../components/Grid/Row";
 import Col from "../../components/Grid/Col";
@@ -43,7 +44,7 @@ class YardSaleCreation extends Component {
         _id: "",
         imageUrl: "",
         productName: "",
-        price: "",
+        productPrice: "",
         quantity: "",
         category: "",
         description: "",
@@ -80,6 +81,11 @@ class YardSaleCreation extends Component {
             .catch(err => console.log(err))
     }
 
+    handleFormSubmit = event => {
+        event.preventDefault();
+ 
+      };
+    
     render() {
         return (
             <div>
@@ -99,23 +105,18 @@ class YardSaleCreation extends Component {
                 <Container fluid>
                     <Row>
                         <Col size="md-6">
-                            <Jumbotron>
                                 <h1>Add an Item to Sell</h1>
-                            </Jumbotron>
-                            <YardSaleCreationElement> <input type="text" name="_id" value={this.state._id} onChange={this.handleInput}></input></YardSaleCreationElement>
-                            <YardSaleCreationElement> <input type="text" name="imageUrl" value={this.state.imageUrl} onChange={this.handleInput}></input></YardSaleCreationElement>
-                            <YardSaleCreationElement> <input type="text" name="productName" value={this.state.productName} onChange={this.handleInput}></input></YardSaleCreationElement>
-                            <YardSaleCreationElement> <input type="text" name="productPrice" value={this.state.price} onChange={this.handleInput}></input></YardSaleCreationElement>
-                            <YardSaleCreationElement> <input type="text" name="quantity" value={this.state.quantity} onChange={this.handleInput}></input></YardSaleCreationElement>
-                            <YardSaleCreationElement> <input type="text" name="category" value={this.state.category} onChange={this.handleInput}></input></YardSaleCreationElement>   
-                            <YardSaleCreationElement> <input type="text" name="description" value={this.state.description} onChange={this.handleInput}></input></YardSaleCreationElement>
-                            <YardSaleCreationElement> <input type="text" name="interest" value={this.state.intCounter} onChange={this.handleInput}></input></YardSaleCreationElement>
-                            <FormBtn>Submit Item</FormBtn>
+                            <YardSaleCreationElement>Product Name: <input type="text" className="form-control" name="productName" value={this.state.productName} onChange={this.handleInput}></input></YardSaleCreationElement>
+                            <YardSaleCreationElement>Price: <input type="text" className="form-control" name="productPrice" value={this.state.productPrice} onChange={this.handleInput}></input></YardSaleCreationElement>
+                            <YardSaleCreationElement>Quantity: <input type="text" className="form-control" name="quantity" value={this.state.quantity} onChange={this.handleInput}></input></YardSaleCreationElement>
+                            <YardSaleCreationElement>Category: <input type="text" className="form-control" name="category" value={this.state.category} onChange={this.handleInput}></input></YardSaleCreationElement>   
+                            <YardSaleCreationElement>Description: <input type="text" className="form-control" name="description" value={this.state.description} onChange={this.handleInput}></input></YardSaleCreationElement>
+                            <YardSaleCreationElement>Picture (URL): <input type="text" className="form-control" name="imageUrl" value={this.state.imageUrl} onChange={this.handleInput}></input></YardSaleCreationElement>
+                            <button onClick={this.handleFormSubmit}>Submit Item</button>
                         </Col>
                         <Col size="md-6 sm-12">
-                            <Jumbotron>
                                 <h1>Items for Sale</h1>
-                            </Jumbotron>
+
                             {this.state.length ? (
                                 <List>
                                     {this.state.map(product => (
@@ -123,7 +124,7 @@ class YardSaleCreation extends Component {
                                                 <strong>
                                                     Product: {product.productName}
                                                     imageUrl: {product.imageUrl}
-                                                    Price: {product.price}
+                                                    Price: {product.productPrice}
                                                     Quantity: {product.quantity}
                                                     Category: {product.category}
                                                     Description: {product.description}
