@@ -43,6 +43,7 @@ class YardSaleCreation extends Component {
         name: "Your Yard Sale's Name", 
         date: "2018-12-3101:00",
         userID: "",
+        yardSaleID: "",
         _id: "",
         imageUrl: "",
         productName: "",
@@ -68,7 +69,7 @@ class YardSaleCreation extends Component {
             zipCode: this.state.zipCode,
             date: new Date(this.state.date + ":00Z")
         }
-        API.createYardSale(newSale)
+        API.createYardSale(this.props.id, newSale)
             .then(function (res) { console.log(res) })
             .catch(err => console.log(err))
     }

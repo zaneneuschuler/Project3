@@ -15,8 +15,8 @@ export default {
         return axios.get(`/api/yardSales/${id}`)
     },
 
-    createYardSale: function(yardsale){
-        return axios.post('api/yardSales', yardsale)
+    createYardSale: function(id, yardsale){
+        return axios.post(`api/user/${id}`, yardsale)
     },
 
     login: function(loginData) {
