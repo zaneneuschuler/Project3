@@ -12,25 +12,28 @@ import Jumbotron from "../../components/Jumbotron";
 const YardSaleCreationWrapper = styled('div')({
     margin: 20
 })
+const ProductHolder = styled('div')({
+    display: "inline-block"
+})
+const YardSaleCreationProductsWrapper = styled('div')({
+    margin: 20,
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+})
 const YardSaleCreationElement = styled('div')({
     margin: 15
 })
-
-function getCookie(cname) {
-    var name = cname + "=";
-    var decodedCookie = decodeURIComponent(document.cookie);
-    var ca = decodedCookie.split(';');
-    for (var i = 0; i < ca.length; i++) {
-      var c = ca[i];
-      while (c.charAt(0) == ' ') {
-        c = c.substring(1);
-      }
-      if (c.indexOf(name) == 0) {
-        return c.substring(name.length, c.length);
-      }
-    }
-    return "";
-  }
+const YardSaleCreationItemElements = styled('div')({
+    margin: 15,
+    display: "flex",
+    alignItems: "baseline",
+    
+})
+const ProductsInput = styled('input')({
+    marginLeft: 20,
+    float: "right"
+})
 
 class YardSaleCreation extends Component {
     state = {
@@ -49,16 +52,6 @@ class YardSaleCreation extends Component {
         description: "",
         intCounter: 0
     }
-    
-    componentDidMount = () => {
-        if(getCookie("id") !== ""){
-          this.setState({
-            userID: getCookie("id"),
-          })
-        }
-        console.log(this.state.userID)
-      }
-
 
     handleInput = (event) => {
         const { name, value } = event.target;
@@ -68,13 +61,13 @@ class YardSaleCreation extends Component {
     }
 
     submitYardSale = () => {
+        this.setState({userID: this.props.id})
         let newSale = {
             name: this.state.name,
             address: this.state.address,
             zipCode: this.state.zipCode,
             date: new Date(this.state.date + ":00Z")
         }
-        console.log(newSale)
         API.createYardSale(newSale)
             .then(function (res) { console.log(res) })
             .catch(err => console.log(err))
@@ -99,18 +92,24 @@ class YardSaleCreation extends Component {
                 <Container fluid>
                     <Row>
                         <Col size="md-6">
-                            <Jumbotron>
-                                <h1>Add an Item to Sell</h1>
-                            </Jumbotron>
-                            <YardSaleCreationElement> <input type="text" name="_id" value={this.state._id} onChange={this.handleInput}></input></YardSaleCreationElement>
-                            <YardSaleCreationElement> <input type="text" name="imageUrl" value={this.state.imageUrl} onChange={this.handleInput}></input></YardSaleCreationElement>
-                            <YardSaleCreationElement> <input type="text" name="productName" value={this.state.productName} onChange={this.handleInput}></input></YardSaleCreationElement>
-                            <YardSaleCreationElement> <input type="text" name="productPrice" value={this.state.price} onChange={this.handleInput}></input></YardSaleCreationElement>
-                            <YardSaleCreationElement> <input type="text" name="quantity" value={this.state.quantity} onChange={this.handleInput}></input></YardSaleCreationElement>
-                            <YardSaleCreationElement> <input type="text" name="category" value={this.state.category} onChange={this.handleInput}></input></YardSaleCreationElement>   
-                            <YardSaleCreationElement> <input type="text" name="description" value={this.state.description} onChange={this.handleInput}></input></YardSaleCreationElement>
-                            <YardSaleCreationElement> <input type="text" name="interest" value={this.state.intCounter} onChange={this.handleInput}></input></YardSaleCreationElement>
-                            <FormBtn>Submit Item</FormBtn>
+                            <h1>Add an Item to Sell</h1>
+                            <ProductHolder>
+                            <YardSaleCreationProductsWrapper>
+                                <YardSaleCreationItemElements>Product Name: <ProductsInput type="text" name="productName" value={this.state.productName} onChange={this.handleInput}></ProductsInput></YardSaleCreationItemElements>
+
+                                <YardSaleCreationItemElements>Image URL: <ProductsInput type="text" name="imageUrl" value={this.state.imageUrl} onChange={this.handleInput}></ProductsInput></YardSaleCreationItemElements>
+
+                                <YardSaleCreationItemElements>Price: <ProductsInput type="text" name="productPrice" value={this.state.price} onChange={this.handleInput}></ProductsInput></YardSaleCreationItemElements>
+
+                                <YardSaleCreationItemElements>Quantity: <ProductsInput type="text" name="quantity" value={this.state.quantity} onChange={this.handleInput}></ProductsInput></YardSaleCreationItemElements>
+
+                                <YardSaleCreationItemElements>Category: <ProductsInput type="text" name="category" value={this.state.category} onChange={this.handleInput}></ProductsInput></YardSaleCreationItemElements>   
+
+                                <YardSaleCreationItemElements>Description: <textarea name="description" value={this.state.description} onChange={this.handleInput}></textarea></YardSaleCreationItemElements>
+
+                                <YardSaleCreationItemElements><FormBtn>Submit Item</FormBtn></YardSaleCreationItemElements>
+                            </YardSaleCreationProductsWrapper>
+                            </ProductHolder>
                         </Col>
                         <Col size="md-6 sm-12">
                             <Jumbotron>
