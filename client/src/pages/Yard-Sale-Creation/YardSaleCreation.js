@@ -35,22 +35,6 @@ const ProductsInput = styled('input')({
     float: "right"
 })
 
-function getCookie(cname) {
-    var name = cname + "=";
-    var decodedCookie = decodeURIComponent(document.cookie);
-    var ca = decodedCookie.split(';');
-    for (var i = 0; i < ca.length; i++) {
-      var c = ca[i];
-      while (c.charAt(0) === ' ') {
-        c = c.substring(1);
-      }
-      if (c.indexOf(name) === 0) {
-        return c.substring(name.length, c.length);
-      }
-    }
-    return "";
-  }
-
 class YardSaleCreation extends Component {
     state = {
         displayProducts: false,
@@ -68,16 +52,6 @@ class YardSaleCreation extends Component {
         description: "",
         intCounter: 0
     }
-    
-    componentDidMount = () => {
-        if(getCookie("id") !== ""){
-          this.setState({
-            userID: getCookie("id"),
-          })
-        }
-        console.log(this.state.userID)
-      }
-
 
     handleInput = (event) => {
         const { name, value } = event.target;
@@ -87,13 +61,13 @@ class YardSaleCreation extends Component {
     }
 
     submitYardSale = () => {
+        this.setState({userID: this.props.id})
         let newSale = {
             name: this.state.name,
             address: this.state.address,
             zipCode: this.state.zipCode,
             date: new Date(this.state.date + ":00Z")
         }
-        console.log(newSale)
         API.createYardSale(newSale)
             .then(function (res) { console.log(res) })
             .catch(err => console.log(err))

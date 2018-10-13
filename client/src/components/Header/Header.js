@@ -4,6 +4,7 @@ import styled from 'react-emotion';
 import "./Header.css";
 import API from '../../utils/API'
 import LoginFormItem from '../../components/LoginForm'
+import { func } from "prop-types";
 
 
 const HeaderWrapper = styled('header')({
@@ -31,38 +32,56 @@ const LoginButton = styled('button')({
   height: 26
 })
 
+function getCookie(cname) {
+  var name = cname + "=";
+  var decodedCookie = decodeURIComponent(document.cookie);
+  var ca = decodedCookie.split(';');
+  for (var i = 0; i < ca.length; i++) {
+    var c = ca[i];
+    while (c.charAt(0) == ' ') {
+      c = c.substring(1);
+    }
+    if (c.indexOf(name) == 0) {
+      return c.substring(name.length, c.length);
+    }
+  }
+  return "";
+}
+
 class Header extends Component {
   constructor() {
     super();
     this.state = {
-      email: '',
-      password: '',
-      type: '',
-      showLoginForm: true
+      showLoginForm: true,
     };
   }
 
-  handleInputChange = (e) => {
-      const { name, value } = e.target
-      this.setState({
-      [name]: value
-      })
-  }
+  // handleInputChange = (e) => {
+  //     const { name, value } = e.target
+  //     this.setState({
+  //     [name]: value
+  //     })
+  // }
 
-  handleFormLogin = event => {
-      event.preventDefault();
-      if (this.state.email && this.state.password) {
-        API.login({
-          "email": this.state.email,
-          "password": this.state.password,
-        })
-          .then(console.log('user login info:  ', JSON.stringify(this.state)))
-          .then(this.setState({
-            showLoginForm: false
-          }))
-          .catch(err => console.log(err));
-      }
-    };
+  // handleFormLogin = event => {
+  //     event.preventDefault();
+  //     if (this.state.email && this.state.password) {
+  //       API.login({
+  //         "email": this.state.email,
+  //         "password": this.state.password,
+  //       })
+  //         .then((data) => {
+  //           console.log(data);
+            
+  //           Document.cookie = 'user=foo'
+  //         })
+  //         .then(this.setState({
+  //           showLoginForm: false,
+  //           id: getCookie("id")
+  //         }))
+  //         .catch(err => console.log(err));
+  //     }
+  //   };
 
   render() {
     return (
@@ -82,7 +101,7 @@ class Header extends Component {
                     value={this.state.email}
                     type="text"
                     placeHolder="Email"
-                    onChangeFn={this.handleInputChange}
+                    onChangeFn={this.props.handleInputChange}
                   />
                   
                   <LoginFormItem
@@ -90,10 +109,10 @@ class Header extends Component {
                     value={this.state.password}
                     type="password"
                     placeHolder="Password"
-                    onChangeFn={this.handleInputChange}
+                    onChangeFn={this.props.handleInputChange}
                   />
                   <div>
-                    <LoginButton onClick={this.handleFormLogin}>Sign In</LoginButton>
+                    <LoginButton onClick={this.props.handleFormLogin}>Sign In</LoginButton>
                   </div>
                 </FormWrapper>
               </div>

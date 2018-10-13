@@ -13,23 +13,10 @@ import BodyMain from "./components/Body-main/BodyMain";
 import Products from "./pages/Products"
 import Registration from "./pages/User-Registration/User-Registration"
 import YardSaleCreation from "./pages/Yard-Sale-Creation/YardSaleCreation"
+import API from './utils/API'
+
 // import Modal from "./components/ModalForm/ModalForm";
 
-function getCookie(cname) {
-  var name = cname + "=";
-  var decodedCookie = decodeURIComponent(document.cookie);
-  var ca = decodedCookie.split(';');
-  for (var i = 0; i < ca.length; i++) {
-    var c = ca[i];
-    while (c.charAt(0) == ' ') {
-      c = c.substring(1);
-    }
-    if (c.indexOf(name) == 0) {
-      return c.substring(name.length, c.length);
-    }
-  }
-  return "";
-}
 
 const Content = styled('div')({
   textAlign: 'center'
@@ -38,24 +25,51 @@ const Content = styled('div')({
 class App extends Component {
   state = {
     loggedIn: false,
+    email: '',
+    password: '',
+    type: '',
     id: ""
   }
 
-  componentDidMount = () => {
-    if(getCookie("id") !== ""){
-      this.setState({
-        id: getCookie("id"),
-        loggedIn: true
+  // componentDidMount = () => {
+  //   if(getCookie("id") !== ""){
+  //     this.setState({
+  //       id: getCookie("id"),
+  //       loggedIn: true
+  //     })
+  //   }
+  // }
+
+  handleInputChange = (e) => {
+    const { name, value } = e.target
+    this.setState({
+    [name]: value
+    })
+}
+
+handleFormLogin = event => {
+  event.preventDefault();
+  if (this.state.email && this.state.password) {
+    API.login({
+      "email": this.state.email,
+      "password": this.state.password,
+    })
+      .then((data) => {
+        this.setState({
+          showLoginForm: false,
+          id: data.data.user._id
+        })
       })
-    }
+      .catch(err => console.log(err));
   }
+};
   
   render() {
     return (
 
       <Router>
         <div>
-          <Header />
+          <Header id={this.state.id} handleFormLogin={this.handleFormLogin} handleInputChange={this.handleInputChange}/>
           <Content>
             <Switch>
               <Route exact path="/" component={BodyMain} />
@@ -65,7 +79,7 @@ class App extends Component {
               <Route path="/register" component={Registration} />
               <Route exact path="/yardsalelistings" component={YardSaleListings} />
               <Route path="/products/*" component={Products} />
-              <Route path="/yardsalecreation" component={YardSaleCreation} />
+              <Route path="/yardsalecreation" render={() => <YardSaleCreation id={this.state.id} />}/>
             </Switch>
           {/* <BodyMain > */}
             {/* <Modal /> */}
