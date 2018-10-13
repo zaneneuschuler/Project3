@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import styled from 'react-emotion';
 import API from "../../utils/API";
+import axios from "axios";
 import DeleteBtn from "../../components/DeleteBtn";
 import Row from "../../components/Grid/Row";
 import Col from "../../components/Grid/Col";
@@ -46,7 +47,7 @@ class YardSaleCreation extends Component {
         _id: "",
         imageUrl: "",
         productName: "",
-        price: "",
+        productPrice: "",
         quantity: "",
         category: "",
         description: "",
@@ -73,6 +74,22 @@ class YardSaleCreation extends Component {
             .catch(err => console.log(err))
     }
 
+    handleFormSubmit = event => {
+        event.preventDefault();
+        let newProduct = {
+            'productName' : this.state.productName,
+            'imageURL' : this.state.imageUrl,
+            'category' : this.state.category,
+            'quantity' : this.state.quantity,
+            'price' : this.state.price,
+            'description' : this.state.description,
+            'interest' : this.state.intCounter
+
+        };
+            
+        
+      };
+    
     render() {
         return (
             <div>
@@ -112,9 +129,8 @@ class YardSaleCreation extends Component {
                             </ProductHolder>
                         </Col>
                         <Col size="md-6 sm-12">
-                            <Jumbotron>
                                 <h1>Items for Sale</h1>
-                            </Jumbotron>
+
                             {this.state.length ? (
                                 <List>
                                     {this.state.map(product => (
@@ -122,7 +138,7 @@ class YardSaleCreation extends Component {
                                                 <strong>
                                                     Product: {product.productName}
                                                     imageUrl: {product.imageUrl}
-                                                    Price: {product.price}
+                                                    Price: {product.productPrice}
                                                     Quantity: {product.quantity}
                                                     Category: {product.category}
                                                     Description: {product.description}
