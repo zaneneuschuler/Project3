@@ -22,5 +22,9 @@ export default {
     login: function(loginData) {
       console.log ('login() is called...' + JSON.stringify(loginData))
         return axios.post("/auth/login", loginData)
+    },
+
+    getUser: function(userID) {
+        return axios.get(`/api/user/${userID}`)
     }
 };
