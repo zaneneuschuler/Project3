@@ -4,6 +4,7 @@ export default {
     getAllYardSales: function(){
         return axios.get("/api/yardSales")
     },
+
     // Saves a new user to the database
     createNewUser: function(userData){
         console.log ('createNewUser() is called...' + JSON.stringify(userData))
@@ -11,6 +12,7 @@ export default {
             return response.data;
         })
     },
+
     getYardSale: function(id){
         return axios.get(`/api/yardSales/${id}`)
     },
@@ -26,5 +28,13 @@ export default {
 
     getUser: function(userID) {
         return axios.get(`/api/user/${userID}`)
+    },
+
+    createNewProduct: function(newProduct){
+        return axios.post('/api/listings', newProduct)
+    },
+
+    updateYardSale: function(yardsaleID, updatedDetails){
+        return axios.post(`/api/yardSales/${yardsaleID}`, updatedDetails)
     }
 };
