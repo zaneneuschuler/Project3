@@ -53,7 +53,8 @@ class YardSaleCreation extends Component {
         category: "",
         description: "",
         intCounter: 0,
-        userYardSales: []
+        userYardSales: [],
+        products: []
     }
 
     componentDidMount(){
@@ -77,8 +78,35 @@ class YardSaleCreation extends Component {
             date: new Date(this.state.date + ":00Z")
         }
         API.createYardSale(this.props.id, newSale)
+            //Gets the newest yard sale that the user creates after submitting the info so they can
+            //add products to it
             .then(res => this.setState({ yardSaleID: res.data.yardSales[(res.data.yardSales.length - 1)] }))
             .catch(err => console.log(err))
+    }
+
+    submitItem = () => {
+        let newItem = {
+            productName: this.state.productName,
+            imageUrl: this.state.imageUrl,
+            category: this.state.category,
+            quantity: this.state.quantity,
+            price: this.state.price,
+            description: this.state.description,
+            interest: this.state.interest
+        }
+        API.createNewProduct(newItem)
+            //Pushes each new item _id that is created to an array so that can be saved to update the new sale
+            //with new product listings
+            .then(res => this.setState({products: this.state.products.concat(res.data)}))
+            .catch(err => console.log(err))
+    }
+
+    finalizeYardSale = () => {
+        this.state.products.forEach(product => {
+            API.updateYardSale(this.state.yardSaleID, product)
+            .then(res => console.log(res))
+            .catch(err => console.log(err))
+        })
     }
 
     render() {
@@ -125,7 +153,7 @@ class YardSaleCreation extends Component {
 
                                <YardSaleCreationItemElements>Image URL: <ProductsInput type="text" name="imageUrl" value={this.state.imageUrl} onChange={this.handleInput}></ProductsInput></YardSaleCreationItemElements>
 
-                               <YardSaleCreationItemElements>Price: <ProductsInput type="text" name="productPrice" value={this.state.price} onChange={this.handleInput}></ProductsInput></YardSaleCreationItemElements>
+                               <YardSaleCreationItemElements>Price: <ProductsInput type="text" name="price" value={this.state.price} onChange={this.handleInput}></ProductsInput></YardSaleCreationItemElements>
 
                                <YardSaleCreationItemElements>Quantity: <ProductsInput type="text" name="quantity" value={this.state.quantity} onChange={this.handleInput}></ProductsInput></YardSaleCreationItemElements>
 
@@ -133,7 +161,7 @@ class YardSaleCreation extends Component {
 
                                <YardSaleCreationItemElements>Description: <textarea name="description" value={this.state.description} onChange={this.handleInput}></textarea></YardSaleCreationItemElements>
 
-                               <YardSaleCreationItemElements><FormBtn>Submit Item</FormBtn></YardSaleCreationItemElements>
+                               <YardSaleCreationItemElements><FormBtn onClick={this.submitItem}>Submit Item</FormBtn></YardSaleCreationItemElements>
                            </YardSaleCreationProductsWrapper>
                            </ProductHolder>
                        </Col>
@@ -167,6 +195,7 @@ class YardSaleCreation extends Component {
                </div>
                : <div><h1>Must Be Logged In to Create A Yard Sale</h1></div>
             }
+            <button onClick={this.finalizeYardSale}>Finalize Yard Sale</button>
             </div>
         );
     }
