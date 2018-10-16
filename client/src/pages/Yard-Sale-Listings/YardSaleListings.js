@@ -15,6 +15,7 @@ const ListingsWrapper = styled('div')({
 
 const IndividualListingsWrapper = styled('div')({
     display: "flex",
+    flexWrap: "wrap",
     boxShadow: "1px 2px 2px 0px grey",
     padding: 10
 });
