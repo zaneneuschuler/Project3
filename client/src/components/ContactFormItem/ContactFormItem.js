@@ -1,23 +1,34 @@
 import React from "react";
 import styled from 'react-emotion';
-import "./ContactForm.css";
+import "./ContactFormItem.css";
 
 const FormInputItem = styled('input')({
-  width: 400,
-  height: 20,
-  marginBottom: 5
+  padding: '0px 5px 5px 0',
+  float: 'left',
+  margin: '5px 0 20px 0',
+  boxShadow: '0 0 1px 1px rgba(0,0,0,.3)',
+  width: 250,
 })
 const TextAreaInput = styled('input')({
-  width: 400,
+  padding: '0px 5px 5px 0',
+  float: 'left',
+  margin: '5px 0 20px 0',
+  boxShadow: '0 0 1px 1px rgba(0,0,0,.3)',
+  width: 250,
   height: 200,
   marginBottom: 5
+})
+
+const Label = styled('div')({
+  fontSize: 14,
+  textAlign: 'left'
 })
 
 export const FormInput = ({ label, name, value, type, placeHolder, onChangeFn }) => {
   return (
     <div>
+      <Label>{label}</Label>
       <FormInputItem
-        label={label}
         name={name}
         value={value}
         type={type}
@@ -31,8 +42,8 @@ export const FormInput = ({ label, name, value, type, placeHolder, onChangeFn })
 export const FormTextArea = ({ label, name, value, type, placeHolder, onChangeFn }) => {
   return (
     <div>
+      <Label>{label}</Label>
       <TextAreaInput
-        label={label}
         name={name}
         value={value}
         type={type}

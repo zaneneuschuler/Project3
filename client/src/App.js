@@ -8,7 +8,7 @@ import Header from './components/Header'
 // import Welcome from './pages/Welcome/Welcome'
 import Contact from './pages/Contact/Contact'
 import About from "./pages/About/About"
-import Login from './pages/Login/Login'
+// import LoginFormItem from './components/LoginForm/LoginForm'
 import BodyMain from "./components/Body-main/BodyMain";
 import Products from "./pages/Products"
 import UserRegistration from "./pages/User-Registration/UserRegistration"
@@ -29,9 +29,11 @@ class App extends Component {
     password: '',
     type: '',
     id: "",
-    showSignInForm: true
+    showLoginForm: true,
+    showRegistrationForm: true
   }
 
+    
   // componentDidMount = () => {
   //   if(getCookie("id") !== ""){
   //     this.setState({
@@ -57,9 +59,13 @@ handleFormLogin = event => {
     })
       .then((data) => {
         this.setState({
-          showSignInForm: false,
+          showLoginForm: false,
           id: data.data.user._id,
-          loggedIn: true
+          loggedIn: true,
+          showRegistrationForm: false
+        }, function() {
+
+          console.log('data: ', this.state)
         })
       })
       .catch(err => console.log('fail to log in: ', err));
@@ -76,7 +82,7 @@ handleFormLogin = event => {
             <Switch>
               <Route exact path="/" component={BodyMain} />
               <Route exact path="/about" component={About} />
-              <Route path="/login" component={Login} />
+              <Route path="/header" render={() => <Header showLoginForm={this.state.showLoginForm} /> } />
               <Route path="/contact" component={Contact} />
               <Route path="/register" render={() => <UserRegistration id={this.state.id} /> } />
               <Route exact path="/yardsalelistings" component={YardSaleListings} />
