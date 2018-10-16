@@ -4,7 +4,7 @@ import styled from 'react-emotion';
 import "./BodyMain.css";
 import collage from '../../images/collage.jpg'
 // import Modal from '../ModalForm/ModalForm'
-import UserRegistration from '../../pages/User-Registration/User-Registration';
+import UserRegistration from '../../pages/User-Registration/UserRegistration';
 
 
 const BodyWrapper = styled('div')({

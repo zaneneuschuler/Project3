@@ -11,7 +11,7 @@ import About from "./pages/About/About"
 import Login from './pages/Login/Login'
 import BodyMain from "./components/Body-main/BodyMain";
 import Products from "./pages/Products"
-import Registration from "./pages/User-Registration/User-Registration"
+import UserRegistration from "./pages/User-Registration/UserRegistration"
 import YardSaleCreation from "./pages/Yard-Sale-Creation/YardSaleCreation"
 import API from './utils/API'
 
@@ -28,7 +28,8 @@ class App extends Component {
     email: '',
     password: '',
     type: '',
-    id: ""
+    id: "",
+    showSignInForm: true
   }
 
   // componentDidMount = () => {
@@ -56,14 +57,15 @@ handleFormLogin = event => {
     })
       .then((data) => {
         this.setState({
-          showLoginForm: false,
-          id: data.data.user._id
+          showSignInForm: false,
+          id: data.data.user._id,
+          loggedIn: true
         })
       })
-      .catch(err => console.log(err));
+      .catch(err => console.log('fail to log in: ', err));
   }
 };
-  
+
   render() {
     return (
 
@@ -76,15 +78,11 @@ handleFormLogin = event => {
               <Route exact path="/about" component={About} />
               <Route path="/login" component={Login} />
               <Route path="/contact" component={Contact} />
-              <Route path="/register" component={Registration} />
+              <Route path="/register" render={() => <UserRegistration id={this.state.id} /> } />
               <Route exact path="/yardsalelistings" component={YardSaleListings} />
               <Route path="/products/*" component={Products} />
               <Route path="/yardsalecreation" render={() => <YardSaleCreation id={this.state.id} />}/>
             </Switch>
-          {/* <BodyMain > */}
-            {/* <Modal /> */}
-          {/* </BodyMain> */}
-          
           </Content>
         </div>
       </Router>     
