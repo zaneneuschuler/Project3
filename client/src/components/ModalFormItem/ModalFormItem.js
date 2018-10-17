@@ -9,7 +9,7 @@ const CustomInput = styled('input')({
   float: 'left',
   margin: '5px 0 20px 0',
   boxShadow: '0 0 1px 1px rgba(0,0,0,.3)',
-  width: 275,
+  width: 250,
 })
 
 const Label = styled('div')({
