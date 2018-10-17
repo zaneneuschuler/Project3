@@ -16,6 +16,21 @@ import YardSaleCreation from "./pages/Yard-Sale-Creation/YardSaleCreation"
 import API from './utils/API'
 
 // import Modal from "./components/ModalForm/ModalForm";
+function getCookie(cname) {
+  var name = cname + "=";
+  var decodedCookie = decodeURIComponent(document.cookie);
+  var ca = decodedCookie.split(';');
+  for (var i = 0; i < ca.length; i++) {
+    var c = ca[i];
+    while (c.charAt(0) == ' ') {
+      c = c.substring(1);
+    }
+    if (c.indexOf(name) == 0) {
+      return c.substring(name.length, c.length);
+    }
+  }
+  return "";
+}
 
 
 const Content = styled('div')({
@@ -25,8 +40,6 @@ const Content = styled('div')({
 class App extends Component {
   state = {
     loggedIn: false,
-    email: '',
-    password: '',
     type: '',
     id: "",
     showLoginForm: true,
@@ -34,14 +47,16 @@ class App extends Component {
   }
 
     
-  // componentDidMount = () => {
-  //   if(getCookie("id") !== ""){
-  //     this.setState({
-  //       id: getCookie("id"),
-  //       loggedIn: true
-  //     })
-  //   }
-  // }
+  componentDidMount = () => {
+    if(getCookie("id") !== ""){
+      this.setState({
+        id: getCookie("id"),
+        loggedIn: true,
+        showLoginForm: false
+      })
+    }
+
+  }
 
   handleInputChange = (e) => {
     const { name, value } = e.target
@@ -49,6 +64,7 @@ class App extends Component {
     [name]: value
     })
 }
+
 
 handleFormLogin = event => {
   event.preventDefault();
@@ -58,14 +74,15 @@ handleFormLogin = event => {
       "password": this.state.password,
     })
       .then((data) => {
+
         this.setState({
+          email: "",
+          password: "",
           showLoginForm: false,
           id: data.data.user._id,
           loggedIn: true,
           showRegistrationForm: false
         }, function() {
-
-          console.log('data: ', this.state)
         })
       })
       .catch(err => console.log('fail to log in: ', err));
@@ -77,7 +94,7 @@ handleFormLogin = event => {
 
       <Router>
         <div>
-          <Header id={this.state.id} handleFormLogin={this.handleFormLogin} handleInputChange={this.handleInputChange}/>
+          <Header id={this.state.id} handleFormLogin={this.handleFormLogin} handleInputChange={this.handleInputChange} showLoginForm={this.state.showLoginForm}/>
           <Content>
             <Switch>
               <Route exact path="/" component={BodyMain} />
