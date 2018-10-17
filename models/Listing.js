@@ -35,7 +35,7 @@ var ListingSchema = new Schema({
     type: Number,
     default: 0
   }
-});
+}, { autoIndex: true });
 
 // This creates our model from the above schema, using mongoose's model method
 var Listing = mongoose.model("Listing", ListingSchema);
