@@ -4,6 +4,7 @@ import styled from 'react-emotion';
 import "./Header.css";
 import API from '../../utils/API'
 import LoginFormItem from '../../components/LoginForm'
+import { func } from "prop-types";
 
 
 const HeaderWrapper = styled('header')({
@@ -26,21 +27,40 @@ const FormWrapper = styled('form')({
 })
 
 const LoginButton = styled('button')({
-  background: "rgb(0,115,177)",
+  background: "#283e4a",
   color: 'white',
   height: 26
 })
+
+function getCookie(cname) {
+  var name = cname + "=";
+  var decodedCookie = decodeURIComponent(document.cookie);
+  var ca = decodedCookie.split(';');
+  for (var i = 0; i < ca.length; i++) {
+    var c = ca[i];
+    while (c.charAt(0) == ' ') {
+      c = c.substring(1);
+    }
+    if (c.indexOf(name) == 0) {
+      return c.substring(name.length, c.length);
+    }
+  }
+  return "";
+}
 
 class Header extends Component {
   constructor() {
     super();
     this.state = {
-      email: '',
-      password: '',
-      type: '',
-      showLoginForm: true
+      showLoginForm: true,
     };
   }
+  // handleInputChange = (e) => {
+  //     const { name, value } = e.target
+  //     this.setState({
+  //     [name]: value
+  //     })
+  // }
 
   componentDidMount = () => {
 
@@ -85,6 +105,7 @@ class Header extends Component {
           <Link to="/contact">Contact</Link>
           <Link to="/yardsalelistings">Yard Sales</Link>
           <Link to="/yardsalecreation">Create A Yard Sale</Link>
+          
             {
               this.state.showLoginForm ?
               <div>
@@ -94,7 +115,7 @@ class Header extends Component {
                     value={this.state.email}
                     type="text"
                     placeHolder="Email"
-                    onChangeFn={this.handleInputChange}
+                    onChangeFn={this.props.handleInputChange}
                   />
                   
                   <LoginFormItem
@@ -102,10 +123,10 @@ class Header extends Component {
                     value={this.state.password}
                     type="password"
                     placeHolder="Password"
-                    onChangeFn={this.handleInputChange}
+                    onChangeFn={this.props.handleInputChange}
                   />
                   <div>
-                    <LoginButton onClick={this.handleFormLogin}>Log In</LoginButton>
+                    <LoginButton onClick={this.props.handleFormLogin}>Sign In</LoginButton>
                   </div>
                 </FormWrapper>
               </div>

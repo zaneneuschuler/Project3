@@ -1,9 +1,10 @@
 import React, { Component } from "react";
 import styled from 'react-emotion';
 import ModalFormItem from '../../components/ModalFormItem/ModalFormItem'
-import API from "../../utils/API";
+// import API from "../../utils/API";
 import axios from "axios";
-import { withCookies, Cookies } from 'react-cookie';
+import API from "../../utils/API";
+// import { withCookies, Cookies } from 'react-cookie';
 
 const UserRegistrationWrapper = styled('div')({
     
@@ -12,30 +13,34 @@ const UserRegistrationWrapper = styled('div')({
     flexDirection: 'column',
     padding: 20,
     boxShadow: '0 0 15px 5px rgba(0,0,0,0.5)',
-    background: 'lightgrey'
+    background: '#f6f8fa'
 });
 const SubmitButton = styled('button')({
     padding: 8,
-    borderRadius: 5,
     background: "rgb(0,115,177)",
     color: 'white',
-    float: 'left'
+    float: 'left',
+    width: 260
 })
-function getCookie(cname) {
-    var name = cname + "=";
-    var decodedCookie = decodeURIComponent(document.cookie);
-    var ca = decodedCookie.split(';');
-    for (var i = 0; i < ca.length; i++) {
-        var c = ca[i];
-        while (c.charAt(0) == ' ') {
-            c = c.substring(1);
-        }
-        if (c.indexOf(name) == 0) {
-            return c.substring(name.length, c.length);
-        }
-    }
-    return "";
+
+const divStyle = {
+  margin: 'auto',
 }
+// function getCookie(cname) {
+//     var name = cname + "=";
+//     var decodedCookie = decodeURIComponent(document.cookie);
+//     var ca = decodedCookie.split(';');
+//     for (var i = 0; i < ca.length; i++) {
+//         var c = ca[i];
+//         while (c.charAt(0) == ' ') {
+//             c = c.substring(1);
+//         }
+//         if (c.indexOf(name) == 0) {
+//             return c.substring(name.length, c.length);
+//         }
+//     }
+//     return "";
+// }
 
 
 class UserRegistration extends Component {
@@ -47,10 +52,11 @@ class UserRegistration extends Component {
         Last: '',
         email: '',
         password: '',
-        showSubmitForm: true,
-        id: ''
+        showRegistrationForm: true,
+        id: '',
+        loggedIn: false
   };
-
+    
   }
 
   handleInputChange = (e) => {
@@ -60,7 +66,7 @@ class UserRegistration extends Component {
       })
   }
 
-  handleFormSubmit = event => {
+  handleRegistrationSubmit = event => {
       event.preventDefault();
       if (this.state.First && this.state.Last && this.state.email && this.state.password) {
         let newUser = {
@@ -69,29 +75,40 @@ class UserRegistration extends Component {
           "email": this.state.email,
           "password": this.state.password,
         };
-        axios.post("/auth/signup", newUser).then(function (response) {
-            document.cookie = `id=${response.data._id}`
-            window.location.reload();
+        
+        axios.post("/auth/signup", newUser)
+        .then(response => {
+          var userId = response.data._id
+          console.log('reponse.id: ', userId)
+          this.setState({ id: userId }, function (){
+            console.log('this.state.id', this.state.id)
+            this.state.id ? 
+              API.login({
+                'email': this.state.email,
+                'password': this.state.password
+              })
+              : console.log('userId is empty')
             
-        })
-          .then(this.setState({
-              First: '',
-              Last: '',
-              email: '',
-              password: '',
-              showSubmitForm: false,
-              id: getCookie("id")
-          }))
-          .catch(err => console.log(err));
+              this.setState({
+                  showRegistrationForm: false,
+                  showSignInForm: false,
+                  loggedIn: true
+                }, function(){
+                  console.log('setData: ', this.state)
+                })
+              })
+            })
+            .catch(err => console.log(err));
       }
     };
   
-  render() {
+    render() {
+      
       return (
-        <UserRegistrationWrapper>
+          <div style={divStyle}>
           {
-            this.state.showSubmitForm ? 
-          <div>
+            this.state.showRegistrationForm ? 
+          <UserRegistrationWrapper>
               <h3>Sell anything here for free</h3>
               <h4>Let's started.  It's free!</h4>
 
@@ -127,14 +144,14 @@ class UserRegistration extends Component {
                   value={this.state.password}
               />
               
-              <SubmitButton onClick={this.handleFormSubmit}>
+              <SubmitButton onClick={this.handleRegistrationSubmit}>
                 Join Now
               </SubmitButton>
               
-              </div>
+              </UserRegistrationWrapper>
               : null
             }
-              </UserRegistrationWrapper>
+            </div>
       );
   }
 }

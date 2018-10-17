@@ -4,7 +4,7 @@ import styled from 'react-emotion';
 import "./BodyMain.css";
 import collage from '../../images/collage.jpg'
 // import Modal from '../ModalForm/ModalForm'
-import UserRegistration from '../../pages/User-Registration/User-Registration';
+import UserRegistration from '../../pages/User-Registration/UserRegistration';
 
 
 const BodyWrapper = styled('div')({
@@ -14,7 +14,7 @@ const BodyWrapper = styled('div')({
   alignItems: 'center',
   backgroundSize: 'cover',
   background: `url("${collage}")`,
-  opacity: '0.7'
+  // opacity: '0.7'
 });
 
 const BodyMain = () => (
