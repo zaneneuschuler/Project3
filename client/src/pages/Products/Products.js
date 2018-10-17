@@ -78,16 +78,9 @@ class Products extends Component {
             <Col size="md-6">
               <Jumbotron>
                 <h1>Yard Sale Listings</h1>
-              </Jumbotron>
-            </Col>
-            <Col size="md-6 sm-12">
-              <Jumbotron>
-                <h1>Products on Sale in my Yard</h1>
-                <h2>{this.state.yardsale.name}</h2>
-                <h3>{this.state.yardsale.date} | {this.state.yardsale.address} | {this.state.yardsale.zipCode}</h3>
-                <Gmaps
-        width={'300px'}
-        height={'300px'}
+                                        <Gmaps
+        width={'100%'}
+        height={"200px"}
         lat={this.state.lat}
         lng={this.state.lng}
         zoom={15}
@@ -104,7 +97,15 @@ class Products extends Component {
           lng={this.state.lng}
           radius={200}
           onClick={this.onClick} />
-      </Gmaps>
+                </Gmaps>
+              </Jumbotron>
+            </Col>
+            <Col size="md-6 sm-12">
+              <Jumbotron>
+                <h1>Products on Sale in my Yard</h1>
+                <h2>{this.state.yardsale.name}</h2>
+                <h3>{this.state.yardsale.date} | {this.state.yardsale.address} | {this.state.yardsale.zipCode}</h3>
+
               </Jumbotron>
               {this.state.products.length ? (
                 <List>

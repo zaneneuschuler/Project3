@@ -5,18 +5,18 @@ router.post("/", (req, res) => {
   let body = req.body;
   console.log(body);
   let data = {
-      from: `${body.name} <${body.email}>`,
-      to: process.env.SUPPORT_EMAIL,
-      subject: "New Support Request on PaiMai!",
-      text: `Hey there, you have a new support email from someone!
+    from: `${body.name} <${body.email}>`,
+    to: process.env.SUPPORT_EMAIL,
+    subject: "New Support Request on PaiMai!",
+    text: `Hey there, you have a new support email from someone!
       They say: ${body.text}
       Please respond in a timely manner, thanks!
       `
   };
-    mailgun.messages().send(data, function (error, body) {
-        console.log(error);
-        res.json(body);
-    });
+  mailgun.messages().send(data, function (error, body) {
+    console.log(error);
+    res.json(body);
+  });
     
 });
 

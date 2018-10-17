@@ -52,27 +52,10 @@ class Header extends Component {
   constructor() {
     super();
     this.state = {
-      showLoginForm: true,
+      showLoginForm: false,
     };
   }
-  // handleInputChange = (e) => {
-  //     const { name, value } = e.target
-  //     this.setState({
-  //     [name]: value
-  //     })
-  // }
 
-  componentDidMount = () => {
-
-    setTimeout(() => {
-          if (this.props.loggedIn) {
-            this.setState({
-              showLoginForm: false
-            })
-          }
-    }, 1000);
-
-  }
 
   handleInputChange = (e) => {
       const { name, value } = e.target
@@ -106,7 +89,7 @@ class Header extends Component {
           <Link to="/yardsalecreation">Sell Your Stuff</Link>
           
             {
-              this.state.showLoginForm ?
+              this.props.showLoginForm ?  
               <div>
                 <FormWrapper>
                   <LoginFormItem

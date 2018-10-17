@@ -26,21 +26,21 @@ const SubmitButton = styled('button')({
 const divStyle = {
   margin: 'auto',
 }
-// function getCookie(cname) {
-//     var name = cname + "=";
-//     var decodedCookie = decodeURIComponent(document.cookie);
-//     var ca = decodedCookie.split(';');
-//     for (var i = 0; i < ca.length; i++) {
-//         var c = ca[i];
-//         while (c.charAt(0) == ' ') {
-//             c = c.substring(1);
-//         }
-//         if (c.indexOf(name) == 0) {
-//             return c.substring(name.length, c.length);
-//         }
-//     }
-//     return "";
-// }
+function getCookie(cname) {
+    var name = cname + "=";
+    var decodedCookie = decodeURIComponent(document.cookie);
+    var ca = decodedCookie.split(';');
+    for (var i = 0; i < ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+        }
+    }
+    return "";
+}
 
 
 class UserRegistration extends Component {
@@ -88,7 +88,7 @@ class UserRegistration extends Component {
                 'password': this.state.password
               })
               : console.log('userId is empty')
-            
+            document.cookie = `id=${this.state.id}`
               this.setState({
                   showRegistrationForm: false,
                   showSignInForm: false,
