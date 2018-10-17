@@ -36,8 +36,8 @@ module.exports = {
       .catch(err => res.status(422).json(err));
   },
   createNewListing: function (req, res) {
-    db.Listing.create(req.body)
-      .then(function (dbNote) {
+    db.Listing.findById(req.body._id)
+      .then(function(dbNote) {
         return db.YardSale.findOneAndUpdate({
           _id: req.params.id
         }, {
