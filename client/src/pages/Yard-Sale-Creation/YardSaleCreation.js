@@ -102,9 +102,11 @@ class YardSaleCreation extends Component {
     }
 
     finalizeYardSale = () => {
-        API.updateYardSale(this.state.yardSaleID, this.state.products)
-        .then(res => console.log(res))
-        .catch(err => console.log(err))
+        this.state.products.forEach(product => {
+            API.updateYardSale(this.state.yardSaleID, product)
+                .then(res => console.log(res))
+                .catch(err => console.log(err))
+        })
     }
 
     render() {
