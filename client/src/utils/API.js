@@ -36,5 +36,13 @@ export default {
 
     updateYardSale: function(yardsaleID, updatedDetails){
         return axios.post(`/api/yardSales/${yardsaleID}`, updatedDetails)
+    },
+
+    updateYardSaleEdit: function(yardsaleID, edit){
+        return axios.put(`api/yardSales/${yardsaleID}`, edit)
+    },
+
+    updateListing: function(productID, edit){
+        return axios.put(`api/listings/${productID}`, edit)
     }
 };
