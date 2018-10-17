@@ -82,12 +82,11 @@ class Header extends Component {
   render() {
     return (
       <HeaderWrapper>
-        <h1>YarddY</h1>        
+        <h1>Pai Mai</h1>        
           <Link to="/">Home</Link>
-          <Link to="/about">About</Link>
           <Link to="/contact">Contact</Link>
-          <Link to="/yardsalelistings">Yard Sales</Link>
-          <Link to="/yardsalecreation">Create A Yard Sale</Link>
+          <Link to="/yardsalelistings">Current Yard Sales</Link>
+          <Link to="/yardsalecreation">Sell Your Stuff</Link>
           
             {
               this.props.showLoginForm ?  
