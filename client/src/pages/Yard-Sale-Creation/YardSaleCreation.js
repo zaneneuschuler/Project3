@@ -8,7 +8,7 @@ import Container from "../../components/Grid/Container";
 import { List, ListItem } from "../../components/List";
 import { Input, TextArea, FormBtn } from "../../components/Form";
 import Jumbotron from "../../components/Jumbotron";
-import YardSaleCreationSales from "../../components/YardSaleCreationSales/YardSaleCreationSales"
+import ProductEdit from "../../components/Edit-Product/ProductEdit"
 
 const YardSaleCreationWrapper = styled('div')({
     margin: 20
@@ -104,7 +104,7 @@ class YardSaleCreation extends Component {
         API.createNewProduct(newItem)
             //Pushes each new item _id that is created to an array so that can be saved to update the new sale
             //with new product listings
-            .then(res => this.setState({products: this.state.products.concat(res.data)}))
+            .then(res => this.setState({products: this.state.products.concat(res.data), productName: "", imageUrl: "", category: "", quantity: "", price: "", description: "", interest: ""}))
             .catch(err => console.log(err))
     }
 
@@ -204,9 +204,8 @@ class YardSaleCreation extends Component {
                 <YardSaleCreationWrapper>
                     {this.state.products.length > 0 ? (
                             <List>
-                                <Jumbotron>
-                                    <h1>Items for Sale</h1>
-                                </Jumbotron>
+                                <h1>Items for Sale</h1>
+                                
                                 {this.state.products.map(product => (
                                     <ListItem key={product._id}>
                                             <strong>
@@ -221,19 +220,17 @@ class YardSaleCreation extends Component {
                                         <YardSaleCreationElement><button onClick={this.beginEdit}>Edit</button></YardSaleCreationElement>
                                         {this.state.editItem ? (
                                             <YardSaleCreationProductsWrapper>
-                                                <YardSaleCreationItemElements>Product Name: <ProductsInput type="text" name="editProductName" value={this.state.editProductName} onChange={this.handleInput}></ProductsInput></YardSaleCreationItemElements>
-                 
-                                                <YardSaleCreationItemElements>Image URL: <ProductsInput type="text" name="editImageUrl" value={this.state.editImageUrl} onChange={this.handleInput}></ProductsInput></YardSaleCreationItemElements>
-                 
-                                                <YardSaleCreationItemElements>Price: <ProductsInput type="text" name="editPrice" value={this.state.editPrice} onChange={this.handleInput}></ProductsInput></YardSaleCreationItemElements>
-                 
-                                                <YardSaleCreationItemElements>Quantity: <ProductsInput type="text" name="editQuantity" value={this.state.editQuantity} onChange={this.handleInput}></ProductsInput></YardSaleCreationItemElements>
-                 
-                                                <YardSaleCreationItemElements>Category: <ProductsInput type="text" name="editCategory" value={this.state.editCategory} onChange={this.handleInput}></ProductsInput></YardSaleCreationItemElements>   
-                 
-                                                <YardSaleCreationItemElements>Description: <textarea name="editDescription" value={this.state.editDescription} onChange={this.handleInput}></textarea></YardSaleCreationItemElements>
-
-                                                <YardSaleCreationElement><button onClick={this.editProduct(product._id)}>Save</button></YardSaleCreationElement>
+                                                <ProductEdit 
+                                                    handleInput = {this.handleInput}
+                                                    id = {product._id}
+                                                    handleClick = {this.editProduct}
+                                                    editProductName = {this.state.editProductName}
+                                                    editImageUrl = {this.state.editImageUrl}
+                                                    editPrice = {this.state.editPrice}
+                                                    editQuantity = {this.state.editQuantity}
+                                                    editCategory = {this.state.editCategory}
+                                                    editDescription = {this.state.editDescription}
+                                                />
                                             </YardSaleCreationProductsWrapper>
                                         ):(
                                             <div></div>
