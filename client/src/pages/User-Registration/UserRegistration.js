@@ -109,6 +109,7 @@ class UserRegistration extends Component {
           {
             this.state.showRegistrationForm ? 
           <UserRegistrationWrapper>
+
               <h3>Sell your stuff for Free!</h3>
               <h4>Sign up now!</h4>
 
