@@ -54,7 +54,13 @@ class YardSaleCreation extends Component {
         description: "",
         intCounter: 0,
         userYardSales: [],
-        products: []
+        products: [],
+        editImageUrl: "",
+        editProductName: "",
+        editPrice: "",
+        editQuantity: "",
+        editCategory: "",
+        editDescription: "",
     }
 
     componentDidMount(){
@@ -71,6 +77,7 @@ class YardSaleCreation extends Component {
 
     submitYardSale = () => {
         this.setState({userID: this.props.id})
+        this.setState({displayProducts: true})
         let newSale = {
             name: this.state.name,
             address: this.state.address,
@@ -109,11 +116,47 @@ class YardSaleCreation extends Component {
         })
     }
 
+    editYardSale = (event) => {
+        const { name, value } = event.target;
+        this.setState({
+            [name]: value
+        });
+        let editSale = {
+            name: this.state.name,
+            address: this.state.address,
+            zipCode: this.state.zipCode,
+            date: new Date(this.state.date + ":00Z")
+        }
+        API.updateYardSaleEdit(this.state.yardSaleID, editSale)
+            .then(res => console.log(res))
+            .catch(err => console.log(err))
+    }
+
+    beginEdit = () => {
+        this.setState({editItem: true});
+    }
+
+    editProduct = (id) => {
+        let editItem = {
+            productName: this.state.editProductName,
+            imageUrl: this.state.editImageUrl,
+            category: this.state.editCategory,
+            quantity: this.state.editQuantity,
+            price: this.state.editPrice,
+            description: this.state.editDescription,
+            interest: this.state.interest
+        }
+
+        API.updateListing(id, editItem)
+            .then(res => console.log(res))
+            .then(this.setState({editItem: true}))
+            .catch(err => console.log(err))
+    }
+
     render() {
         return (
             <div>
-                {this.props.id ? 
-                <div>
+                {this.props.id ? (
                    <YardSaleCreationWrapper>
                    <h3>Enter Your Sale's Info Here</h3>
                    {/* Address */}
@@ -125,25 +168,18 @@ class YardSaleCreation extends Component {
                    {/* Name of Sale */}
                    <YardSaleCreationElement>Name of Your Sale: <input type="text" name="name" value={this.state.name} onChange={this.handleInput}></input></YardSaleCreationElement>
 
-                   <button onClick={this.submitYardSale}>Submit</button>
+                   <YardSaleCreationElement>
+                       <button onClick={this.submitYardSale}>Submit</button>
+                    </YardSaleCreationElement>
+                   <YardSaleCreationElement>
+                       <button onClick={this.editYardSale}>Edit Yard Sale</button>
+                    </YardSaleCreationElement>
                </YardSaleCreationWrapper>
-               <div>
-                   {this.state.userYardSales.length ? (
-                           this.state.userYardSales.map(yardSale => {
-                               return (
-                                   <YardSaleCreationSales key={yardSale._id}
-                                       link = {yardSale._id}
-                                       date = {yardSale.name}
-                                       name = {yardSale.date}
-                                   />
-                               );
-                           })
-
-                       ) : (
-                       <h3>No Yard Sales to Display</h3>
-                   )}
-               </div>
-               <Container fluid>
+                    ): 
+                        (<div><h1>Must Be Logged In to Create A Yard Sale</h1></div>
+                    )}
+                {this.state.displayProducts ? (
+                    <Container fluid>
                    <Row>
                        <Col size="md-6">
                            <h1>Add an Item to Sell</h1>
@@ -165,37 +201,65 @@ class YardSaleCreation extends Component {
                            </YardSaleCreationProductsWrapper>
                            </ProductHolder>
                        </Col>
-                       <Col size="md-6 sm-12">
-                           <Jumbotron>
-                               <h1>Items for Sale</h1>
-                           </Jumbotron>
-                           {this.state.length ? (
-                               <List>
-                                   {this.state.map(product => (
-                                       <ListItem key={product._id}>
-                                               <strong>
-                                                   Product: {product.productName}
-                                                   imageUrl: {product.imageUrl}
-                                                   Price: {product.price}
-                                                   Quantity: {product.quantity}
-                                                   Category: {product.category}
-                                                   Description: {product.description}
-                                                   Interest: {product.interest}
-                                               </strong>
-                                           <DeleteBtn />
-                                       </ListItem>
-                                   ))}
-                               </List>
-                           ) : (
-                                   <h3>No Results to Display</h3>
-                               )}
-                       </Col>
                    </Row>
                </Container>
-               </div>
-               : <div><h1>Must Be Logged In to Create A Yard Sale</h1></div>
-            }
-            <button onClick={this.finalizeYardSale}>Finalize Yard Sale</button>
+                ):(
+                    <div></div>
+                )}
+                <Container fluid>
+                    <Row>
+                    <Col size="md-6 sm-12">
+                    <Jumbotron>
+                        <h1>Items for Sale</h1>
+                    </Jumbotron>
+                    {this.state.products.length > 0 ? (
+                            <List>
+                                {this.state.products.map(product => (
+                                    <ListItem key={product._id}>
+                                            <strong>
+                                                Product: {product.productName}
+                                                imageUrl: {product.imageUrl}
+                                                Price: {product.price}
+                                                Quantity: {product.quantity}
+                                                Category: {product.category}
+                                                Description: {product.description}
+                                                Interest: {product.interest}
+                                            </strong>
+                                        <YardSaleCreationElement><button onClick={this.beginEdit}>Edit</button></YardSaleCreationElement>
+                                        {this.state.editItem ? (
+                                            <ProductHolder>
+                                            <YardSaleCreationProductsWrapper>
+                                                <YardSaleCreationItemElements>Product Name: <ProductsInput type="text" name="editProductName" value={product.productName} onChange={this.handleInput}></ProductsInput></YardSaleCreationItemElements>
+                 
+                                                <YardSaleCreationItemElements>Image URL: <ProductsInput type="text" name="editImageUrl" value={product.imageUrl} onChange={this.handleInput}></ProductsInput></YardSaleCreationItemElements>
+                 
+                                                <YardSaleCreationItemElements>Price: <ProductsInput type="text" name="editPrice" value={product.price} onChange={this.handleInput}></ProductsInput></YardSaleCreationItemElements>
+                 
+                                                <YardSaleCreationItemElements>Quantity: <ProductsInput type="text" name="editQuantity" value={product.quantity} onChange={this.handleInput}></ProductsInput></YardSaleCreationItemElements>
+                 
+                                                <YardSaleCreationItemElements>Category: <ProductsInput type="text" name="editCategory" value={product.category} onChange={this.handleInput}></ProductsInput></YardSaleCreationItemElements>   
+                 
+                                                <YardSaleCreationItemElements>Description: <textarea name="editDescription" value={product.description} onChange={this.handleInput}></textarea></YardSaleCreationItemElements>
+
+                                                <YardSaleCreationElement><button onClick={this.editProduct(product._id)}>Edit</button></YardSaleCreationElement>
+                                            </YardSaleCreationProductsWrapper>
+                                            </ProductHolder>
+                                        ):(
+                                            <div></div>
+                                        )}
+                                        <button onClick={this.deleteProduct}>Delete</button>
+                                    </ListItem>              
+                                ))}
+                            <YardSaleCreationElement>
+                                <button onClick={this.finalizeYardSale}>Finalize Yard Sale</button>
+                            </YardSaleCreationElement>
+                            </List>
+                        ) : (
+                            <h3>No Results to Display</h3>
+                        )}
+                    </Col>
+                    </Row>
+                </Container>
             </div>
         );
     }
