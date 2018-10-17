@@ -148,6 +148,7 @@ class YardSaleCreation extends Component {
         }
 
         API.updateListing(id, editItem)
+            .then(res => console.log(res))
             .then(this.setState({editItem: true}))
             .catch(err => console.log(err))
     }
