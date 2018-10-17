@@ -109,13 +109,12 @@ class UserRegistration extends Component {
           {
             this.state.showRegistrationForm ? 
           <UserRegistrationWrapper>
-
-              <h3>Sell your stuff for Free!</h3>
-              <h4>Sign up now!</h4>
+              <h3>Sell anything here for free</h3>
+              <h4>Let's started.  It's free!</h4>
 
               <ModalFormItem
                   name="First"
-                  label="First Name:"
+                  label="First name"
                   type="text"
                   onChangeFn={this.handleInputChange}
                   value={this.state.firstName}
@@ -123,7 +122,7 @@ class UserRegistration extends Component {
 
               <ModalFormItem
                   name="Last"
-                  label="Last Name:"
+                  label="Last name"
                   type="text"
                   onChangeFn={this.handleInputChange}
                   value={this.state.lastName}
@@ -131,7 +130,7 @@ class UserRegistration extends Component {
               
               <ModalFormItem
                   name="email"
-                  label="Email:"
+                  label="Email"
                   type="string"
                   onChangeFn={this.handleInputChange}
                   value={this.state.email}
@@ -139,7 +138,7 @@ class UserRegistration extends Component {
               
               <ModalFormItem
                   name="password"
-                  label="Password:"
+                  label="Password"
                   type="password"
                   onChangeFn={this.handleInputChange}
                   value={this.state.password}
