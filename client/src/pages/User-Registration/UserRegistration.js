@@ -58,6 +58,15 @@ class UserRegistration extends Component {
   };
     
   }
+  componentDidMount = () => {
+    console.log(getCookie("id"));
+    if(getCookie("id")){
+      this.setState({
+        showRegistrationForm: false
+      })
+    }
+  }
+  
 
   handleInputChange = (e) => {
       const { name, value } = e.target

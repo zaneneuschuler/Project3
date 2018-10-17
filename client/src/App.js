@@ -48,6 +48,7 @@ class App extends Component {
 
     
   componentDidMount = () => {
+    console.log(getCookie("id"));
     if(getCookie("id") !== ""){
       this.setState({
         id: getCookie("id"),
@@ -74,6 +75,7 @@ handleFormLogin = event => {
       "password": this.state.password,
     })
       .then((data) => {
+        document.cookie = `id=${data.data.user._id}`
 
         this.setState({
           email: "",
