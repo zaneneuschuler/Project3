@@ -8,7 +8,7 @@ import Container from "../../components/Grid/Container";
 import { List, ListItem } from "../../components/List";
 import { Input, TextArea, FormBtn } from "../../components/Form";
 import Jumbotron from "../../components/Jumbotron";
-import ProductEdit from "../../components/Edit-Product/ProductEdit"
+import YardSaleCreationSales from "../../components/YardSaleCreationSales/YardSaleCreationSales"
 
 const YardSaleCreationWrapper = styled('div')({
     margin: 20
@@ -23,13 +23,14 @@ const YardSaleCreationProductsWrapper = styled('div')({
     alignItems: "center",
 })
 const YardSaleCreationElement = styled('div')({
-    margin: 15
+    margin: 15,
+    alignItems: "center"
 })
 const YardSaleCreationItemElements = styled('div')({
     margin: 15,
     display: "flex",
     alignItems: "baseline",
-    
+
 })
 const ProductsInput = styled('input')({
     marginLeft: 20,
@@ -39,9 +40,9 @@ const ProductsInput = styled('input')({
 class YardSaleCreation extends Component {
     state = {
         displayProducts: false,
-        address: "Street Address City, State", 
-        zipCode: 12345, 
-        name: "Your Yard Sale's Name", 
+        address: "Street Address City, State",
+        zipCode: 12345,
+        name: "Yard Sale Name",
         date: "2018-12-3101:00",
         userID: "",
         yardSaleID: "",
@@ -63,9 +64,9 @@ class YardSaleCreation extends Component {
         editDescription: "",
     }
 
-    componentDidMount(){
+    componentDidMount() {
         API.getUser(this.props.id)
-            .then(res => this.setState({userYardSales: this.state.userYardSales.concat(res.data.yardSales)}))
+            .then(res => this.setState({ userYardSales: this.state.userYardSales.concat(res.data.yardSales) }))
     }
 
     handleInput = (event) => {
@@ -76,8 +77,8 @@ class YardSaleCreation extends Component {
     }
 
     submitYardSale = () => {
-        this.setState({userID: this.props.id})
-        this.setState({displayProducts: true})
+        this.setState({ userID: this.props.id })
+        this.setState({ displayProducts: true })
         let newSale = {
             name: this.state.name,
             address: this.state.address,
@@ -104,7 +105,7 @@ class YardSaleCreation extends Component {
         API.createNewProduct(newItem)
             //Pushes each new item _id that is created to an array so that can be saved to update the new sale
             //with new product listings
-            .then(res => this.setState({products: this.state.products.concat(res.data), productName: "", imageUrl: "", category: "", quantity: "", price: "", description: "", interest: ""}))
+            .then(res => this.setState({ products: this.state.products.concat(res.data) }))
             .catch(err => console.log(err))
     }
 
@@ -132,7 +133,7 @@ class YardSaleCreation extends Component {
             .catch(err => console.log(err))
     }
 
-    beginEdit = (event) => {
+    beginEdit = () => {
         this.setState({ editItem: true });
     }
 
@@ -149,6 +150,7 @@ class YardSaleCreation extends Component {
 
         API.updateListing(id, editItem)
             .then(res => console.log(res))
+            .then(this.setState({ editItem: true }))
             .catch(err => console.log(err))
     }
 
@@ -156,58 +158,66 @@ class YardSaleCreation extends Component {
         return (
             <div>
                 {this.props.id ? (
-                   <YardSaleCreationWrapper>
-                   <h3>Enter Your Sale's Info Here</h3>
-                   {/* Address */}
-                   <YardSaleCreationElement>Address: <input type="text" name="address" value={this.state.address} onChange={this.handleInput}></input></YardSaleCreationElement>
-                   {/* Zip Code */}
-                   <YardSaleCreationElement>Zip Code: <input type="text" name="zipCode" value={this.state.zipCode} onChange={this.handleInput}></input></YardSaleCreationElement>
-                   {/* Date of Sale */}
-                   <YardSaleCreationElement>Date of Sale: <input type="datetime-local" name="date" value={this.state.date} onChange={this.handleInput}></input></YardSaleCreationElement>
-                   {/* Name of Sale */}
-                   <YardSaleCreationElement>Name of Your Sale: <input type="text" name="name" value={this.state.name} onChange={this.handleInput}></input></YardSaleCreationElement>
+                    <YardSaleCreationWrapper>
+                        <h3>Enter Your Sale's Info</h3>
+                        {/* Name of Sale */}
+                        <YardSaleCreationElement>Name of Your Sale: <input type="text" name="name" value={this.state.name} onChange={this.handleInput}></input></YardSaleCreationElement>
+                        {/* Address */}
+                        <YardSaleCreationElement>Address: <input type="text" name="address" value={this.state.address} onChange={this.handleInput}></input></YardSaleCreationElement>
+                        {/* Zip Code */}
+                        <YardSaleCreationElement>Zip Code: <input type="text" name="zipCode" value={this.state.zipCode} onChange={this.handleInput}></input></YardSaleCreationElement>
+                        {/* Date of Sale */}
+                        <YardSaleCreationElement>Date of Sale: <input type="datetime-local" name="date" value={this.state.date} onChange={this.handleInput}></input></YardSaleCreationElement>
 
-                   <YardSaleCreationElement>
-                       <button onClick={this.submitYardSale}>Submit</button>
-                    </YardSaleCreationElement>
-                   <YardSaleCreationElement>
-                       <button onClick={this.editYardSale}>Edit Yard Sale</button>
-                    </YardSaleCreationElement>
-               </YardSaleCreationWrapper>
-                    ): 
-                        (<div><h1>Must Be Logged In to Create A Yard Sale</h1></div>
+
+                        <YardSaleCreationElement>
+                            <button onClick={this.submitYardSale}>Submit</button>
+                        </YardSaleCreationElement>
+                        <YardSaleCreationElement>
+                            <button onClick={this.editYardSale}>Edit Yard Sale</button>
+                        </YardSaleCreationElement>
+                    </YardSaleCreationWrapper>
+                ) :
+                    (<div><h1>Must Be Logged In to Create A Yard Sale</h1></div>
                     )}
                 {this.state.displayProducts ? (
-                    <YardSaleCreationWrapper>
-                           <h1>Add an Item to Sell</h1>
-                           <ProductHolder>
-                           <YardSaleCreationProductsWrapper>
-                               <YardSaleCreationItemElements>Product Name: <ProductsInput type="text" name="productName" value={this.state.productName} onChange={this.handleInput}></ProductsInput></YardSaleCreationItemElements>
+                    <Container fluid>
+                        <Row>
+                            <Col size="md-6">
+                                <h1>Add an Item to Sell</h1>
+                                <ProductHolder>
+                                    <YardSaleCreationProductsWrapper>
+                                        <YardSaleCreationItemElements>Product Name: <ProductsInput type="text" name="productName" value={this.state.productName} onChange={this.handleInput}></ProductsInput></YardSaleCreationItemElements>
 
-                               <YardSaleCreationItemElements>Image URL: <ProductsInput type="text" name="imageUrl" value={this.state.imageUrl} onChange={this.handleInput}></ProductsInput></YardSaleCreationItemElements>
+                                        <YardSaleCreationItemElements>Image URL: <ProductsInput type="text" name="imageUrl" value={this.state.imageUrl} onChange={this.handleInput}></ProductsInput></YardSaleCreationItemElements>
 
-                               <YardSaleCreationItemElements>Price: <ProductsInput type="text" name="price" value={this.state.price} onChange={this.handleInput}></ProductsInput></YardSaleCreationItemElements>
+                                        <YardSaleCreationItemElements>Price: <ProductsInput type="text" name="price" value={this.state.price} onChange={this.handleInput}></ProductsInput></YardSaleCreationItemElements>
 
-                               <YardSaleCreationItemElements>Quantity: <ProductsInput type="text" name="quantity" value={this.state.quantity} onChange={this.handleInput}></ProductsInput></YardSaleCreationItemElements>
+                                        <YardSaleCreationItemElements>Quantity: <ProductsInput type="text" name="quantity" value={this.state.quantity} onChange={this.handleInput}></ProductsInput></YardSaleCreationItemElements>
 
-                               <YardSaleCreationItemElements>Category: <ProductsInput type="text" name="category" value={this.state.category} onChange={this.handleInput}></ProductsInput></YardSaleCreationItemElements>   
+                                        <YardSaleCreationItemElements>Category: <ProductsInput type="text" name="category" value={this.state.category} onChange={this.handleInput}></ProductsInput></YardSaleCreationItemElements>
 
-                               <YardSaleCreationItemElements>Description: <textarea name="description" value={this.state.description} onChange={this.handleInput}></textarea></YardSaleCreationItemElements>
+                                        <YardSaleCreationItemElements>Description: <textarea name="description" value={this.state.description} onChange={this.handleInput}></textarea></YardSaleCreationItemElements>
 
-                               <YardSaleCreationItemElements><FormBtn onClick={this.submitItem}>Submit Item</FormBtn></YardSaleCreationItemElements>
-                           </YardSaleCreationProductsWrapper>
-                           </ProductHolder>
-               </YardSaleCreationWrapper>
-                ):(
-                    <div></div>
-                )}
-                <YardSaleCreationWrapper>
-                    {this.state.products.length > 0 ? (
-                            <List>
+                                        <YardSaleCreationItemElements><FormBtn onClick={this.submitItem}>Submit Item</FormBtn></YardSaleCreationItemElements>
+                                    </YardSaleCreationProductsWrapper>
+                                </ProductHolder>
+                            </Col>
+                        </Row>
+                    </Container>
+                ) : (
+                        <div></div>
+                    )}
+                <Container fluid>
+                    <Row>
+                        <Col size="md-6 sm-12">
+                            <Jumbotron>
                                 <h1>Items for Sale</h1>
-                                
-                                {this.state.products.map(product => (
-                                    <ListItem key={product._id}>
+                            </Jumbotron>
+                            {this.state.products.length > 0 ? (
+                                <List>
+                                    {this.state.products.map(product => (
+                                        <ListItem key={product._id}>
                                             <strong>
                                                 Product: {product.productName}
                                                 imageUrl: {product.imageUrl}
@@ -217,35 +227,41 @@ class YardSaleCreation extends Component {
                                                 Description: {product.description}
                                                 Interest: {product.interest}
                                             </strong>
-                                        <YardSaleCreationElement><button onClick={this.beginEdit}>Edit</button></YardSaleCreationElement>
-                                        {this.state.editItem ? (
-                                            <YardSaleCreationProductsWrapper>
-                                                <ProductEdit 
-                                                    handleInput = {this.handleInput}
-                                                    id = {product._id}
-                                                    handleClick = {this.editProduct}
-                                                    editProductName = {this.state.editProductName}
-                                                    editImageUrl = {this.state.editImageUrl}
-                                                    editPrice = {this.state.editPrice}
-                                                    editQuantity = {this.state.editQuantity}
-                                                    editCategory = {this.state.editCategory}
-                                                    editDescription = {this.state.editDescription}
-                                                />
-                                            </YardSaleCreationProductsWrapper>
-                                        ):(
-                                            <div></div>
-                                        )}
-                                        <button onClick={this.deleteProduct}>Delete</button>
-                                    </ListItem>              
-                                ))}
-                            <YardSaleCreationElement>
-                                <button onClick={this.finalizeYardSale}>Finalize Yard Sale</button>
-                            </YardSaleCreationElement>
-                            </List>
-                        ) : (
-                            <h3>No Results to Display</h3>
-                        )}
-                </YardSaleCreationWrapper>
+                                            <YardSaleCreationElement><button onClick={this.beginEdit}>Edit</button></YardSaleCreationElement>
+                                            {this.state.editItem ? (
+                                                <ProductHolder>
+                                                    <YardSaleCreationProductsWrapper>
+                                                        <YardSaleCreationItemElements>Product Name: <ProductsInput type="text" name="editProductName" value={product.productName} onChange={this.handleInput}></ProductsInput></YardSaleCreationItemElements>
+
+                                                        <YardSaleCreationItemElements>Image URL: <ProductsInput type="text" name="editImageUrl" value={product.imageUrl} onChange={this.handleInput}></ProductsInput></YardSaleCreationItemElements>
+
+                                                        <YardSaleCreationItemElements>Price: <ProductsInput type="text" name="editPrice" value={product.price} onChange={this.handleInput}></ProductsInput></YardSaleCreationItemElements>
+
+                                                        <YardSaleCreationItemElements>Quantity: <ProductsInput type="text" name="editQuantity" value={product.quantity} onChange={this.handleInput}></ProductsInput></YardSaleCreationItemElements>
+
+                                                        <YardSaleCreationItemElements>Category: <ProductsInput type="text" name="editCategory" value={product.category} onChange={this.handleInput}></ProductsInput></YardSaleCreationItemElements>
+
+                                                        <YardSaleCreationItemElements>Description: <textarea name="editDescription" value={product.description} onChange={this.handleInput}></textarea></YardSaleCreationItemElements>
+
+                                                        <YardSaleCreationElement><button onClick={this.editProduct(product._id)}>Edit</button></YardSaleCreationElement>
+                                                    </YardSaleCreationProductsWrapper>
+                                                </ProductHolder>
+                                            ) : (
+                                                    <div></div>
+                                                )}
+                                            <button onClick={this.deleteProduct}>Delete</button>
+                                        </ListItem>
+                                    ))}
+                                    <YardSaleCreationElement>
+                                        <button onClick={this.finalizeYardSale}>Finalize Yard Sale</button>
+                                    </YardSaleCreationElement>
+                                </List>
+                            ) : (
+                                    <h3>No Results to Display</h3>
+                                )}
+                        </Col>
+                    </Row>
+                </Container>
             </div>
         );
     }
