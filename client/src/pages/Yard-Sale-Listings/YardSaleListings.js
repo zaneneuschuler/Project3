@@ -55,10 +55,8 @@ class YardSaleListings extends Component {
     render() {
         return (
             <div>
-
                 <input type="text" name="searchZip" value={this.state.searchZip} onChange={this.handleInput}></input>
                 <button onClick={() => this.searchByZip(this.state.searchZip)}>Search By Zip Code</button>
-
                 <YardSaleListingsWrapper>
                     <h1>Listings</h1>
                 </YardSaleListingsWrapper>

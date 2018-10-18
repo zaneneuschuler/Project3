@@ -12,5 +12,8 @@ router
   .post(yardSaleController.createNewListing)
   .put(yardSaleController.update)
   .delete(yardSaleController.remove);
-
+//Matches with "/api/yardSales/zipCode/:zipCode"
+router
+  .route("/zipCode/:zipCode")
+  .get(yardSaleController.findByZipCode)
 module.exports = router;
