@@ -17,6 +17,10 @@ export default {
         return axios.get(`/api/yardSales/${id}`)
     },
 
+    getYardSaleByZip: function(zipCode){
+        return axios.get(`/api/yardSales/zipCode/${zipCode}`)
+    },
+
     createYardSale: function(id, yardsale){
         return axios.post(`api/user/${id}`, yardsale)
     },
