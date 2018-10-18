@@ -40,7 +40,7 @@ const ProductsInput = styled('input')({
 class YardSaleCreation extends Component {
     state = {
         displayProducts: false,
-        address: "Street Address City, State",
+        address: "Street, City, State",
         zipCode: 12345,
         name: "Yard Sale Name",
         date: "2018-12-3101:00",
@@ -161,13 +161,13 @@ class YardSaleCreation extends Component {
                     <YardSaleCreationWrapper>
                         <h3>Enter Your Sale's Info</h3>
                         {/* Name of Sale */}
-                        <YardSaleCreationElement>Name of Your Sale: <input type="text" name="name" value={this.state.name} onChange={this.handleInput}></input></YardSaleCreationElement>
+                        <YardSaleCreationElement>Name: <input type="text" name="name" value={this.state.name} onChange={this.handleInput}></input></YardSaleCreationElement>
                         {/* Address */}
                         <YardSaleCreationElement>Address: <input type="text" name="address" value={this.state.address} onChange={this.handleInput}></input></YardSaleCreationElement>
                         {/* Zip Code */}
                         <YardSaleCreationElement>Zip Code: <input type="text" name="zipCode" value={this.state.zipCode} onChange={this.handleInput}></input></YardSaleCreationElement>
                         {/* Date of Sale */}
-                        <YardSaleCreationElement>Date of Sale: <input type="datetime-local" name="date" value={this.state.date} onChange={this.handleInput}></input></YardSaleCreationElement>
+                        <YardSaleCreationElement>Sale Date: <input type="datetime-local" name="date" value={this.state.date} onChange={this.handleInput}></input></YardSaleCreationElement>
 
 
                         <YardSaleCreationElement>
