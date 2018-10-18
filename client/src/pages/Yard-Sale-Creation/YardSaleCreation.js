@@ -8,7 +8,7 @@ import Container from "../../components/Grid/Container";
 import { List, ListItem } from "../../components/List";
 import { Input, TextArea, FormBtn } from "../../components/Form";
 import Jumbotron from "../../components/Jumbotron";
-import YardSaleCreationSales from "../../components/YardSaleCreationSales/YardSaleCreationSales"
+import ProductEdit from "../../components/Edit-Product/ProductEdit"
 import collage from '../../images/collage.jpg'
 
 const BodyWrapper = styled('div')({
@@ -76,6 +76,9 @@ class YardSaleCreation extends Component {
         editQuantity: "",
         editCategory: "",
         editDescription: "",
+        editID: "",
+        editProductIDs: [],
+        showEdit: false
     }
 
     componentDidMount() {
@@ -114,12 +117,12 @@ class YardSaleCreation extends Component {
             quantity: this.state.quantity,
             price: this.state.price,
             description: this.state.description,
-            interest: this.state.interest
+            interest: this.state.intCounter
         }
         API.createNewProduct(newItem)
             //Pushes each new item _id that is created to an array so that can be saved to update the new sale
             //with new product listings
-            .then(res => this.setState({ products: this.state.products.concat(res.data) }))
+            .then(res => this.setState({ products: this.state.products.concat(res.data)}))
             .catch(err => console.log(err))
     }
 
@@ -147,11 +150,47 @@ class YardSaleCreation extends Component {
             .catch(err => console.log(err))
     }
 
-    beginEdit = () => {
-        this.setState({ editItem: true });
+    beginEdit = (id) => {
+        API.getProduct(id)
+            .then(res => this.setState({ 
+                editProductName: res.data.productName,
+                editImageUrl: res.data.imageUrl,
+                editCategory: res.data.category,
+                editQuantity: res.data.quantity,
+                editPrice: res.data.price,
+                editDescription: res.data.description,
+                editID: res.data._id,
+                showEdit: true,
+                editProductIDs: this.state.editProductIDs.concat(res.data._id)
+            }))
+            .catch(err => console.log(err))
     }
 
-    editProduct = (id) => {
+    renderEdit = (id) => {
+        if(this.state.showEdit === true && this.state.editID === id){
+            return (
+                <ProductEdit 
+                    key = {this.state.editID}
+                    id = {this.state.editID}
+                    handleInput = {this.handleInput}
+                    editProductName = {this.state.editProductName}
+                    editImageUrl = {this.state.editImageUrl}
+                    editPrice = {this.state.editPrice}
+                    editQuantity = {this.state.editQuantity}
+                    editCategory = {this.state.editCategory}
+                    editDescription = {this.state.editDescription}
+                />
+            )
+        }
+    }
+
+    closeEdit = () => {
+        this.setState({ showEdit: false, editID: "" })
+    }
+
+    editProduct = (event) => {
+        event.preventDefault();
+        let id = this.state.editID;
         let editItem = {
             productName: this.state.editProductName,
             imageUrl: this.state.editImageUrl,
@@ -161,10 +200,8 @@ class YardSaleCreation extends Component {
             description: this.state.editDescription,
             interest: this.state.interest
         }
-
         API.updateListing(id, editItem)
             .then(res => console.log(res))
-            .then(this.setState({ editItem: true }))
             .catch(err => console.log(err))
     }
 
@@ -242,30 +279,14 @@ class YardSaleCreation extends Component {
                                                 Description: {product.description}
                                                 Interest: {product.interest}
                                             </strong>
-                                            <YardSaleCreationElement><button onClick={this.beginEdit}>Edit</button></YardSaleCreationElement>
-                                            {this.state.editItem ? (
-                                                <ProductHolder>
+                                            <YardSaleCreationElement><button onClick={() => this.beginEdit(product._id)}>Edit</button></YardSaleCreationElement>
+                                            <YardSaleCreationElement><button onClick={() => this.closeEdit}>Close Edit</button></YardSaleCreationElement> <ProductHolder>
                                                     <YardSaleCreationProductsWrapper>
-                                                        <YardSaleCreationItemElements>Product Name: <ProductsInput type="text" name="editProductName" value={product.productName} onChange={this.handleInput}></ProductsInput></YardSaleCreationItemElements>
-
-                                                        <YardSaleCreationItemElements>Image URL: <ProductsInput type="text" name="editImageUrl" value={product.imageUrl} onChange={this.handleInput}></ProductsInput></YardSaleCreationItemElements>
-
-                                                        <YardSaleCreationItemElements>Price: <ProductsInput type="text" name="editPrice" value={product.price} onChange={this.handleInput}></ProductsInput></YardSaleCreationItemElements>
-
-                                                        <YardSaleCreationItemElements>Quantity: <ProductsInput type="text" name="editQuantity" value={product.quantity} onChange={this.handleInput}></ProductsInput></YardSaleCreationItemElements>
-
-                                                        <YardSaleCreationItemElements>Category: <ProductsInput type="text" name="editCategory" value={product.category} onChange={this.handleInput}></ProductsInput></YardSaleCreationItemElements>
-
-                                                        <YardSaleCreationItemElements>Description: <textarea name="editDescription" value={product.description} onChange={this.handleInput}></textarea></YardSaleCreationItemElements>
-
-                                                        <YardSaleCreationElement><button onClick={this.editProduct(product._id)}>Edit</button><br></br></YardSaleCreationElement>
-                                                        
+                                                        {this.renderEdit(product._id)}
                                                     </YardSaleCreationProductsWrapper>
                                                 </ProductHolder>
-                                            ) : (
-                                                    <div></div>
-                                                )}
                                             <button onClick={this.deleteProduct}>Delete</button>
+                                            <button onClick={this.editProduct}>Save</button>
                                         </ListItem>
                                     ))}
                                     <YardSaleCreationElement>

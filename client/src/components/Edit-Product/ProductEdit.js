@@ -4,14 +4,12 @@ import styled from 'react-emotion';
 
 const EditProductCard = ({ 
     handleInput, 
-    id, 
-    handleClick, 
     editProductName, 
     editImageUrl, 
     editPrice, 
     editQuantity,
     editCategory,
-    editDescription
+    editDescription,
     }) => {
     return (
         <div>
@@ -26,8 +24,6 @@ const EditProductCard = ({
             <div>Category: <input type="text" name="editCategory" value={editCategory} onChange={() => handleInput}></input></div>   
 
             <div>Description: <textarea name="editDescription" value={editDescription} onChange={() => handleInput}></textarea></div>
-
-            <div><button onClick={() => handleClick(id)}>Save</button></div>
         </div>
     )
 }
