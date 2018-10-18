@@ -52,9 +52,10 @@ class Products extends Component {
             </Col>
             <Col size="md-6 sm-12">
               <Jumbotron>
-                <h1>Products on Sale in my Yard</h1>
-                <h2>{this.state.yardsale.name}</h2>
-                <h3>{this.state.yardsale.date} | {this.state.yardsale.address} | {this.state.yardsale.zipCode}</h3>
+                <h1>{this.state.yardsale.name}</h1><br></br> 
+                <h3>{this.state.yardsale.address} | {this.state.yardsale.zipCode}</h3> 
+                <h3>{this.state.yardsale.date}</h3><br></br>
+
               </Jumbotron>
               {this.state.products.length ? (
                 <List>
