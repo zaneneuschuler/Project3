@@ -109,8 +109,8 @@ class UserRegistration extends Component {
           {
             this.state.showRegistrationForm ? 
           <UserRegistrationWrapper>
-              <h3>Sell your stuff for Free!</h3>
-              <h4>Sign up Now!</h4>
+              <h3>Sell stuff for Free!</h3>
+              <h4>Sign up Now</h4>
 
               <ModalFormItem
                   name="First"

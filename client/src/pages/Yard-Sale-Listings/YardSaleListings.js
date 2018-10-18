@@ -14,7 +14,7 @@ const ListingsWrapper = styled('div')({
 });
 
 const IndividualListingsWrapper = styled('div')({
-    display: "flex",
+    flex: 1,
     flexWrap: "wrap",
     boxShadow: "1px 2px 2px 0px grey",
     padding: 10
@@ -23,24 +23,42 @@ const IndividualListingsWrapper = styled('div')({
 class YardSaleListings extends Component {
 
     state = {
-        yardSales: []
+        yardSales: [],
+        searchZip: ""
     }
 
-    componentDidMount(){
-        this.loadYardSaleListings();
+    // componentDidMount(){
+    //     this.loadYardSaleListings();
+    // }
+
+    // loadYardSaleListings = () => {
+    //     API.getAllYardSales()
+    //     .then(
+    //         res => this.setState({ yardSales: res.data })
+    //     )
+    //     .catch(err => console.log(err))
+    // }
+
+    searchByZip = (zip) => {
+        API.getYardSaleByZip(zip)
+            .then(res => this.setState({ yardSales: res.data }))
+            .catch(err => console.log(err))
     }
 
-    loadYardSaleListings = () => {
-        API.getAllYardSales()
-        .then(
-            res => this.setState({ yardSales: res.data })
-        )
-        .catch(err => console.log(err))
+    handleInput = (event) => {
+        const { name, value } = event.target;
+        this.setState({
+            [name]: value
+        });
     }
 
     render() {
         return (
             <div>
+
+                <input type="text" name="searchZip" value={this.state.searchZip} onChange={this.handleInput}></input>
+                <button onClick={() => this.searchByZip(this.state.searchZip)}>Search By Zip Code</button>
+
                 <YardSaleListingsWrapper>
                     <h1>Listings</h1>
                 </YardSaleListingsWrapper>
