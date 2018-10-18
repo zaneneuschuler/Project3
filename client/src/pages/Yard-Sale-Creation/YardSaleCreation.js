@@ -9,10 +9,24 @@ import { List, ListItem } from "../../components/List";
 import { Input, TextArea, FormBtn } from "../../components/Form";
 import Jumbotron from "../../components/Jumbotron";
 import YardSaleCreationSales from "../../components/YardSaleCreationSales/YardSaleCreationSales"
+import collage from '../../images/collage.jpg'
+
+const BodyWrapper = styled('div')({
+    width: '100%',
+    minHeight: '80vh',
+    alignItems: 'center',
+    backgroundSize: 'cover',
+    background: `url("${collage}")`,
+    // opacity: '0.7'
+  });
+
 
 const YardSaleCreationWrapper = styled('div')({
-    margin: 20
+    margin: 20,
+    background: "white"
 })
+
+
 const ProductHolder = styled('div')({
     display: "inline-block"
 })
@@ -157,6 +171,7 @@ class YardSaleCreation extends Component {
     render() {
         return (
             <div>
+            <BodyWrapper>
                 {this.props.id ? (
                     <YardSaleCreationWrapper>
                         <h3>Enter Your Sale's Info</h3>
@@ -243,7 +258,8 @@ class YardSaleCreation extends Component {
 
                                                         <YardSaleCreationItemElements>Description: <textarea name="editDescription" value={product.description} onChange={this.handleInput}></textarea></YardSaleCreationItemElements>
 
-                                                        <YardSaleCreationElement><button onClick={this.editProduct(product._id)}>Edit</button></YardSaleCreationElement>
+                                                        <YardSaleCreationElement><button onClick={this.editProduct(product._id)}>Edit</button><br></br></YardSaleCreationElement>
+                                                        
                                                     </YardSaleCreationProductsWrapper>
                                                 </ProductHolder>
                                             ) : (
@@ -262,6 +278,9 @@ class YardSaleCreation extends Component {
                         </Col>
                     </Row>
                 </Container>
+
+            </BodyWrapper>
+
             </div>
         );
     }
