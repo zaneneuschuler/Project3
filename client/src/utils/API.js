@@ -39,7 +39,7 @@ export default {
     },
 
     updateYardSale: function(yardsaleID, updatedDetails){
-        return axios.post(`/api/yardSales/${yardsaleID}`, updatedDetails)
+        return axios.put(`/api/yardSales/${yardsaleID}`, updatedDetails)
     },
 
     updateYardSaleEdit: function(yardsaleID, edit){
@@ -60,5 +60,17 @@ export default {
     },
     submitMessage: function(message){
         return axios.post(`/api/mail`, message)
+    },
+
+    getProduct: function(productID){
+        return axios.get(`/api/listings/${productID}`)
+    },
+
+    getYardSaleListings: function(id){
+        return axios.get(`api/yardSales/${id}`)
+    },
+
+    deletProducts: function(id){
+        return axios.delete(`api/listings/${id}`)
     }
 };
