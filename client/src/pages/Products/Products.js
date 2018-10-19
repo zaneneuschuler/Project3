@@ -7,6 +7,7 @@ import Row from "../../components/Grid/Row";
 import Col from "../../components/Grid/Col";
 import { List, ListItem } from "../../components/List";
 import ProductCard from "../../components/ProductCard";
+import {Gmaps, params, Marker, Circle} from "react-gmaps";
 
 class Products extends Component {
 
