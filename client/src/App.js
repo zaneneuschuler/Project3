@@ -12,6 +12,7 @@ import Products from "./pages/Products"
 import UserRegistration from "./pages/User-Registration/UserRegistration"
 import YardSaleCreation from "./pages/Yard-Sale-Creation/YardSaleCreation"
 import API from './utils/API'
+import axios from "axios";
 
 // import Modal from "./components/ModalForm/ModalForm";
 function getCookie(cname) {
