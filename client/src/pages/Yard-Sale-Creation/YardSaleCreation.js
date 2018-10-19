@@ -84,6 +84,7 @@ class YardSaleCreation extends Component {
         editCategory: "",
         editDescription: "",
         editID: "",
+        editProductIDs: [],
         showEdit: false
     }
 
@@ -111,7 +112,7 @@ class YardSaleCreation extends Component {
         API.createYardSale(this.props.id, newSale)
             //Gets the newest yard sale that the user creates after submitting the info so they can
             //add products to it
-            .then(res => this.setState({ yardSaleID: res.data.yardSales[(res.data.yardSales.length - 1)] }))
+            .then(res => this.setState({ yardSaleID: res.data.yardSales[res.data.yardSales.length - 1] }))
             .catch(err => console.log(err))
     }
 
@@ -133,11 +134,12 @@ class YardSaleCreation extends Component {
     }
 
     finalizeYardSale = () => {
-        this.state.products.forEach(product => {
-            API.updateYardSale(this.state.yardSaleID, product)
-                .then(res => console.log(res))
-                .catch(err => console.log(err))
-        })
+        const productIds = this.state.products.map(({ _id }) => _id);
+        console.log(productIds);
+        API.updateYardSale(this.state.yardSaleID, { listings: productIds })
+            .then(res => console.log(res))
+            .catch(err => console.log(err))
+
     }
 
     editYardSale = (event) => {
@@ -279,13 +281,7 @@ class YardSaleCreation extends Component {
                                     {this.state.products.map(product => (
                                         <ListItem key={product._id}>
                                             <strong>
-                                                Product: {product.productName}<br></br>
-                                                <img src={product.imageUrl} style={{ height: 150, width: 150, textAlign: "center" }}></img><br></br>
-                                                Price: {product.price}<br></br>
-                                                Quantity: {product.quantity}<br></br>
-                                                Category: {product.category}<br></br>
-                                                Description: {product.description}<br></br>
-                                                Interest: {product.interest}
+                                                Product: {product.productName}
                                             </strong>
                                             <YardSaleCreationElement><button onClick={() => this.beginEdit(product._id)}>Edit</button></YardSaleCreationElement>
                                                 <ProductHolder>
