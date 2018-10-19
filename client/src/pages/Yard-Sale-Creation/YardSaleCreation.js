@@ -241,12 +241,12 @@ class YardSaleCreation extends Component {
                                     {this.state.products.map(product => (
                                         <ListItem key={product._id}>
                                             <strong>
-                                                Product: {product.productName}
-                                                imageUrl: {product.imageUrl}
-                                                Price: {product.price}
-                                                Quantity: {product.quantity}
-                                                Category: {product.category}
-                                                Description: {product.description}
+                                                Product: {product.productName}<br></br>
+                                                <img src={product.imageUrl} style={{ height: 150, width: 150, textAlign: "center" }}></img><br></br>
+                                                Price: {product.price}<br></br>
+                                                Quantity: {product.quantity}<br></br>
+                                                Category: {product.category}<br></br>
+                                                Description: {product.description}<br></br>
                                                 Interest: {product.interest}
                                             </strong>
                                             <YardSaleCreationElement><button onClick={this.beginEdit}>Edit</button></YardSaleCreationElement>
