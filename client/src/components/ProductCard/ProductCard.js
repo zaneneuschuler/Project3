@@ -6,7 +6,7 @@ const Wrapper = styled('div')({
   margin: 25
 })
 
-const ProductCard = ({ imageUrl, price, category, productName, quantity, description, interest }) => (
+const ProductCard = ({ imageUrl, price, category, productName, quantity, description, interest, clickHandle, id }) => (
   
   <Container>
   <Wrapper>  
@@ -19,6 +19,7 @@ const ProductCard = ({ imageUrl, price, category, productName, quantity, descrip
       <p>Category: {category}</p>
       <p>Description: {description}</p>
       <p>Interest: {interest}</p>
+            <button onClick={() => clickHandle(id)} >Add Interest! <i className="fa fa-thumbs-up"></i></button>
     </div>
   </Wrapper>
   </Container>

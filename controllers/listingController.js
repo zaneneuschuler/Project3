@@ -29,6 +29,13 @@ module.exports = {
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
+  increment: function(req,res){
+    console.log(req);
+    db.Listing
+    .findOneAndUpdate({_id: req.params.id}, {$inc: {interest: 1}})
+       .then(dbModel => res.json(dbModel))
+         .catch(err => res.status(422).json(err));
+  },
   remove: function(req, res) {
     db.Listing
       .findById({ _id: req.params.id })

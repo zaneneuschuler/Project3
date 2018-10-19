@@ -53,5 +53,12 @@ export default {
         let search = {address, zip}
         console.log(search);
         return axios.post(`/api/gMaps`, search)
+    },
+    incrementInterest: function(listingId){
+        console.log(listingId);
+        return axios.put(`/api/listings/inc/${listingId}`)
+    },
+    submitMessage: function(message){
+        return axios.post(`/api/mail`, message)
     }
 };
