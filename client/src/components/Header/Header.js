@@ -56,28 +56,25 @@ class Header extends Component {
     };
   }
 
-
-  handleInputChange = (e) => {
-      const { name, value } = e.target
-      this.setState({
-      [name]: value
-      })
-  }
-
-  handleFormLogin = event => {
-      event.preventDefault();
-      if (this.state.email && this.state.password) {
-        API.login({
-          "email": this.state.email,
-          "password": this.state.password,
-        })
-          .then(console.log('user login info:  ', JSON.stringify(this.state)))
-          .then(this.setState({
-            showLoginForm: false
-          }))
-          .catch(err => console.log(err));
-      }
-    };
+  // handleFormLogin = event => {
+  //     event.preventDefault();
+  //     if (this.state.email && this.state.password) {
+  //       API.login({
+  //         "email": this.state.email,
+  //         "password": this.state.password,
+  //       })
+  //         .then((data) => {
+  //           console.log(data);
+            
+  //           Document.cookie = 'user=foo'
+  //         })
+  //         .then(this.setState({
+  //           showLoginForm: false,
+  //           id: getCookie("id")
+  //         }))
+  //         .catch(err => console.log(err));
+  //     }
+  //   };
 
   render() {
     return (
@@ -85,7 +82,7 @@ class Header extends Component {
         <h1>Pai Mai</h1>        
           <Link to="/">Home</Link>
           <Link to="/contact">Contact</Link>
-          <Link to="/yardsalelistings">Current Yard Sales</Link>
+          <Link to="/yardsalelistings">Yard Sales</Link>
           <Link to="/yardsalecreation">Sell Your Stuff</Link>
           
             {

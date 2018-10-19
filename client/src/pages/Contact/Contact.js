@@ -71,6 +71,7 @@ class ContactForm extends Component {
             <div>
               <BodyWrapper>
                 <ContactWrapper>
+                  <h3>Questions?</h3>
                   <FormInput
                     name="name"
                     label="Name"

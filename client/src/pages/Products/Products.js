@@ -1,15 +1,12 @@
 import React, { Component } from "react";
 import Jumbotron from "../../components/Jumbotron";
 import API from "../../utils/API";
-import axios from "axios";
 // import { Link } from "react-router-dom";
 import Container from "../../components/Grid/Container";
 import Row from "../../components/Grid/Row";
 import Col from "../../components/Grid/Col";
 import { List, ListItem } from "../../components/List";
 import ProductCard from "../../components/ProductCard";
-import {Gmaps, Marker, InfoWindow, Circle} from 'react-gmaps';
-const params = {v: '3.exp', key: process.env.GMAPS_KEY};
 
 class Products extends Component {
 
@@ -23,36 +20,13 @@ class Products extends Component {
         price: "",
         imgURL: "",
         description: "",
-        intCounter: 0,
-        lat: 0,
-        lng: 0
+        intCounter: 0
     };
-      onMapCreated(map) {
-        map.setOptions({
-          disableDefaultUI: true
-        });
-      }
-
-      onDragEnd(e) {
-        console.log('onDragEnd', e);
-      }
-
-      onCloseClick() {
-        console.log('onCloseClick');
-      }
-
-      onClick(e) {
-        console.log('onClick', e);
-      }
+    
 
     componentDidMount() {
       this.loadProducts();
       this.loadYardSaleInfo();
-    }
-
-    getGmap = (address) => {
-        console.log(address);
-        axios.post("/api/gMaps", address).then(res => this.setState({lat: res.data.lat, lng: res.data.lng}))
     }
 
     loadProducts = () => {
@@ -63,13 +37,9 @@ class Products extends Component {
 
     loadYardSaleInfo = () => {
       API.getYardSale(this.state.yardsaleID)
-      .then(res => this.setState({yardsale: res.data}, this.getGmap(res.data))
-      // .then(function(res){
-      //   console.log(res.data);
-      //   this.setState({yardsale: res.data})
-      //   this.getGmap(res.data);
-      // }
-      )}
+      .then(res => this.setState({yardsale: res.data}))
+      .catch(err => console.log(err))
+    }
 
     render() {
       return (
@@ -102,9 +72,9 @@ class Products extends Component {
             </Col>
             <Col size="md-6 sm-12">
               <Jumbotron>
-                <h1>Products on Sale in my Yard</h1>
-                <h2>{this.state.yardsale.name}</h2>
-                <h3>{this.state.yardsale.date} | {this.state.yardsale.address} | {this.state.yardsale.zipCode}</h3>
+                <h1>{this.state.yardsale.name}</h1><br></br> 
+                <h3>{this.state.yardsale.address} | {this.state.yardsale.zipCode}</h3> 
+                <h3>{this.state.yardsale.date}</h3><br></br>
 
               </Jumbotron>
               {this.state.products.length ? (
