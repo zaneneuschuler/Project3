@@ -1,10 +1,8 @@
 import React, { Component } from "react";
 import styled from 'react-emotion';
 import ModalFormItem from '../../components/ModalFormItem/ModalFormItem'
-// import API from "../../utils/API";
 import axios from "axios";
 import API from "../../utils/API";
-// import { withCookies, Cookies } from 'react-cookie';
 
 const UserRegistrationWrapper = styled('div')({
     
@@ -45,8 +43,8 @@ function getCookie(cname) {
 
 class UserRegistration extends Component {
 
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
         First: '',
         Last: '',
@@ -67,93 +65,49 @@ class UserRegistration extends Component {
     }
   }
   
-
-  handleInputChange = (e) => {
-      const { name, value } = e.target
-      this.setState({
-      [name]: value
-      })
-  }
-
-  handleRegistrationSubmit = event => {
-      event.preventDefault();
-      if (this.state.First && this.state.Last && this.state.email && this.state.password) {
-        let newUser = {
-         'First': this.state.First,
-          "Last": this.state.Last,
-          "email": this.state.email,
-          "password": this.state.password,
-        };
-        
-        axios.post("/auth/signup", newUser)
-        .then(response => {
-          var userId = response.data._id
-          console.log('reponse.id: ', userId)
-          this.setState({ id: userId }, function (){
-            console.log('this.state.id', this.state.id)
-            this.state.id ? 
-              API.login({
-                'email': this.state.email,
-                'password': this.state.password
-              })
-              : console.log('userId is empty')
-            document.cookie = `id=${this.state.id}`
-              this.setState({
-                  showRegistrationForm: false,
-                  showSignInForm: false,
-                  loggedIn: true
-                }, function(){
-                  console.log('setData: ', this.state)
-                })
-              })
-            })
-            .catch(err => console.log(err));
-      }
-    };
-  
     render() {
       
       return (
           <div style={divStyle}>
           {
-            this.state.showRegistrationForm ? 
+            !this.props.loggedIn ? 
           <UserRegistrationWrapper>
               <h3>Sell stuff for Free!</h3>
               <h4>Sign up Now</h4>
 
               <ModalFormItem
-                  name="First"
+                  name="first"
                   label="First Name:"
                   type="text"
-                  onChangeFn={this.handleInputChange}
-                  value={this.state.firstName}
+                  onChangeFn={this.props.handleInputChange}
+                  value={this.props.first}
               />
 
               <ModalFormItem
-                  name="Last"
+                  name="last"
                   label="Last Name:"
                   type="text"
-                  onChangeFn={this.handleInputChange}
-                  value={this.state.lastName}
+                  onChangeFn={this.props.handleInputChange}
+                  value={this.props.last}
               />
               
               <ModalFormItem
                   name="email"
                   label="Email:"
                   type="string"
-                  onChangeFn={this.handleInputChange}
-                  value={this.state.email}
+                  onChangeFn={this.props.handleInputChange}
+                  value={this.props.email}
               />
               
               <ModalFormItem
                   name="password"
                   label="Password:"
                   type="password"
-                  onChangeFn={this.handleInputChange}
-                  value={this.state.password}
+                  onChangeFn={this.props.handleInputChange}
+                  value={this.props.password}
               />
               
-              <SubmitButton onClick={this.handleRegistrationSubmit}>
+              <SubmitButton onClick={this.props.handleRegistrationSubmit}>
                 Join Now
               </SubmitButton>
               

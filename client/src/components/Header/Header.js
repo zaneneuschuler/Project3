@@ -55,26 +55,7 @@ class Header extends Component {
       showLoginForm: false,
     };
   }
-
-  // handleFormLogin = event => {
-  //     event.preventDefault();
-  //     if (this.state.email && this.state.password) {
-  //       API.login({
-  //         "email": this.state.email,
-  //         "password": this.state.password,
-  //       })
-  //         .then((data) => {
-  //           console.log(data);
-            
-  //           Document.cookie = 'user=foo'
-  //         })
-  //         .then(this.setState({
-  //           showLoginForm: false,
-  //           id: getCookie("id")
-  //         }))
-  //         .catch(err => console.log(err));
-  //     }
-  //   };
+  
 
   render() {
     return (
@@ -86,7 +67,7 @@ class Header extends Component {
           <Link to="/yardsalecreation">Sell Your Stuff</Link>
           
             {
-              this.props.showLoginForm ?  
+              !this.props.loggedIn ?
               <div>
                 <FormWrapper>
                   <LoginFormItem

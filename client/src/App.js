@@ -5,10 +5,8 @@ import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
 
 import YardSaleListings from "./pages/Yard-Sale-Listings/YardSaleListings"
 import Header from './components/Header'
-// import Welcome from './pages/Welcome/Welcome'
 import Contact from './pages/Contact/Contact'
 import About from "./pages/About/About"
-// import LoginFormItem from './components/LoginForm/LoginForm'
 import BodyMain from "./components/Body-main/BodyMain";
 import Products from "./pages/Products"
 import UserRegistration from "./pages/User-Registration/UserRegistration"
@@ -91,19 +89,65 @@ handleFormLogin = event => {
   }
 };
 
+handleRegistrationSubmit = event => {
+  event.preventDefault();
+  console.log("foo");
+  
+  if (this.state.first && this.state.last && this.state.email && this.state.password) {
+    let newUser = {
+     'First': this.state.First,
+      "Last": this.state.Last,
+      "email": this.state.email,
+      "password": this.state.password,
+    };
+    
+    axios.post("/auth/signup", newUser)
+    .then(response => {
+      var userId = response.data._id
+      console.log('reponse.id: ', userId)
+      this.setState({ id: userId }, function (){
+        console.log('this.state.id', this.state.id)
+        this.state.id ? 
+          API.login({
+            'email': this.state.email,
+            'password': this.state.password
+          })
+          : console.log('userId is empty')
+        
+          this.setState({
+              showRegistrationForm: false,
+              showSignInForm: false,
+              loggedIn: true
+            }, function(){
+              console.log('setData: ', this.state)
+            })
+          })
+        })
+        .catch(err => console.log(err));
+  }
+};
+
+componentDidUpdate = () => {
+  console.log(this.state);
+  
+}
+
   render() {
     return (
 
       <Router>
         <div>
-          <Header id={this.state.id} handleFormLogin={this.handleFormLogin} handleInputChange={this.handleInputChange} showLoginForm={this.state.showLoginForm}/>
+          <Header id={this.state.id} handleFormLogin={this.handleFormLogin} loggedIn={this.state.loggedIn} handleInputChange={this.handleInputChange}/>
           <Content>
             <Switch>
-              <Route exact path="/" component={BodyMain} />
+              <Route exact path="/" render={() => <BodyMain id={this.state.id} handleRegistrationSubmit={this.handleRegistrationSubmit} handleInputChange={this.handleInputChange} loggedIn={this.state.loggedIn} last={this.state.last} first={this.state.first} email={this.state.email} password={this.state.password}/>} />
               <Route exact path="/about" component={About} />
               <Route path="/header" render={() => <Header showLoginForm={this.state.showLoginForm} /> } />
               <Route path="/contact" component={Contact} />
-              <Route path="/register" render={() => <UserRegistration id={this.state.id} /> } />
+
+              <Route path="/register" render={() => <UserRegistration id={this.state.id} handleRegistrationSubmit={this.handleRegistrationSubmit} handleInputChange={this.handleInputChange} loggedIn={this.state.loggedIn} last={this.state.last} first={this.state.first} email={this.state.email} password={this.state.password}/> } />
+
+
               <Route exact path="/yardsalelistings" component={YardSaleListings} />
               <Route path="/products/*" component={Products} />
               <Route path="/yardsalecreation" render={() => <YardSaleCreation id={this.state.id} />}/>
