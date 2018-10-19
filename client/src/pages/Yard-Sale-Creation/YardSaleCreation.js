@@ -15,6 +15,7 @@ const BodyWrapper = styled('div')({
     width: '100%',
     minHeight: '80vh',
     alignItems: 'center',
+    display: 'flex',
     backgroundSize: 'cover',
     background: `url("${collage}")`
   });
@@ -22,6 +23,9 @@ const BodyWrapper = styled('div')({
 
 const YardSaleCreationWrapper = styled('div')({
     margin: 20,
+    alignContent: 'center',
+    alignItems: "center",
+    flex: 1,
     background: "white"
 })
 
@@ -31,7 +35,7 @@ const ProductHolder = styled('div')({
 })
 const YardSaleCreationProductsWrapper = styled('div')({
     margin: 20,
-    display: "flex",
+    flex: 1,
     flexDirection: "column",
     alignItems: "center",
 })
@@ -198,6 +202,7 @@ class YardSaleCreation extends Component {
                     )}
                 {this.state.displayProducts ? (
                     <Container fluid>
+                    <YardSaleCreationWrapper>
                         <Row>
                             <Col size="md-6">
                                 <h1>Add an Item to Sell</h1>
@@ -220,6 +225,7 @@ class YardSaleCreation extends Component {
                                 </ProductHolder>
                             </Col>
                         </Row>
+                    </YardSaleCreationWrapper>
                     </Container>
                 ) : (
                         <div></div>
@@ -227,9 +233,9 @@ class YardSaleCreation extends Component {
                 <Container fluid>
                     <Row>
                         <Col size="md-6 sm-12">
-                            <Jumbotron>
+                            <YardSaleCreationWrapper>
                                 <h1>Items for Sale</h1>
-                            </Jumbotron>
+                            
                             {this.state.products.length > 0 ? (
                                 <List>
                                     {this.state.products.map(product => (
@@ -274,8 +280,10 @@ class YardSaleCreation extends Component {
                                     </YardSaleCreationElement>
                                 </List>
                             ) : (
-                                    <h3 style={resultsDisplay}>No Results to Display</h3>
+                                    <h3>No Results to Display</h3>
                                 )}
+
+                        </YardSaleCreationWrapper>
                         </Col>
                     </Row>
                 </Container>
