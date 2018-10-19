@@ -86,7 +86,8 @@ class YardSaleCreation extends Component {
         editID: "",
         editProductIDs: [],
         showEdit: false,
-        filteredProducts: []
+        filteredProducts: [],
+        isFinalized: false
     }
 
     componentDidMount() {
@@ -138,7 +139,7 @@ class YardSaleCreation extends Component {
         const productIds = this.state.filteredProducts.map(({ _id }) => _id);
         console.log(productIds);
         API.updateYardSale(this.state.yardSaleID, { listings: productIds })
-            .then(res => console.log(res))
+            .then(this.setState({ isFinalized: true }))
             .catch(err => console.log(err))
 
     }
@@ -232,6 +233,7 @@ class YardSaleCreation extends Component {
     render() {
         return (
             <div>
+                {! this.state.isFinalized ?
             <BodyWrapper>
                 {this.props.id ? (
                     <YardSaleCreationWrapper>
@@ -319,7 +321,9 @@ class YardSaleCreation extends Component {
                 </Container>
 
             </BodyWrapper>
-
+            : <div>
+                <h1>You Created Your Sale!</h1>
+            </div>}
             </div>
         );
     }
