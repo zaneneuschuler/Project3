@@ -16,8 +16,7 @@ const BodyWrapper = styled('div')({
     minHeight: '80vh',
     alignItems: 'center',
     backgroundSize: 'cover',
-    background: `url("${collage}")`,
-    // opacity: '0.7'
+    background: `url("${collage}")`
   });
 
 
@@ -50,6 +49,10 @@ const ProductsInput = styled('input')({
     marginLeft: 20,
     float: "right"
 })
+
+const resultsDisplay = {
+    color: 'white',
+  }
 
 class YardSaleCreation extends Component {
     state = {
@@ -221,8 +224,6 @@ class YardSaleCreation extends Component {
                         <YardSaleCreationElement>Zip Code: <input type="text" name="zipCode" value={this.state.zipCode} onChange={this.handleInput}></input></YardSaleCreationElement>
                         {/* Date of Sale */}
                         <YardSaleCreationElement>Sale Date: <input type="datetime-local" name="date" value={this.state.date} onChange={this.handleInput}></input></YardSaleCreationElement>
-
-
                         <YardSaleCreationElement>
                             <button onClick={this.submitYardSale}>Submit</button>
                         </YardSaleCreationElement>
@@ -231,7 +232,7 @@ class YardSaleCreation extends Component {
                         </YardSaleCreationElement>
                     </YardSaleCreationWrapper>
                 ) :
-                    (<div><h1>Must Be Logged In to Create A Yard Sale</h1></div>
+                    (<div><h1 style={resultsDisplay}>Must Be Logged In to Create A Yard Sale</h1></div>
                     )}
                 {this.state.displayProducts ? (
                     <Container fluid>
@@ -295,7 +296,7 @@ class YardSaleCreation extends Component {
                                     </YardSaleCreationElement>
                                 </List>
                             ) : (
-                                    <h3>No Results to Display</h3>
+                                    <h3 style={resultsDisplay}>No Results to Display</h3>
                                 )}
                         </Col>
                     </Row>
