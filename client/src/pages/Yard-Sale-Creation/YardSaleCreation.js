@@ -15,6 +15,7 @@ const BodyWrapper = styled('div')({
     width: '100%',
     minHeight: '80vh',
     alignItems: 'center',
+    display: 'flex',
     backgroundSize: 'cover',
     background: `url("${collage}")`
   });
@@ -22,6 +23,9 @@ const BodyWrapper = styled('div')({
 
 const YardSaleCreationWrapper = styled('div')({
     margin: 20,
+    alignContent: 'center',
+    alignItems: "center",
+    flex: 1,
     background: "white"
 })
 
@@ -31,7 +35,7 @@ const ProductHolder = styled('div')({
 })
 const YardSaleCreationProductsWrapper = styled('div')({
     margin: 20,
-    display: "flex",
+    flex: 1,
     flexDirection: "column",
     alignItems: "center",
 })
@@ -236,6 +240,7 @@ class YardSaleCreation extends Component {
                     )}
                 {this.state.displayProducts ? (
                     <Container fluid>
+                    <YardSaleCreationWrapper>
                         <Row>
                             <Col size="md-6">
                                 <h1>Add an Item to Sell</h1>
@@ -258,6 +263,7 @@ class YardSaleCreation extends Component {
                                 </ProductHolder>
                             </Col>
                         </Row>
+                    </YardSaleCreationWrapper>
                     </Container>
                 ) : (
                         <div></div>
@@ -265,20 +271,20 @@ class YardSaleCreation extends Component {
                 <Container fluid>
                     <Row>
                         <Col size="md-6 sm-12">
-                            <Jumbotron>
+                            <YardSaleCreationWrapper>
                                 <h1>Items for Sale</h1>
-                            </Jumbotron>
+                            
                             {this.state.products.length > 0 ? (
                                 <List>
                                     {this.state.products.map(product => (
                                         <ListItem key={product._id}>
                                             <strong>
-                                                Product: {product.productName}
-                                                imageUrl: {product.imageUrl}
-                                                Price: {product.price}
-                                                Quantity: {product.quantity}
-                                                Category: {product.category}
-                                                Description: {product.description}
+                                                Product: {product.productName}<br></br>
+                                                <img src={product.imageUrl} style={{ height: 150, width: 150, textAlign: "center" }}></img><br></br>
+                                                Price: {product.price}<br></br>
+                                                Quantity: {product.quantity}<br></br>
+                                                Category: {product.category}<br></br>
+                                                Description: {product.description}<br></br>
                                                 Interest: {product.interest}
                                             </strong>
                                             <YardSaleCreationElement><button onClick={() => this.beginEdit(product._id)}>Edit</button></YardSaleCreationElement>
@@ -296,8 +302,10 @@ class YardSaleCreation extends Component {
                                     </YardSaleCreationElement>
                                 </List>
                             ) : (
-                                    <h3 style={resultsDisplay}>No Results to Display</h3>
+                                    <h3>No Results to Display</h3>
                                 )}
+
+                        </YardSaleCreationWrapper>
                         </Col>
                     </Row>
                 </Container>
