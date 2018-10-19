@@ -13,15 +13,15 @@ const EditProductCard = ({
     }) => {
     return (
         <div>
-            <div>Product Name: <input type="text" name="editProductName" value={editProductName} onChange={ handleInput}></input></div>
+            <div>Product Name: <input type="text" name="editProductName" value={editProductName} onChange={ handleInput}></input></div><br></br>
 
-            <div>Image URL: <input type="text" name="editImageUrl" value={editImageUrl} onChange={handleInput}></input></div>
+            <div>Image URL: <input type="text" name="editImageUrl" value={editImageUrl} onChange={handleInput}></input></div><br></br>
 
-            <div>Price: <input type="text" name="editPrice" value={editPrice} onChange={handleInput}></input></div>
+            <div>Price: <input type="text" name="editPrice" value={editPrice} onChange={handleInput}></input></div><br></br>
 
-            <div>Quantity: <input type="text" name="editQuantity" value={editQuantity} onChange={handleInput}></input></div>
+            <div>Quantity: <input type="text" name="editQuantity" value={editQuantity} onChange={handleInput}></input></div><br></br>
 
-            <div>Category: <input type="text" name="editCategory" value={editCategory} onChange={handleInput}></input></div>   
+            <div>Category: <input type="text" name="editCategory" value={editCategory} onChange={handleInput}></input></div><br></br> 
 
             <div>Description: <textarea name="editDescription" value={editDescription} onChange={handleInput}></textarea></div>
         </div>

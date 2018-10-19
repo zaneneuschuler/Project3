@@ -56,5 +56,9 @@ export default {
 
     getYardSaleListings: function(id){
         return axios.get(`api/yardSales/${id}`)
+    },
+
+    deletProducts: function(id){
+        return axios.delete(`api/listings/${id}`)
     }
 };
