@@ -48,5 +48,9 @@ export default {
 
     updateListing: function(productID, edit){
         return axios.put(`api/listings/${productID}`, edit)
+    },
+
+    getProduct: function(productID){
+        return axios.get(`/api/listings/${productID}`)
     }
 };

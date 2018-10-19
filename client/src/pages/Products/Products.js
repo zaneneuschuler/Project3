@@ -46,9 +46,6 @@ class Products extends Component {
       return (
         <Container fluid>
           <Row>
-            <Col size="md-6">
-              <Jumbotron>
-                <h1>Yard Sale Listings</h1>
                                         <Gmaps
         width={'100%'}
         height={"200px"}
@@ -69,8 +66,6 @@ class Products extends Component {
           radius={200}
           onClick={this.onClick} />
                 </Gmaps>
-              </Jumbotron>
-            </Col>
             <Col size="md-6 sm-12">
               <Jumbotron>
                 <h1>{this.state.yardsale.name}</h1><br></br> 
