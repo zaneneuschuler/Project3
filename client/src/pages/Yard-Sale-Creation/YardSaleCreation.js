@@ -78,7 +78,8 @@ class YardSaleCreation extends Component {
         editDescription: "",
         editID: "",
         editProductIDs: [],
-        showEdit: false
+        showEdit: false,
+        filteredProducts: []
     }
 
     componentDidMount() {
@@ -127,7 +128,7 @@ class YardSaleCreation extends Component {
     }
 
     finalizeYardSale = () => {
-        const productIds = this.state.products.map(({ _id }) => _id);
+        const productIds = this.state.filteredProducts.map(({ _id }) => _id);
         console.log(productIds);
         API.updateYardSale(this.state.yardSaleID, { listings: productIds })
             .then(res => console.log(res))
@@ -169,19 +170,32 @@ class YardSaleCreation extends Component {
     renderEdit = (id) => {
         if(this.state.showEdit === true && this.state.editID === id){
             return (
-                <ProductEdit 
-                    key = {this.state.editID}
-                    id = {this.state.editID}
-                    handleInput = {this.handleInput}
-                    editProductName = {this.state.editProductName}
-                    editImageUrl = {this.state.editImageUrl}
-                    editPrice = {this.state.editPrice}
-                    editQuantity = {this.state.editQuantity}
-                    editCategory = {this.state.editCategory}
-                    editDescription = {this.state.editDescription}
-                />
+                <div>
+                    <ProductEdit 
+                        key = {this.state.editID}
+                        id = {this.state.editID}
+                        handleInput = {this.handleInput}
+                        editProductName = {this.state.editProductName}
+                        editImageUrl = {this.state.editImageUrl}
+                        editPrice = {this.state.editPrice}
+                        editQuantity = {this.state.editQuantity}
+                        editCategory = {this.state.editCategory}
+                        editDescription = {this.state.editDescription}
+                    />
+                    <button onClick={this.deleteProduct}>Delete</button>
+                    <button onClick={this.editProduct}>Save</button>
+                </div>
             )
         }
+    }
+
+    deleteProduct = () => {
+        let id = this.state.editID;
+        API.deletProducts(id)
+            .then(res => console.log(res))
+            .catch(err => console.log(err));
+        const filteredProducts = this.state.products.filter(product => (product._id !== id));
+        this.setState({ filteredProducts: filteredProducts });
     }
 
     editProduct = () => {
@@ -282,8 +296,6 @@ class YardSaleCreation extends Component {
                                                         {this.renderEdit(product._id)}
                                                     </YardSaleCreationProductsWrapper>
                                                 </ProductHolder>
-                                            <button onClick={this.deleteProduct}>Delete</button>
-                                            <button onClick={this.editProduct}>Save</button>
                                         </ListItem>
                                     ))}
                                     <YardSaleCreationElement>
