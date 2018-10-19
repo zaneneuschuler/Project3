@@ -52,15 +52,9 @@ class Header extends Component {
   constructor() {
     super();
     this.state = {
-      showLoginForm: true,
+      showLoginForm: false,
     };
   }
-  // handleInputChange = (e) => {
-  //     const { name, value } = e.target
-  //     this.setState({
-  //     [name]: value
-  //     })
-  // }
 
   // handleFormLogin = event => {
   //     event.preventDefault();
@@ -92,7 +86,7 @@ class Header extends Component {
           <Link to="/yardsalecreation">Sell Your Stuff</Link>
           
             {
-              this.state.showLoginForm ?
+              this.props.showLoginForm ?  
               <div>
                 <FormWrapper>
                   <LoginFormItem

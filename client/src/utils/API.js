@@ -26,7 +26,7 @@ export default {
     },
 
     login: function(loginData) {
-      console.log ('login() is called...' + JSON.stringify(loginData))
+      console.log ('login() is called...')
         return axios.post("/auth/login", loginData)
     },
 

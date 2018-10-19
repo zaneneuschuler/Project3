@@ -7,6 +7,7 @@ import Row from "../../components/Grid/Row";
 import Col from "../../components/Grid/Col";
 import { List, ListItem } from "../../components/List";
 import ProductCard from "../../components/ProductCard";
+import {Gmaps, params, Marker, Circle} from "react-gmaps";
 
 class Products extends Component {
 
@@ -48,6 +49,26 @@ class Products extends Component {
             <Col size="md-6">
               <Jumbotron>
                 <h1>Yard Sale Listings</h1>
+                                        <Gmaps
+        width={'100%'}
+        height={"200px"}
+        lat={this.state.lat}
+        lng={this.state.lng}
+        zoom={15}
+        loadingMessage={'Be happy'}
+        params={params}
+        onMapCreated={this.onMapCreated}>
+        <Marker
+          lat={this.state.lat}
+          lng={this.state.lng}
+          draggable={true}
+          onDragEnd={this.onDragEnd} />
+        <Circle
+          lat={this.state.lat}
+          lng={this.state.lng}
+          radius={200}
+          onClick={this.onClick} />
+                </Gmaps>
               </Jumbotron>
             </Col>
             <Col size="md-6 sm-12">
