@@ -7,21 +7,25 @@ import Row from "../../components/Grid/Row";
 import Col from "../../components/Grid/Col";
 import { List, ListItem } from "../../components/List";
 import ProductCard from "../../components/ProductCard";
-import {Gmaps, params, Marker, Circle} from "react-gmaps";
+import {Gmaps, Marker, Circle} from "react-gmaps";
 
+const params = {v: '3.exp', key:process.env.GMAPS_KEY};
 class Products extends Component {
 
     state = {
         yardsaleID: this.props.location.pathname.split('/')[2],
-        yardsale: [],
+        yardsale: "",
         products: [],
+
         category: "",
         title: "",
         seller: "",
         price: "",
         imgURL: "",
         description: "",
-        intCounter: 0
+        intCounter: [],
+        lat: "",
+        lng: ""
     };
     
 
@@ -29,8 +33,16 @@ class Products extends Component {
       this.loadProducts();
       this.loadYardSaleInfo();
     }
+    componentDidUpdate(prevprops, prevstate) {
+      console.log(prevstate);
+      console.log(this.state.yardsale)
+      if(!prevstate.yardsale && this.state.yardsale ){
+        this.getCoordinates();
+      }
+    }
 
     loadProducts = () => {
+      this.setState({products: []});
       API.getYardSale(this.state.yardsaleID)
         .then(res => this.setState({products: this.state.products.concat(res.data.listings)}))
         .catch(err => console.log(err))
@@ -40,6 +52,26 @@ class Products extends Component {
       API.getYardSale(this.state.yardsaleID)
       .then(res => this.setState({yardsale: res.data}))
       .catch(err => console.log(err))
+    }
+
+    updateInterest = (id) => {
+      console.log(id);
+      if(this.state.intCounter.includes(id)){
+        alert("You already added interest for this item!");
+      }else{
+        API.incrementInterest(id)
+          .then(this.setState({
+            intCounter: [...this.state.intCounter, id]
+          }, this.loadProducts()));
+      }
+    }
+
+
+    getCoordinates = () => {
+      console.log(this.state.yardsale)
+      API.getCoordinates(this.state.yardsale.address, this.state.yardsale.zipCode)
+      .then(res => this.setState({lat: res.data.lat, lng: res.data.lng}))
+      .catch(err => console.log(err));
     }
 
     render() {
@@ -84,7 +116,9 @@ class Products extends Component {
                         quantity = {product.quantity}
                         category = {product.category}
                         description = {product.description}
-                        interest = {this.state.intCounter}
+                        interest = {product.interest}
+                        clickHandle = {this.updateInterest}
+                        id = {product._id}
                       />
                     </ListItem>
                   ))}

@@ -13,4 +13,7 @@ router
   .put(listingController.update)
   .delete(listingController.remove);
 
+router
+  .route("/inc/:id")
+  .put(listingController.increment);
 module.exports = router;
