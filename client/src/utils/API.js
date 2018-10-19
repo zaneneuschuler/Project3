@@ -48,5 +48,10 @@ export default {
 
     updateListing: function(productID, edit){
         return axios.put(`api/listings/${productID}`, edit)
+    },
+    getCoordinates: function(address, zip){
+        let search = {address, zip}
+        console.log(search);
+        return axios.post(`/api/gMaps`, search)
     }
 };

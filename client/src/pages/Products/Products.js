@@ -7,8 +7,9 @@ import Row from "../../components/Grid/Row";
 import Col from "../../components/Grid/Col";
 import { List, ListItem } from "../../components/List";
 import ProductCard from "../../components/ProductCard";
-import {Gmaps, params, Marker, Circle} from "react-gmaps";
+import {Gmaps, Marker, Circle} from "react-gmaps";
 
+const params = {v: '3.exp', key:process.env.GMAPS_KEY};
 class Products extends Component {
 
     state = {
@@ -21,7 +22,9 @@ class Products extends Component {
         price: "",
         imgURL: "",
         description: "",
-        intCounter: 0
+        intCounter: 0,
+        lat: "",
+        lng: ""
     };
     
 
@@ -38,8 +41,15 @@ class Products extends Component {
 
     loadYardSaleInfo = () => {
       API.getYardSale(this.state.yardsaleID)
-      .then(res => this.setState({yardsale: res.data}))
+      .then(res => this.setState({yardsale: res.data}, this.getCoordinates))
       .catch(err => console.log(err))
+    }
+
+    getCoordinates = () => {
+      console.log(this.state.yardsale.address + " " + this.state.yardsale.zipCode)
+      API.getCoordinates(this.state.yardsale.address, this.state.yardsale.zipCode)
+      .then(res => this.setState({lat: res.data.lat, lng: res.data.lng}))
+      .catch(err => console.log(err));
     }
 
     render() {
