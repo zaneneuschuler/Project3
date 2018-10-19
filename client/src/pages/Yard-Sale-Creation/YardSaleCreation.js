@@ -77,7 +77,6 @@ class YardSaleCreation extends Component {
         editCategory: "",
         editDescription: "",
         editID: "",
-        editProductIDs: [],
         showEdit: false
     }
 
@@ -160,8 +159,7 @@ class YardSaleCreation extends Component {
                 editPrice: res.data.price,
                 editDescription: res.data.description,
                 editID: res.data._id,
-                showEdit: true,
-                editProductIDs: this.state.editProductIDs.concat(res.data._id)
+                showEdit: true
             }))
             .catch(err => console.log(err))
     }
@@ -184,12 +182,7 @@ class YardSaleCreation extends Component {
         }
     }
 
-    closeEdit = () => {
-        this.setState({ showEdit: false, editID: "" })
-    }
-
-    editProduct = (event) => {
-        event.preventDefault();
+    editProduct = () => {
         let id = this.state.editID;
         let editItem = {
             productName: this.state.editProductName,
@@ -201,7 +194,15 @@ class YardSaleCreation extends Component {
             interest: this.state.interest
         }
         API.updateListing(id, editItem)
-            .then(res => console.log(res))
+            .then(this.setState({
+                productName: this.state.editProductName,
+                imageUrl: this.state.editImageUrl,
+                category: this.state.editCategory,
+                quantity: this.state.editQuantity,
+                price: this.state.editPrice,
+                description: this.state.editDescription,
+                interest: this.state.interest
+            }))
             .catch(err => console.log(err))
     }
 
@@ -280,7 +281,7 @@ class YardSaleCreation extends Component {
                                                 Interest: {product.interest}
                                             </strong>
                                             <YardSaleCreationElement><button onClick={() => this.beginEdit(product._id)}>Edit</button></YardSaleCreationElement>
-                                            <YardSaleCreationElement><button onClick={() => this.closeEdit}>Close Edit</button></YardSaleCreationElement> <ProductHolder>
+                                                <ProductHolder>
                                                     <YardSaleCreationProductsWrapper>
                                                         {this.renderEdit(product._id)}
                                                     </YardSaleCreationProductsWrapper>

@@ -45,11 +45,6 @@ class Products extends Component {
       return (
         <Container fluid>
           <Row>
-            <Col size="md-6">
-              <Jumbotron>
-                <h1>Yard Sale Listings</h1>
-              </Jumbotron>
-            </Col>
             <Col size="md-6 sm-12">
               <Jumbotron>
                 <h1>{this.state.yardsale.name}</h1><br></br> 
