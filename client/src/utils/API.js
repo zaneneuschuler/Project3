@@ -17,6 +17,10 @@ export default {
         return axios.get(`/api/yardSales/${id}`)
     },
 
+    getYardSaleByZip: function(zipCode){
+        return axios.get(`/api/yardSales/zipCode/${zipCode}`)
+    },
+
     createYardSale: function(id, yardsale){
         return axios.post(`api/user/${id}`, yardsale)
     },
@@ -36,5 +40,13 @@ export default {
 
     updateYardSale: function(yardsaleID, updatedDetails){
         return axios.post(`/api/yardSales/${yardsaleID}`, updatedDetails)
+    },
+
+    updateYardSaleEdit: function(yardsaleID, edit){
+        return axios.put(`api/yardSales/${yardsaleID}`, edit)
+    },
+
+    updateListing: function(productID, edit){
+        return axios.put(`api/listings/${productID}`, edit)
     }
 };
