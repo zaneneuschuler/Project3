@@ -6,7 +6,7 @@ import collage from '../../images/collage.jpg'
 
 const BodyWrapper = styled('div')({
     width: '100%',
-    minHeight: '80vh',
+    minHeight: '100vh',
     alignItems: 'center',
     backgroundSize: 'cover',
     background: `url("${collage}")`,
@@ -21,7 +21,7 @@ const YardSaleListingsWrapper = styled('div')({
 const ListingsWrapper = styled('div')({
     display: "flex",
     justifyContent: "space-around",
-    backgroundColor: "white"
+    backgroundColor: "black"
 });
 
 const IndividualListingsWrapper = styled('div')({
