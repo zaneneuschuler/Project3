@@ -2,9 +2,9 @@ import React, { Component } from "react";
 import { Link } from 'react-router-dom';
 import styled from 'react-emotion';
 import "./Header.css";
-import API from '../../utils/API'
+// import API from '../../utils/API'
 import LoginFormItem from '../../components/LoginForm'
-import { func } from "prop-types";
+// import { func } from "prop-types";
 
 
 const HeaderWrapper = styled('header')({
@@ -29,7 +29,7 @@ const FormWrapper = styled('form')({
 const LoginButton = styled('button')({
   background: "#283e4a",
   color: 'white',
-  height: 26
+  height: 30
 })
 
 function getCookie(cname) {
@@ -68,7 +68,7 @@ class Header extends Component {
           
             {
               !this.props.loggedIn ?
-              <div>
+              
                 <FormWrapper>
                   <LoginFormItem
                     name="email"
@@ -89,8 +89,8 @@ class Header extends Component {
                     <LoginButton onClick={this.props.handleFormLogin}>Sign In</LoginButton>
                   </div>
                 </FormWrapper>
-              </div>
-              : null
+              
+              : <h6 style={{ paddingTop: '10px'}}>{`Hello, ${this.props.first}`}</h6>
           }
       </HeaderWrapper>
     )

@@ -8,7 +8,7 @@ import UserRegistration from '../../pages/User-Registration/UserRegistration';
 
 const BodyWrapper = styled('div')({
   width: '100%',
-  minHeight: '80vh',
+  minHeight: '100vh',
   display: 'flex',
   alignItems: 'center',
   backgroundSize: 'cover',

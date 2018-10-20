@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import styled from 'react-emotion';
 import ModalFormItem from '../../components/ModalFormItem/ModalFormItem'
-import axios from "axios";
-import API from "../../utils/API";
 
 const UserRegistrationWrapper = styled('div')({
     
