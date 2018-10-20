@@ -8,11 +8,12 @@ export default {
     // Saves a new user to the database
     createNewUser: function(userData){
         console.log ('createNewUser() is called...' + JSON.stringify(userData))
-        axios.post("/auth/signup", userData).then(function (response){
+        return axios.post("/auth/signup", userData).then(function(response) {
+            console.log("response.data: ", response.data)
             return response.data;
         })
     },
-
+    
     getYardSale: function(id){
         return axios.get(`/api/yardSales/${id}`)
     },
@@ -39,7 +40,7 @@ export default {
     },
 
     updateYardSale: function(yardsaleID, updatedDetails){
-        return axios.post(`/api/yardSales/${yardsaleID}`, updatedDetails)
+        return axios.put(`/api/yardSales/${yardsaleID}`, updatedDetails)
     },
 
     updateYardSaleEdit: function(yardsaleID, edit){
@@ -60,5 +61,17 @@ export default {
     },
     submitMessage: function(message){
         return axios.post(`/api/mail`, message)
+    },
+
+    getProduct: function(productID){
+        return axios.get(`/api/listings/${productID}`)
+    },
+
+    getYardSaleListings: function(id){
+        return axios.get(`api/yardSales/${id}`)
+    },
+
+    deletProducts: function(id){
+        return axios.delete(`api/listings/${id}`)
     }
 };

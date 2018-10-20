@@ -2,9 +2,9 @@ import React, { Component } from "react";
 import { Link } from 'react-router-dom';
 import styled from 'react-emotion';
 import "./Header.css";
-import API from '../../utils/API'
+// import API from '../../utils/API'
 import LoginFormItem from '../../components/LoginForm'
-import { func } from "prop-types";
+// import { func } from "prop-types";
 
 
 const HeaderWrapper = styled('header')({
@@ -29,7 +29,7 @@ const FormWrapper = styled('form')({
 const LoginButton = styled('button')({
   background: "#283e4a",
   color: 'white',
-  height: 26
+  height: 30
 })
 const LogOutButton = styled('button')({
   background: "#283e4a",
@@ -59,26 +59,7 @@ class Header extends Component {
       showLoginForm: false,
     };
   }
-
-  // handleFormLogin = event => {
-  //     event.preventDefault();
-  //     if (this.state.email && this.state.password) {
-  //       API.login({
-  //         "email": this.state.email,
-  //         "password": this.state.password,
-  //       })
-  //         .then((data) => {
-  //           console.log(data);
-            
-  //           Document.cookie = 'user=foo'
-  //         })
-  //         .then(this.setState({
-  //           showLoginForm: false,
-  //           id: getCookie("id")
-  //         }))
-  //         .catch(err => console.log(err));
-  //     }
-  //   };
+  
 
   render() {
     return (
@@ -90,8 +71,8 @@ class Header extends Component {
           <Link to="/yardsalecreation">Sell Your Stuff</Link>
           
             {
-              this.props.showLoginForm ?  
-              <div>
+              this.props.showLoginForm ?
+              
                 <FormWrapper>
                   <LoginFormItem
                     name="email"
@@ -112,8 +93,8 @@ class Header extends Component {
                     <LoginButton onClick={this.props.handleFormLogin}>Sign In</LoginButton>
                   </div>
                 </FormWrapper>
-              </div>
-              : <LogOutButton onClick={this.props.handleFormLogout}>Log out</LogOutButton>
+              :<div> <h7 style={{ paddingTop: '10px', paddingRight: '10px'}}>{`Hello, ${this.props.first}`}</h7>   <LogOutButton onClick={this.props.handleFormLogout}>Log out</LogOutButton></div>
+              
           }
       </HeaderWrapper>
     )

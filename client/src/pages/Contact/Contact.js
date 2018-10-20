@@ -8,12 +8,11 @@ import API from "../../utils/API";
 
 const BodyWrapper = styled('div')({
   width: '100%',
-  minHeight: '80vh',
+  minHeight: '100vh',
   display: 'flex',
   alignItems: 'center',
   backgroundSize: 'cover',
-  background: `url("${collage}")`,
-  // opacity: '0.7'
+  background: `url("${collage}")`
 });
 
 const ContactWrapper = styled('div')({
@@ -41,7 +40,8 @@ class ContactForm extends Component {
     this.state = {
       name: '',
       email: '',
-      message: ''
+      message: '',
+      messageSent: false
     };
   }
 
@@ -61,7 +61,7 @@ class ContactForm extends Component {
         "message": this.state.message,
       };
       API.submitMessage(newMessage)
-      .then(alert(newMessage))
+      .then(this.setState({ messageSent: true }))
       .catch(err => console.log('fail to log in: ', err));
     }
   };
@@ -69,38 +69,42 @@ class ContactForm extends Component {
     render() {
         return (
             <div>
-              <BodyWrapper>
-                <ContactWrapper>
-                  <h3>Questions?</h3>
-                  <FormInput
-                    name="name"
-                    label="Name"
-                    type="text"
-                    onChangeFn={this.handelInputChange}
-                    value={this.state.name}
-                  />
-                  <FormInput
-                    name="email"
-                    label="Email"
-                    type="text"
-                    onChangeFn={this.handelInputChange}
-                    value={this.state.email}
-                  />
+              {
+                !this.state.messageSent ?
+                <BodyWrapper>
+                  <ContactWrapper>
+                    <h3>Questions?</h3>
+                    <FormInput
+                      name="name"
+                      label="Name"
+                      type="text"
+                      onChangeFn={this.handleInputChange}
+                      value={this.state.name}
+                    />
+                    <FormInput
+                      name="email"
+                      label="Email"
+                      type="text"
+                      onChangeFn={this.handleInputChange}
+                      value={this.state.email}
+                    />
 
-                  <FormTextArea
-                    name="message"
-                    label="Message"
-                    type="text"
-                    onChangeFn={this.handelInputChange}
-                    value={this.state.message}
-                  />
+                    <FormTextArea
+                      name="message"
+                      label="Message"
+                      type="text"
+                      onChangeFn={this.handleInputChange}
+                      value={this.state.message}
+                    />
 
-              <SubmitButton onClick={this.handleMessageSubmit}>
-                Submit
-              </SubmitButton>
-              
-                </ContactWrapper>
-              </BodyWrapper> 
+                <SubmitButton onClick={this.handleMessageSubmit}>
+                  Submit
+                </SubmitButton>
+                
+                  </ContactWrapper>
+                </BodyWrapper>
+                : <div><h3>Thank you for your inquiry. We will respond as soon as possible generally within a few hours. If you do not hear from us within 24 hours, kindly contact </h3> <h2>Zane Nueschuler</h2> <h3>as your message did not get to us.</h3></div>
+              }
             </div>
         );
     }
