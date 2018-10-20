@@ -142,9 +142,11 @@ class YardSaleCreation extends Component {
 
     finalizeYardSale = () => {
         let productIds;
-        if(this.state.filteredProducts.length >0){
+        if(this.state.filteredProducts.length > 0){
+            console.log("filtered products being sent");
          productIds = this.state.filteredProducts.map(({ _id }) => _id);
         }else{
+            console.log("normal products being sent");
              productIds = this.state.products.map(({ _id }) => _id);
         }
         
