@@ -35,7 +35,6 @@ const ProductHolder = styled('div')({
 })
 const YardSaleCreationProductsWrapper = styled('div')({
     margin: 20,
-    flex: 1,
     flexDirection: "column",
     alignItems: "center",
 })
@@ -260,7 +259,7 @@ class YardSaleCreation extends Component {
                     <Container fluid>
                     <YardSaleCreationWrapper>
                         <Row>
-                            <Col size="md-6">
+                            <Col size="sm-12">
                                 <h1>Add an Item to Sell</h1>
                                 <ProductHolder>
                                     <YardSaleCreationProductsWrapper>
@@ -288,7 +287,7 @@ class YardSaleCreation extends Component {
                     )}
                 <Container fluid>
                     <Row>
-                        <Col size="md-6 sm-12">
+                        <Col size="sm-12">
                             <YardSaleCreationWrapper>
                                 <h1>Items for Sale</h1>
                             
