@@ -6,14 +6,15 @@ import collage from '../../images/collage.jpg'
 
 
 const BodyWrapper = styled('div')({
-    width: '100%',
+    width: "100%",
     alignItems: 'center',
     backgroundSize: 'cover',
-    background: `url("${collage}")`,
+    backgroundColor: "rgba(0, 0, 0, .1)"
     // opacity: '0.7'   
   });
 
   const Wrapper = styled('div')({
+    display: "inline-table",
     margin: 10,
     boxShadow: "1px 2px 2px 0px grey",
     padding: 10,

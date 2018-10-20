@@ -4,10 +4,11 @@ import { YardSaleListCard } from "../../components/Yard-Sale-List/index";
 import API from "../../utils/API";
 import collage from '../../images/collage.jpg';
 import moment from "moment";
+import blur from '../../images/blur.jpg'
 
 const BodyWrapper = styled('div')({
     width: '100%',
-    minHeight: '80vh',
+    minHeight: '100vh',
     alignItems: 'center',
     backgroundSize: 'cover',
     background: `url("${collage}")`,
@@ -22,7 +23,8 @@ const YardSaleListingsWrapper = styled('div')({
 const ListingsWrapper = styled('div')({
     display: "flex",
     justifyContent: "space-around",
-    backgroundColor: "white"
+    backgroundColor: "rgba(0, 0, 0, .4)",
+    backgroundImage: `url(${blur})`
 });
 
 const IndividualListingsWrapper = styled('div')({
@@ -30,7 +32,8 @@ const IndividualListingsWrapper = styled('div')({
     flexWrap: "wrap",
     boxShadow: "1px 2px 2px 0px grey",
     padding: 10,
-    backgroundColor: "White"
+    // backgroundColor: "rgba(255, 255, 255, .4)",
+
 
 });
 
