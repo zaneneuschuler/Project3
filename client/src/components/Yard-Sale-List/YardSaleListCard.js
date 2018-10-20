@@ -27,9 +27,9 @@ export const YardSaleListCard = ({ address, zipCode, date, name, link }) => {
         <BodyWrapper>
         <Wrapper>
             <Link className="link" to={"/products/" + link}>
-            <h4><p>{date}</p></h4>
+            <h4><p>{name}</p></h4>
             <p>Address: {address} {zipCode}</p>
-            <p>Date Posted: {name}</p>
+            <p>Date Posted: {date}</p>
             </Link>
         </Wrapper>
         </BodyWrapper>

@@ -2,7 +2,8 @@ import React, { Component } from "react";
 import styled from 'react-emotion';
 import { YardSaleListCard } from "../../components/Yard-Sale-List/index";
 import API from "../../utils/API";
-import collage from '../../images/collage.jpg'
+import collage from '../../images/collage.jpg';
+import moment from "moment";
 import blur from '../../images/blur.jpg'
 
 const BodyWrapper = styled('div')({
@@ -74,7 +75,6 @@ class YardSaleListings extends Component {
                 <SearchButtons><button onClick={() => this.searchByZip(this.state.searchZip)}>Search By Zip Code</button></SearchButtons>
                 </YardSaleListingsWrapper>
                 
-                
                 <ListingsWrapper>
                     <IndividualListingsWrapper>
                         {this.state.yardSales.length ? (
@@ -84,8 +84,8 @@ class YardSaleListings extends Component {
                                         link = {yardSale._id}
                                         address = {yardSale.address}
                                         zipCode = {yardSale.zipCode}
-                                        date = {yardSale.name}
-                                        name = {yardSale.date}
+                                        date = {moment(yardSale.date.toString()).format('MM-DD-YY h:mm a')}
+                                        name = {yardSale.name}
                                     />
                                 );
                             })
