@@ -65,7 +65,15 @@ class App extends Component {
     [name]: value
     })
 }
-
+handleFormLogout = event => {
+  event.preventDefault();
+  document.cookie = "id=0";
+  this.setState({
+    showLoginForm: true,
+    loggedIn: false,
+    id: ""
+  })
+}
 
 handleFormLogin = event => {
   event.preventDefault();
@@ -96,7 +104,7 @@ handleFormLogin = event => {
 
       <Router>
         <div>
-          <Header id={this.state.id} handleFormLogin={this.handleFormLogin} handleInputChange={this.handleInputChange} showLoginForm={this.state.showLoginForm}/>
+          <Header id={this.state.id} handleFormLogin={this.handleFormLogin} handleFormLogout={this.handleFormLogout} handleInputChange={this.handleInputChange} showLoginForm={this.state.showLoginForm}/>
           <Content>
             <Switch>
               <Route exact path="/" component={BodyMain} />

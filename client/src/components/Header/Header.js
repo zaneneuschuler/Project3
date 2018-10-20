@@ -31,7 +31,11 @@ const LoginButton = styled('button')({
   color: 'white',
   height: 26
 })
-
+const LogOutButton = styled('button')({
+  background: "#283e4a",
+  color: 'white',
+  height: 26
+})
 function getCookie(cname) {
   var name = cname + "=";
   var decodedCookie = decodeURIComponent(document.cookie);
@@ -109,7 +113,7 @@ class Header extends Component {
                   </div>
                 </FormWrapper>
               </div>
-              : null
+              : <LogOutButton onClick={this.props.handleFormLogout}>Log out</LogOutButton>
           }
       </HeaderWrapper>
     )
