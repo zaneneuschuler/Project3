@@ -50,7 +50,7 @@ class App extends Component {
     }
 
   componentDidMount = () => {
-    if(getCookie("id") !== ""){
+    if(getCookie("id") !== "" && getCookie("id") !== "0"){
       this.getUserFirstName(getCookie("id"))
       this.setState({
         id: getCookie("id"),
@@ -66,8 +66,16 @@ class App extends Component {
     this.setState({
     [name]: value
     })
-  }
-
+}
+handleFormLogout = event => {
+  event.preventDefault();
+  document.cookie = "id=0";
+  this.setState({
+    showLoginForm: true,
+    loggedIn: false,
+    id: ""
+  })
+}
 
   handleFormLogin = event => {
     event.preventDefault();
@@ -141,7 +149,7 @@ componentDidUpdate = () => {
 
       <Router>
         <div>
-          <Header id={this.state.id} handleFormLogin={this.handleFormLogin} loggedIn={this.state.loggedIn} handleInputChange={this.handleInputChange} first={this.state.first}/>
+          <Header id={this.state.id} handleFormLogin={this.handleFormLogin} handleFormLogout={this.handleFormLogout} handleInputChange={this.handleInputChange} showLoginForm={this.state.showLoginForm} first={this.state.first}/>
           <Content>
             <Switch>
               <Route exact path="/" render={() => <BodyMain id={this.state.id} handleRegistrationSubmit={this.handleRegistrationSubmit} handleInputChange={this.handleInputChange} loggedIn={this.state.loggedIn} last={this.state.last} first={this.state.first} email={this.state.email} password={this.state.password}/>} />
