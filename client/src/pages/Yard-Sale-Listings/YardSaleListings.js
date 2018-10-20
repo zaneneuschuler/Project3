@@ -7,7 +7,7 @@ import blur from '../../images/blur.jpg'
 
 const BodyWrapper = styled('div')({
     width: '100%',
-    minHeight: '80vh',
+    minHeight: '100vh',
     alignItems: 'center',
     backgroundSize: 'cover',
     background: `url("${collage}")`,
