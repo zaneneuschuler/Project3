@@ -84,7 +84,7 @@ class YardSaleListings extends Component {
                                         link = {yardSale._id}
                                         address = {yardSale.address}
                                         zipCode = {yardSale.zipCode}
-                                        date = {moment(yardSale.date.toString()).format('MM-DD-YY h:mm a')}
+                                        date = {moment(yardSale.date).format('MM-DD-YY h:mm a')}
                                         name = {yardSale.name}
                                     />
                                 );

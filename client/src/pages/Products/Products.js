@@ -118,7 +118,7 @@ class Products extends Component {
                       <ListItem>
                         <ProductCard key={product._id} 
                           imageUrl ={product.imageUrl} 
-                          product = {product.productName}
+                          productName = {product.productName}
                           price = {product.price}
                           quantity = {product.quantity}
                           category = {product.category}
