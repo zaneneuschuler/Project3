@@ -17,16 +17,22 @@ const BodyWrapper = styled('div')({
     alignItems: 'center',
     display: 'flex',
     backgroundSize: 'cover',
-    background: `url("${collage}")`
+    background: `url("${collage}")`,
+    backgroundRepeat: "y"
   });
-
+const StyledButton = styled('button')({
+    background: "#283e4a",
+    color: 'white',
+    height: 30
+})
 
 const YardSaleCreationWrapper = styled('div')({
     margin: 20,
+    padding: 20,
     alignContent: 'center',
     alignItems: "center",
     flex: 1,
-    background: "white"
+    backgroundColor: "rgba(255,255,255,0.5)",
 })
 
 
@@ -189,8 +195,8 @@ class YardSaleCreation extends Component {
                         editCategory = {this.state.editCategory}
                         editDescription = {this.state.editDescription}
                     />
-                    <button onClick={this.deleteProduct}>Mark For Delete</button>
-                    <button onClick={this.editProduct}>Save Changes</button>
+                    <StyledButton onClick={this.deleteProduct}>Delete</StyledButton>
+                    <StyledButton onClick={this.editProduct}>Save</StyledButton>
                 </div>
             )
         }
@@ -246,10 +252,10 @@ class YardSaleCreation extends Component {
                         {/* Date of Sale */}
                         <YardSaleCreationElement>Sale Date: <input type="datetime-local" name="date" value={this.state.date} onChange={this.handleInput}></input></YardSaleCreationElement>
                         <YardSaleCreationElement>
-                            <button onClick={this.submitYardSale}>Submit</button>
+                            <StyledButton onClick={this.submitYardSale}>Submit</StyledButton>
                         </YardSaleCreationElement>
                         <YardSaleCreationElement>
-                            <button onClick={this.editYardSale}>Edit Yard Sale</button>
+                            <StyledButton onClick={this.editYardSale}>Edit Yard Sale</StyledButton>
                         </YardSaleCreationElement>
                     </YardSaleCreationWrapper>
                 ) :
@@ -298,7 +304,7 @@ class YardSaleCreation extends Component {
                                             <strong>
                                                 Product: {product.productName}
                                             </strong>
-                                            <YardSaleCreationElement><button onClick={() => this.beginEdit(product._id)}>Edit</button></YardSaleCreationElement>
+                                            <YardSaleCreationElement><StyledButton onClick={() => this.beginEdit(product._id)}>Edit</StyledButton></YardSaleCreationElement>
                                                 <ProductHolder>
                                                     <YardSaleCreationProductsWrapper>
                                                         {this.renderEdit(product._id)}
@@ -307,7 +313,7 @@ class YardSaleCreation extends Component {
                                         </ListItem>
                                     ))}
                                     <YardSaleCreationElement>
-                                        <button onClick={this.finalizeYardSale}>Finalize Yard Sale</button>
+                                        <StyledButton onClick={this.finalizeYardSale}>Finalize Yard Sale</StyledButton>
                                     </YardSaleCreationElement>
                                 </List>
                             ) : (
