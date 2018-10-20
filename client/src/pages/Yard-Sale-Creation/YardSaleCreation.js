@@ -156,7 +156,7 @@ class YardSaleCreation extends Component {
             date: new Date(this.state.date + ":00Z")
         }
         API.updateYardSaleEdit(this.state.yardSaleID, editSale)
-            .then(res => console.log(res))
+            .then(alert("You have successfully edited your info."))
             .catch(err => console.log(err))
     }
 
@@ -190,8 +190,8 @@ class YardSaleCreation extends Component {
                         editCategory = {this.state.editCategory}
                         editDescription = {this.state.editDescription}
                     />
-                    <button onClick={this.deleteProduct}>Delete</button>
-                    <button onClick={this.editProduct}>Save</button>
+                    <button onClick={this.deleteProduct}>Mark For Delete</button>
+                    <button onClick={this.editProduct}>Save Changes</button>
                 </div>
             )
         }
@@ -200,7 +200,7 @@ class YardSaleCreation extends Component {
     deleteProduct = () => {
         let id = this.state.editID;
         API.deletProducts(id)
-            .then(res => console.log(res))
+            .then(alert("Successfully marked product for deletion."))
             .catch(err => console.log(err));
         const filteredProducts = this.state.products.filter(product => (product._id !== id));
         this.setState({ filteredProducts: filteredProducts });
