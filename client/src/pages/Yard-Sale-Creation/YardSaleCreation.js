@@ -141,7 +141,13 @@ class YardSaleCreation extends Component {
     }
 
     finalizeYardSale = () => {
-        const productIds = this.state.filteredProducts.map(({ _id }) => _id);
+        const productIds;
+        if(filteredProducts.length >0){
+         productIds = this.state.filteredProducts.map(({ _id }) => _id);
+        }else{
+             productIds = this.state.products.map(({ _id }) => _id);
+        }
+        
         console.log(productIds);
         API.updateYardSale(this.state.yardSaleID, { listings: productIds })
             .then(this.setState({ isFinalized: true }))
