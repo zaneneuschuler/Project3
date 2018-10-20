@@ -142,7 +142,7 @@ class YardSaleCreation extends Component {
 
     finalizeYardSale = () => {
         let productIds;
-        if(filteredProducts.length >0){
+        if(this.state.filteredProducts.length >0){
          productIds = this.state.filteredProducts.map(({ _id }) => _id);
         }else{
              productIds = this.state.products.map(({ _id }) => _id);
