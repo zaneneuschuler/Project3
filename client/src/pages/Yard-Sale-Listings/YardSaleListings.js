@@ -33,24 +33,16 @@ const IndividualListingsWrapper = styled('div')({
 
 });
 
+const SearchButtons = styled('div')({
+    margin: 10
+})
+
 class YardSaleListings extends Component {
 
     state = {
         yardSales: [],
         searchZip: ""
     }
-
-    // componentDidMount(){
-    //     this.loadYardSaleListings();
-    // }
-
-    // loadYardSaleListings = () => {
-    //     API.getAllYardSales()
-    //     .then(
-    //         res => this.setState({ yardSales: res.data })
-    //     )
-    //     .catch(err => console.log(err))
-    // }
 
     searchByZip = (zip) => {
         API.getYardSaleByZip(zip)
@@ -72,10 +64,11 @@ class YardSaleListings extends Component {
                 <BodyWrapper>
                 <br></br>
                 <YardSaleListingsWrapper>
+                <SearchButtons>
                     <h3>Find Local Sales: </h3>   
-                   
-                <input type="text" name="searchZip" value={this.state.searchZip} onChange={this.handleInput}></input>
-                <button onClick={() => this.searchByZip(this.state.searchZip)}>Search By Zip Code</button>
+                </SearchButtons>
+                <SearchButtons><input type="text" name="searchZip" value={this.state.searchZip} onChange={this.handleInput}></input></SearchButtons>
+                <SearchButtons><button onClick={() => this.searchByZip(this.state.searchZip)}>Search By Zip Code</button></SearchButtons>
                 </YardSaleListingsWrapper>
                 
                 
