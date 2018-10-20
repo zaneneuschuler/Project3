@@ -8,6 +8,7 @@ import Col from "../../components/Grid/Col";
 import { List, ListItem } from "../../components/List";
 import ProductCard from "../../components/ProductCard";
 import {Gmaps, Marker, Circle} from "react-gmaps";
+import moment from "moment";
 
 const params = {v: '3.exp', key:process.env.GMAPS_KEY};
 class Products extends Component {
@@ -33,6 +34,7 @@ class Products extends Component {
       this.loadProducts();
       this.loadYardSaleInfo();
     }
+
     componentDidUpdate(prevprops, prevstate) {
       console.log(prevstate);
       console.log(this.state.yardsale)
@@ -102,7 +104,7 @@ class Products extends Component {
               <Jumbotron>
                 <h1>{this.state.yardsale.name}</h1><br></br> 
                 <h3>{this.state.yardsale.address} | {this.state.yardsale.zipCode}</h3> 
-                <h3>{this.state.yardsale.date}</h3><br></br>
+                <h3>{moment(this.state.yardsale.date).format('MM-DD-YY h:mm a')}</h3><br></br>
 
               </Jumbotron>
               {this.state.products.length ? (
