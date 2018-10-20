@@ -35,7 +35,6 @@ const ProductHolder = styled('div')({
 })
 const YardSaleCreationProductsWrapper = styled('div')({
     margin: 20,
-    flex: 1,
     flexDirection: "column",
     alignItems: "center",
 })
@@ -156,7 +155,7 @@ class YardSaleCreation extends Component {
             date: new Date(this.state.date + ":00Z")
         }
         API.updateYardSaleEdit(this.state.yardSaleID, editSale)
-            .then(res => console.log(res))
+            .then(alert("You have successfully edited your info."))
             .catch(err => console.log(err))
     }
 
@@ -190,8 +189,8 @@ class YardSaleCreation extends Component {
                         editCategory = {this.state.editCategory}
                         editDescription = {this.state.editDescription}
                     />
-                    <button onClick={this.deleteProduct}>Delete</button>
-                    <button onClick={this.editProduct}>Save</button>
+                    <button onClick={this.deleteProduct}>Mark For Delete</button>
+                    <button onClick={this.editProduct}>Save Changes</button>
                 </div>
             )
         }
@@ -200,7 +199,7 @@ class YardSaleCreation extends Component {
     deleteProduct = () => {
         let id = this.state.editID;
         API.deletProducts(id)
-            .then(res => console.log(res))
+            .then(alert("Successfully marked product for deletion."))
             .catch(err => console.log(err));
         const filteredProducts = this.state.products.filter(product => (product._id !== id));
         this.setState({ filteredProducts: filteredProducts });
@@ -260,7 +259,7 @@ class YardSaleCreation extends Component {
                     <Container fluid>
                     <YardSaleCreationWrapper>
                         <Row>
-                            <Col size="md-6">
+                            <Col size="sm-12">
                                 <h1>Add an Item to Sell</h1>
                                 <ProductHolder>
                                     <YardSaleCreationProductsWrapper>
@@ -288,7 +287,7 @@ class YardSaleCreation extends Component {
                     )}
                 <Container fluid>
                     <Row>
-                        <Col size="md-6 sm-12">
+                        <Col size="sm-12">
                             <YardSaleCreationWrapper>
                                 <h1>Items for Sale</h1>
                             
