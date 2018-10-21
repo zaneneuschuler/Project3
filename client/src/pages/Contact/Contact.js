@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import styled from 'react-emotion';
-import { FormInput, FormTextArea } from "../../components/ContactFormItem/ContactFormItem";
+import { FormInput, FormTextArea } from "../../components/FormComponents/FormComponents";
 
 import collage from '../../images/collage.jpg'
 import API from "../../utils/API";

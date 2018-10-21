@@ -1,8 +1,11 @@
+//This file would hold all input, textarea, dropdown, and button components for any form
+//##############################################################################
+
 import React from "react";
 import styled from 'react-emotion';
-import "./ContactFormItem.css";
 
-const FormInputItem = styled('input')({
+
+const TextBoxInput = styled('input')({
   padding: '0px 5px 5px 0',
   float: 'left',
   margin: '5px 0 20px 0',
@@ -28,7 +31,7 @@ export const FormInput = ({ label, name, value, type, placeHolder, onChangeFn })
   return (
     <div>
       <Label>{label}</Label>
-      <FormInputItem
+      <TextBoxInput
         name={name}
         value={value}
         type={type}

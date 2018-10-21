@@ -37,8 +37,6 @@ function getCookie(cname) {
     }
     return "";
 }
-
-
 class UserRegistration extends Component {
 
   constructor(props) {
