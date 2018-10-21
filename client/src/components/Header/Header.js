@@ -31,7 +31,11 @@ const LoginButton = styled('button')({
   color: 'white',
   height: 30
 })
-
+const LogOutButton = styled('button')({
+  background: "#283e4a",
+  color: 'white',
+  height: 26
+})
 function getCookie(cname) {
   var name = cname + "=";
   var decodedCookie = decodeURIComponent(document.cookie);
@@ -67,7 +71,7 @@ class Header extends Component {
           <Link to="/yardsalecreation">Sell Your Stuff</Link>
           
             {
-              !this.props.loggedIn ?
+              this.props.showLoginForm ?
               
                 <FormWrapper>
                   <LoginFormItem
@@ -89,8 +93,8 @@ class Header extends Component {
                     <LoginButton onClick={this.props.handleFormLogin}>Sign In</LoginButton>
                   </div>
                 </FormWrapper>
+              :<div> <h7 style={{ paddingTop: '10px', paddingRight: '10px'}}>{`Hello, ${this.props.first}`}</h7>   <LogOutButton onClick={this.props.handleFormLogout}>Log out</LogOutButton></div>
               
-              : <h6 style={{ paddingTop: '10px'}}>{`Hello, ${this.props.first}`}</h6>
           }
       </HeaderWrapper>
     )

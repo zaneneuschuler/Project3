@@ -58,7 +58,7 @@ class ContactForm extends Component {
       let newMessage = {
        'name': this.state.name,        
         "email": this.state.email,
-        "message": this.state.message,
+        "text": this.state.message,
       };
       API.submitMessage(newMessage)
       .then(this.setState({ messageSent: true }))
@@ -103,7 +103,7 @@ class ContactForm extends Component {
                 
                   </ContactWrapper>
                 </BodyWrapper>
-                : <div><h3>Thank you for your inquiry. We will respond as soon as possible generally within a few hours. If you do not hear from us within 24 hours, kindly contact </h3> <h2>Zane Nueschuler</h2> <h3>as your message did not get to us.</h3></div>
+                : <div><h3>Thank you for your inquiry. We will respond as soon as possible generally within a few hours. If you do not hear from us within 24 hours, kindly contact </h3> <h2>Zane Neuschuler</h2> <h3>as your message did not get to us.</h3></div>
               }
             </div>
         );

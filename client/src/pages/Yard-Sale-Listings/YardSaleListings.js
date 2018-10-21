@@ -2,11 +2,13 @@ import React, { Component } from "react";
 import styled from 'react-emotion';
 import { YardSaleListCard } from "../../components/Yard-Sale-List/index";
 import API from "../../utils/API";
-import collage from '../../images/collage.jpg'
+import collage from '../../images/collage.jpg';
+import moment from "moment";
+import blur from '../../images/blur.jpg'
 
 const BodyWrapper = styled('div')({
     width: '100%',
-    minHeight: '80vh',
+    minHeight: '100vh',
     alignItems: 'center',
     backgroundSize: 'cover',
     background: `url("${collage}")`,
@@ -21,7 +23,8 @@ const YardSaleListingsWrapper = styled('div')({
 const ListingsWrapper = styled('div')({
     display: "flex",
     justifyContent: "space-around",
-    backgroundColor: "white"
+    backgroundColor: "rgba(0, 0, 0, .4)",
+    backgroundImage: `url(${blur})`
 });
 
 const IndividualListingsWrapper = styled('div')({
@@ -29,9 +32,14 @@ const IndividualListingsWrapper = styled('div')({
     flexWrap: "wrap",
     boxShadow: "1px 2px 2px 0px grey",
     padding: 10,
-    backgroundColor: "White"
+    // backgroundColor: "rgba(255, 255, 255, .4)",
+
 
 });
+
+const SearchButtons = styled('div')({
+    margin: 10
+})
 
 class YardSaleListings extends Component {
 
@@ -39,18 +47,6 @@ class YardSaleListings extends Component {
         yardSales: [],
         searchZip: ""
     }
-
-    // componentDidMount(){
-    //     this.loadYardSaleListings();
-    // }
-
-    // loadYardSaleListings = () => {
-    //     API.getAllYardSales()
-    //     .then(
-    //         res => this.setState({ yardSales: res.data })
-    //     )
-    //     .catch(err => console.log(err))
-    // }
 
     searchByZip = (zip) => {
         API.getYardSaleByZip(zip)
@@ -72,12 +68,12 @@ class YardSaleListings extends Component {
                 <BodyWrapper>
                 <br></br>
                 <YardSaleListingsWrapper>
+                <SearchButtons>
                     <h3>Find Local Sales: </h3>   
-                   
-                <input type="text" name="searchZip" value={this.state.searchZip} onChange={this.handleInput}></input>
-                <button onClick={() => this.searchByZip(this.state.searchZip)}>Search By Zip Code</button>
+                </SearchButtons>
+                <SearchButtons><input type="text" name="searchZip" value={this.state.searchZip} onChange={this.handleInput}></input></SearchButtons>
+                <SearchButtons><button onClick={() => this.searchByZip(this.state.searchZip)}>Search By Zip Code</button></SearchButtons>
                 </YardSaleListingsWrapper>
-                
                 
                 <ListingsWrapper>
                     <IndividualListingsWrapper>
@@ -88,8 +84,8 @@ class YardSaleListings extends Component {
                                         link = {yardSale._id}
                                         address = {yardSale.address}
                                         zipCode = {yardSale.zipCode}
-                                        date = {yardSale.name}
-                                        name = {yardSale.date}
+                                        date = {moment(yardSale.date).format('MM-DD-YY h:mm a')}
+                                        name = {yardSale.name}
                                     />
                                 );
                             })

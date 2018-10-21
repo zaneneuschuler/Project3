@@ -13,20 +13,26 @@ import collage from '../../images/collage.jpg'
 
 const BodyWrapper = styled('div')({
     width: '100%',
-    minHeight: '80vh',
+    minHeight: '100vh',
     alignItems: 'center',
     display: 'flex',
     backgroundSize: 'cover',
-    background: `url("${collage}")`
+    background: `url("${collage}")`,
+    backgroundRepeat: "y"
   });
-
+const StyledButton = styled('button')({
+    background: "#283e4a",
+    color: 'white',
+    height: 30
+})
 
 const YardSaleCreationWrapper = styled('div')({
     margin: 20,
+    padding: 20,
     alignContent: 'center',
     alignItems: "center",
     flex: 1,
-    background: "white"
+    backgroundColor: "rgba(255,255,255,0.5)",
 })
 
 
@@ -35,7 +41,6 @@ const ProductHolder = styled('div')({
 })
 const YardSaleCreationProductsWrapper = styled('div')({
     margin: 20,
-    flex: 1,
     flexDirection: "column",
     alignItems: "center",
 })
@@ -136,7 +141,15 @@ class YardSaleCreation extends Component {
     }
 
     finalizeYardSale = () => {
-        const productIds = this.state.filteredProducts.map(({ _id }) => _id);
+        let productIds;
+        if(this.state.filteredProducts.length > 0){
+            console.log("filtered products being sent");
+         productIds = this.state.filteredProducts.map(({ _id }) => _id);
+        }else{
+            console.log("normal products being sent");
+             productIds = this.state.products.map(({ _id }) => _id);
+        }
+        
         console.log(productIds);
         API.updateYardSale(this.state.yardSaleID, { listings: productIds })
             .then(this.setState({ isFinalized: true }))
@@ -156,7 +169,7 @@ class YardSaleCreation extends Component {
             date: new Date(this.state.date + ":00Z")
         }
         API.updateYardSaleEdit(this.state.yardSaleID, editSale)
-            .then(res => console.log(res))
+            .then(alert("You have successfully edited your info."))
             .catch(err => console.log(err))
     }
 
@@ -190,8 +203,8 @@ class YardSaleCreation extends Component {
                         editCategory = {this.state.editCategory}
                         editDescription = {this.state.editDescription}
                     />
-                    <button onClick={this.deleteProduct}>Delete</button>
-                    <button onClick={this.editProduct}>Save</button>
+                    <StyledButton onClick={this.deleteProduct}>Delete</StyledButton>
+                    <StyledButton onClick={this.editProduct}>Save</StyledButton>
                 </div>
             )
         }
@@ -200,7 +213,7 @@ class YardSaleCreation extends Component {
     deleteProduct = () => {
         let id = this.state.editID;
         API.deletProducts(id)
-            .then(res => console.log(res))
+            .then(alert("Successfully marked product for deletion."))
             .catch(err => console.log(err));
         const filteredProducts = this.state.products.filter(product => (product._id !== id));
         this.setState({ filteredProducts: filteredProducts });
@@ -247,10 +260,10 @@ class YardSaleCreation extends Component {
                         {/* Date of Sale */}
                         <YardSaleCreationElement>Sale Date: <input type="datetime-local" name="date" value={this.state.date} onChange={this.handleInput}></input></YardSaleCreationElement>
                         <YardSaleCreationElement>
-                            <button onClick={this.submitYardSale}>Submit</button>
+                            <StyledButton onClick={this.submitYardSale}>Submit</StyledButton>
                         </YardSaleCreationElement>
                         <YardSaleCreationElement>
-                            <button onClick={this.editYardSale}>Edit Yard Sale</button>
+                            <StyledButton onClick={this.editYardSale}>Edit Yard Sale</StyledButton>
                         </YardSaleCreationElement>
                     </YardSaleCreationWrapper>
                 ) :
@@ -260,7 +273,7 @@ class YardSaleCreation extends Component {
                     <Container fluid>
                     <YardSaleCreationWrapper>
                         <Row>
-                            <Col size="md-6">
+                            <Col size="sm-12">
                                 <h1>Add an Item to Sell</h1>
                                 <ProductHolder>
                                     <YardSaleCreationProductsWrapper>
@@ -288,7 +301,7 @@ class YardSaleCreation extends Component {
                     )}
                 <Container fluid>
                     <Row>
-                        <Col size="md-6 sm-12">
+                        <Col size="sm-12">
                             <YardSaleCreationWrapper>
                                 <h1>Items for Sale</h1>
                             
@@ -299,7 +312,7 @@ class YardSaleCreation extends Component {
                                             <strong>
                                                 Product: {product.productName}
                                             </strong>
-                                            <YardSaleCreationElement><button onClick={() => this.beginEdit(product._id)}>Edit</button></YardSaleCreationElement>
+                                            <YardSaleCreationElement><StyledButton onClick={() => this.beginEdit(product._id)}>Edit</StyledButton></YardSaleCreationElement>
                                                 <ProductHolder>
                                                     <YardSaleCreationProductsWrapper>
                                                         {this.renderEdit(product._id)}
@@ -308,7 +321,7 @@ class YardSaleCreation extends Component {
                                         </ListItem>
                                     ))}
                                     <YardSaleCreationElement>
-                                        <button onClick={this.finalizeYardSale}>Finalize Yard Sale</button>
+                                        <StyledButton onClick={this.finalizeYardSale}>Finalize Yard Sale</StyledButton>
                                     </YardSaleCreationElement>
                                 </List>
                             ) : (

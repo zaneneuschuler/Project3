@@ -8,6 +8,7 @@ import Col from "../../components/Grid/Col";
 import { List, ListItem } from "../../components/List";
 import ProductCard from "../../components/ProductCard";
 import {Gmaps, Marker, Circle} from "react-gmaps";
+import moment from "moment";
 
 const params = {v: '3.exp', key:process.env.GMAPS_KEY};
 class Products extends Component {
@@ -33,6 +34,7 @@ class Products extends Component {
       this.loadProducts();
       this.loadYardSaleInfo();
     }
+
     componentDidUpdate(prevprops, prevstate) {
       console.log(prevstate);
       console.log(this.state.yardsale)
@@ -98,36 +100,42 @@ class Products extends Component {
           radius={200}
           onClick={this.onClick} />
                 </Gmaps>
-            <Col size="md-6 sm-12">
-              <Jumbotron>
-                <h1>{this.state.yardsale.name}</h1><br></br> 
-                <h3>{this.state.yardsale.address} | {this.state.yardsale.zipCode}</h3> 
-                <h3>{this.state.yardsale.date}</h3><br></br>
+     </Row>
+                <br />
+            <Row>
+              <Col size="md-6 sm-12">
+                <Jumbotron>
+                  <h1>{this.state.yardsale.name}</h1><br></br> 
+                  <h3>{this.state.yardsale.address} | {this.state.yardsale.zipCode}</h3> 
+                  <h3>{moment(this.state.yardsale.date).format('MM-DD-YY h:mm a')}</h3><br></br>
+  
+                </Jumbotron>
+                </Col>
+                <Col size="md-6 sm-12">
+                {this.state.products.length ? (
+                  <List>
+                    {this.state.products.map(product => (
+                      <ListItem>
+                        <ProductCard key={product._id} 
+                          imageUrl ={product.imageUrl} 
+                          productName = {product.productName}
+                          price = {product.price}
+                          quantity = {product.quantity}
+                          category = {product.category}
+                          description = {product.description}
+                          interest = {product.interest}
+                          clickHandle = {this.updateInterest}
+                          id = {product._id}
+                        />
+                      </ListItem>
+                    ))}
+                  </List>
+                ) : (
+                  <h3>No Results to Display</h3>
+                )}
+              </Col>
 
-              </Jumbotron>
-              {this.state.products.length ? (
-                <List>
-                  {this.state.products.map(product => (
-                    <ListItem>
-                      <ProductCard key={product._id} 
-                        imageUrl ={product.imageUrl} 
-                        product = {product.productName}
-                        price = {product.price}
-                        quantity = {product.quantity}
-                        category = {product.category}
-                        description = {product.description}
-                        interest = {product.interest}
-                        clickHandle = {this.updateInterest}
-                        id = {product._id}
-                      />
-                    </ListItem>
-                  ))}
-                </List>
-              ) : (
-                <h3>No Results to Display</h3>
-              )}
-            </Col>
-          </Row>
+            </Row>
         </Container>
       );
     }

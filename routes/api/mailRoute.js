@@ -5,12 +5,12 @@ router.post("/", (req, res) => {
   let body = req.body;
   console.log(body);
   let data = {
-    from: `${body.name} <${body.email}>`,
+    from: `${body.name} <noreply@paim.ai>`,
     to: process.env.SUPPORT_EMAIL,
     subject: "New Support Request on PaiMai!",
     text: `Hey there, you have a new support email from someone!
       They say: ${body.text}
-      Please respond in a timely manner, thanks!
+      Please respond in a timely manner at ${body.email}, thanks!
       `
   };
   mailgun.messages().send(data, function (error, body) {
