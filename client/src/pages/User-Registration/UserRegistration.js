@@ -1,23 +1,7 @@
 import React, { Component } from "react";
 import styled from 'react-emotion';
-import ModalFormItem from '../../components/ModalFormItem/ModalFormItem'
+import { MainForm, FormTitle, FormBody, FormTextInput, FormTextArea, SubmitButton } from "../../components/FormComponents/FormComponents";
 
-const UserRegistrationWrapper = styled('div')({
-    
-    margin: 'auto',
-    display: 'flex',
-    flexDirection: 'column',
-    padding: 20,
-    boxShadow: '0 0 15px 5px rgba(0,0,0,0.5)',
-    background: '#f6f8fa'
-});
-const SubmitButton = styled('button')({
-    padding: 8,
-    background: "rgb(0,115,177)",
-    color: 'white',
-    float: 'left',
-    width: 260
-})
 
 const divStyle = {
   margin: 'auto',
@@ -37,8 +21,6 @@ function getCookie(cname) {
     }
     return "";
 }
-
-
 class UserRegistration extends Component {
 
   constructor(props) {
@@ -69,48 +51,51 @@ class UserRegistration extends Component {
           <div style={divStyle}>
           {
             !this.props.loggedIn ? 
-          <UserRegistrationWrapper>
+            <MainForm>
+              <FormTitle>
               <h3>Sell stuff for Free!</h3>
               <h4>Sign up Now</h4>
+              </FormTitle>
 
-              <ModalFormItem
+              <FormBody>
+                <FormTextInput
                   name="first"
                   label="First Name:"
                   type="text"
                   onChangeFn={this.props.handleInputChange}
                   value={this.props.first}
-              />
+                />
 
-              <ModalFormItem
-                  name="last"
-                  label="Last Name:"
-                  type="text"
-                  onChangeFn={this.props.handleInputChange}
-                  value={this.props.last}
-              />
+                <FormTextInput
+                    name="last"
+                    label="Last Name:"
+                    type="text"
+                    onChangeFn={this.props.handleInputChange}
+                    value={this.props.last}
+                />
               
-              <ModalFormItem
-                  name="email"
-                  label="Email:"
-                  type="string"
-                  onChangeFn={this.props.handleInputChange}
-                  value={this.props.email}
-              />
+                <FormTextInput
+                    name="email"
+                    label="Email:"
+                    type="string"
+                    onChangeFn={this.props.handleInputChange}
+                    value={this.props.email}
+                />
+                
+                <FormTextInput
+                    name="password"
+                    label="Password:"
+                    type="password"
+                    onChangeFn={this.props.handleInputChange}
+                    value={this.props.password}
+                />
               
-              <ModalFormItem
-                  name="password"
-                  label="Password:"
-                  type="password"
-                  onChangeFn={this.props.handleInputChange}
-                  value={this.props.password}
-              />
-              
-              <SubmitButton onClick={this.props.handleRegistrationSubmit}>
-                Join Now
-              </SubmitButton>
-              
-              </UserRegistrationWrapper>
-              : null
+                <SubmitButton onClick={this.props.handleRegistrationSubmit}>
+                  Join Now
+                </SubmitButton>
+              </FormBody>
+            </MainForm>
+            : null
             }
             </div>
       );

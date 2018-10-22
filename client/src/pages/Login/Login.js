@@ -1,15 +1,11 @@
 import React, { Component, Link } from "react";
 import styled from 'react-emotion';
-import Header from "../../components/Header/Header";
 import API from "../../utils/API";
 
 const LoginWrapper = styled('div')({
     display: "flex",
     justifyContent: "center",
 });
-
-
-
 
 class Login extends Component {
 
@@ -48,10 +44,6 @@ handleLogin = (event) => {
       .catch(err => console.log(err));
   }
 }
-
-
-
-
     render() {
         return (
             <div>
