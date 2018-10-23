@@ -5,6 +5,15 @@ import { MainForm, FormTitle, FormBody, FormTextInput, FormTextArea, SubmitButto
 
 const divStyle = {
   margin: 'auto',
+  marginTop: '140px'
+}
+
+const spanStyle = {
+  color: 'rgba(0,0,0,0.6)',
+  textAlign: 'center',
+  display: 'block',
+  fontSize: 14,
+  paddingBottom: 10
 }
 function getCookie(cname) {
     var name = cname + "=";
@@ -53,8 +62,8 @@ class UserRegistration extends Component {
             !this.props.loggedIn ? 
             <MainForm>
               <FormTitle>
-              <h3>Sell stuff for Free!</h3>
-              <h4>Sign up Now</h4>
+                <h3>Sell stuff for Free!</h3>
+                <h4>Sign up Now</h4>
               </FormTitle>
 
               <FormBody>
@@ -89,6 +98,9 @@ class UserRegistration extends Component {
                     onChangeFn={this.props.handleInputChange}
                     value={this.props.password}
                 />
+                <span className="agreement" style={spanStyle}>
+                  By clicking Join now, you agree to the PaiMai User Agreement, Privacy Policy, and Cookie Policy.
+                </span>
               
                 <SubmitButton onClick={this.props.handleRegistrationSubmit}>
                   Join Now

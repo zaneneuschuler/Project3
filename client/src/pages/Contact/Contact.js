@@ -7,6 +7,7 @@ import API from "../../utils/API";
 
 const divStyle = {
   margin: 'auto',
+  marginTop: '140px'
 }
 class ContactForm extends Component {
   constructor() {
