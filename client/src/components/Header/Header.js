@@ -2,9 +2,7 @@ import React, { Component } from "react";
 import { Link } from 'react-router-dom';
 import styled from 'react-emotion';
 import "./Header.css";
-// import API from '../../utils/API'
 import LoginFormItem from '../../components/LoginForm'
-// import { func } from "prop-types";
 
 
 const HeaderWrapper = styled('header')({
@@ -29,12 +27,16 @@ const FormWrapper = styled('form')({
 const LoginButton = styled('button')({
   background: "#283e4a",
   color: 'white',
-  height: 30
+  height: 30,
+  width: 90,
+  padding: '0 0 0 0'
 })
 const LogOutButton = styled('button')({
   background: "#283e4a",
   color: 'white',
-  height: 26
+  height: 30,
+  width: 90,
+  padding: '0 0 0 0'
 })
 function getCookie(cname) {
   var name = cname + "=";
@@ -93,8 +95,7 @@ class Header extends Component {
                     <LoginButton onClick={this.props.handleFormLogin}>Sign In</LoginButton>
                   </div>
                 </FormWrapper>
-              :<div> <h7 style={{ paddingTop: '10px', paddingRight: '10px'}}>{`Hello, ${this.props.first}`}</h7>   <LogOutButton onClick={this.props.handleFormLogout}>Log out</LogOutButton></div>
-              
+              :<div> <h7 style={{ paddingTop: '10px', paddingRight: '10px'}}>{`Hello, ${this.props.first.toUpperCase()}`}</h7>   <LogOutButton onClick={this.props.handleFormLogout}>Log out</LogOutButton></div>
           }
       </HeaderWrapper>
     )

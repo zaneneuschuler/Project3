@@ -55,15 +55,15 @@ const TextBoxInput = styled('input')({
   float: 'left',
   margin: '0px 0 10px 0',
   width: 360,
+  height: 32
 })
 
 const TextAreaInput = styled('input')({
   padding: '0px 5px 5px 0',
   float: 'left',
-  margin: '5px 0 20px 0',
+  margin: '0px 0 10px 0',
   width: 360,
-  height: 200,
-  marginBottom: 5
+  height: 150
 })
 
 const Label = styled('div')({
@@ -75,7 +75,8 @@ export const SubmitButton = styled('button')({
   background: "rgb(0,115,177)",
   color: 'white',
   float: 'left',
-  width: 360
+  width: 360,
+  height: 32
 })
 
 export const FormTextInput = ({ label, name, value, type, placeHolder, onChangeFn }) => {

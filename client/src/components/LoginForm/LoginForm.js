@@ -4,7 +4,7 @@ import "./LoginForm.css";
 
 const LoginInput = styled('input')({
   width: 200,
-  height: 20,
+  height: 30,
   marginRight: 5
 })
 

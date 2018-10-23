@@ -75,6 +75,8 @@ class App extends Component {
     event.preventDefault();
     document.cookie = "id=0";
     this.setState({
+      first: '',
+      last: '',
       showLoginForm: true,
       loggedIn: false,
       id: ""
@@ -118,9 +120,7 @@ class App extends Component {
       axios.post("/auth/signup", newUser)
       .then(response => {
         var userId = response.data._id
-        console.log('reponse.id: ', userId)
         this.setState({ id: userId }, function (){
-          console.log('this.state.id', this.state.id)
           this.state.id ? 
             API.login({
               'email': this.state.email,
@@ -129,10 +129,12 @@ class App extends Component {
             : console.log('userId is empty')
           
             this.setState({
-                showRegistrationForm: false,
-                showLoginForm: false,
-                loggedIn: true
-              }, function(){
+              email: '',
+              password: '',
+              showRegistrationForm: false,
+              showLoginForm: false,
+              loggedIn: true
+            }, function(){
                 console.log('setData: ', this.state)
               })
             })
