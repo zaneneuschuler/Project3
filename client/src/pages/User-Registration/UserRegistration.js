@@ -1,7 +1,32 @@
 import React, { Component } from "react";
 import styled from 'react-emotion';
 import { MainForm, FormTitle, FormBody, FormTextInput, FormTextArea, SubmitButton } from "../../components/FormComponents/FormComponents";
+import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
 
+const HomePageDiv = styled('div')({
+  display: "flex",
+  justifyContent: "space-around",
+  height: "100%",
+  width: "100%",
+  position: "absolute",
+  top: 70,
+  left: 0
+})
+
+const HomePageElements = styled('div')({
+  backgroundColor: "rgba(255,255,255,0.5)",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "space-around",
+  height: "75%",
+  width: "85%",
+  margin: 40,
+  fontSize: 40
+})
+
+const LinkSpan = styled('span')({
+  color: "blue"
+})
 
 const divStyle = {
   margin: 'auto',
@@ -107,7 +132,14 @@ class UserRegistration extends Component {
                 </SubmitButton>
               </FormBody>
             </MainForm>
-            : null
+            : <HomePageDiv>
+                <HomePageElements>
+                  <LinkSpan><Link to="/yardsalecreation">Create A Yard Sale</Link></LinkSpan>
+                </HomePageElements>
+                <HomePageElements>
+                  <LinkSpan><Link to="/yardsalelistings">Browse Yard Sales By Zip Code</Link></LinkSpan>
+                </HomePageElements>
+              </HomePageDiv>
             }
             </div>
       );
