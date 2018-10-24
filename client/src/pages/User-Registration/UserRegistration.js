@@ -5,7 +5,7 @@ import { MainForm, FormTitle, FormBody, FormTextInput, FormTextArea, SubmitButto
 
 const divStyle = {
   margin: 'auto',
-  marginTop: '140px'
+  // marginTop: '140px'
 }
 
 const spanStyle = {

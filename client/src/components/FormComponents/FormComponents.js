@@ -6,7 +6,7 @@ import styled from 'react-emotion';
 
 export const MainForm = styled('div')({
   width: 400,
-  height: 600,
+  height: 550,
   margin: 'auto',
   display: 'flex',
   flexDirection: 'column',
