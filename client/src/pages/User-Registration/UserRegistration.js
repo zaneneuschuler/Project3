@@ -29,8 +29,7 @@ const LinkSpan = styled('span')({
 })
 
 const divStyle = {
-  margin: 'auto',
-  // marginTop: '140px'
+  margin: 'auto'
 }
 
 const spanStyle = {
@@ -87,8 +86,8 @@ class UserRegistration extends Component {
             !this.props.loggedIn ? 
             <MainForm>
               <FormTitle>
-                <h3>Sell stuff for Free!</h3>
-                <h4>Sign up Now</h4>
+                <h3 style={divStyle}>Sell stuff for Free!</h3>
+                <h4 style={divStyle}>Sign up Now</h4>
               </FormTitle>
 
               <FormBody>

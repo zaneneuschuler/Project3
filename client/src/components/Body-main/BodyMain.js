@@ -1,7 +1,7 @@
 import React from "react";
 import styled from 'react-emotion';
 import "./BodyMain.css";
-import collage from '../../images/collage.jpg'
+import blur from '../../images/blur.jpg'
 import UserRegistration from '../../pages/User-Registration/UserRegistration';
 import ContactForm from '../../pages/Contact/Contact';
 
@@ -11,7 +11,7 @@ const BodyWrapper = styled('div')({
   display: 'flex',
   alignItems: 'center',
   backgroundSize: 'cover',
-  background: `url("${collage}")`,
+  background: `url("${blur}")`,
 });
 
 const BodyMain = (props) => (
