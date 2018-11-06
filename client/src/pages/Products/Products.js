@@ -14,10 +14,11 @@ const params = {v: '3.exp', key:process.env.GMAPS_KEY};
 class Products extends Component {
 
     state = {
+        url: "https://paimai.herokuapp.com"+this.props.location.pathname,
         yardsaleID: this.props.location.pathname.split('/')[2],
         yardsale: "",
         products: [],
-
+ 
         category: "",
         title: "",
         seller: "",
@@ -33,6 +34,10 @@ class Products extends Component {
     componentDidMount() {
       this.loadProducts();
       this.loadYardSaleInfo();
+      this.setState({
+        fbURL: "https://www.facebook.com/sharer/sharer.php?u=" + this.state.url + "%2F&amp;src=sdkpreparse",
+               mailHref: "mailto:?subject=Check out this yard sale!&body=Hey, I saw this yard sale on PaiMai and I thought you'd be interested!%0A%0A" + this.state.url
+      })
     }
 
     componentDidUpdate(prevprops, prevstate) {
@@ -108,6 +113,11 @@ class Products extends Component {
                   <h1>{this.state.yardsale.name}</h1><br></br> 
                   <h3>{this.state.yardsale.address} | {this.state.yardsale.zipCode}</h3> 
                   <h3>{moment(this.state.yardsale.date).format('MM-DD-YY h:mm a')}</h3><br></br>
+                  <h4>Share with friends!</h4>
+                  <div class="fb-share-button" data-href={this.state.url} data-layout="button" data-size="large" data-mobile-iframe="true">
+                  <a target="_blank" href={this.state.fbURL} class="fb-xfbml-parse-ignore">Share this yard sale on facebook!</a></div><br />
+                  <a class="twitter-share-button"href="https://twitter.com/intent/tweet?text=Hey, check out this cool yard sale!"data-size="large">Tweet</a> <br />
+                  <a href={this.state.mailHref} class="sendEmail">Email this to someone!</a>
   
                 </Jumbotron>
                 </Col>
